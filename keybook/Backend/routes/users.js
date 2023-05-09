@@ -69,7 +69,7 @@ router.post("/register", async function (req, res) {
 //POST login
 router.post("/auth", async (req, res) => {
   try {
-    const { user, password } = req.body;    
+    const { user, password } = req.body;
     const result = await sequelize.query(
       `SELECT * FROM user WHERE  email = '${user.email}'`
     );
@@ -96,7 +96,7 @@ router.delete("/:id/delete", async (req, res) => {
   const userId = req.params.id;
   try {
     await sequelize.query(`DELETE FROM user WHERE id = ${userId}`);
-    res.status(200).send({ message: "Cuanta borrada con éxito" });
+    res.status(200).send({ message: "Cuenta borrada con éxito" });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: "Error al borrar cuenta" });
