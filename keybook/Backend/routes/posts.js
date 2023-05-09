@@ -16,4 +16,44 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+//POST posts
+router.post("/", async function (req, res) {
+    try {
+        const { post_id_user, post_content } = req.body;
+        console.log(post_id_user);
+        const newPost = await sequelize.query(
+            `INSERT INTO post (post_id_user, post_content) VALUES (?, ?)`,
+            {
+                type: sequelize.QueryTypes.INSERT,
+                replacements: [post_id_user, post_content],
+            }
+        );
+        res.status(200).send({
+            post_id: newPost[0],
+            post_id_user,
+            post_content,
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({ error: e.message });
+    }
+});
+
+//GET posts
+router.get("/", async function (req, res) {
+    try {
+        const posts = await sequelize.query(
+            `SELECT * FROM user
+        JOIN post ON user.id = post.post_id_user
+        WHERE user.id;`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+        res.send(posts);
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({ error: e.message });
+    }
+});
+
+
 module.exports = router;
