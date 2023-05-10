@@ -90,6 +90,17 @@ router.post("/auth", async (req, res) => {
   }
 });
 
+router.get("/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const result = await sequelize.query(
+    `SELECT * FROM user WHERE id = ${userId}`
+  );
+  if (result[0].length) {
+    res.status(200).send(result[0][0]);
+  } else {
+    res.status(404).send({ error: "Usuario no encontrado" });
+  }
+});
 
 // DELETE user by ID
 router.delete("/:id/delete", async (req, res) => {
