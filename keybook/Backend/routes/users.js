@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 const sequelize = require("../db/connection");
 var router = express.Router();
 const bcrypt = require("bcrypt");
@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const salt = 10;
 
 /* GET users listing. */
-router.get('/', async function (req, res, next) {
+router.get("/", async function (req, res, next) {
   try {
     const usersList = await sequelize.query("SELECT * FROM user", {
       type: sequelize.QueryTypes.SELECT,
@@ -17,7 +17,6 @@ router.get('/', async function (req, res, next) {
     res.status(500).send("Error interno del servidor");
   }
 });
-
 
 //POST create new user
 router.post("/register", async function (req, res) {
@@ -115,3 +114,32 @@ router.delete("/:id/delete", async (req, res) => {
 });
 
 module.exports = router;
+
+//GET user by name or email (based on input)
+app.get("/user", async function (req, res) {
+  const { searchKey } = req.query;
+  console.log("instance");
+  try {
+    const personas = searchKey
+      ? await sequelize.query(
+          `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
+          {
+            replacements: { searchKey },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        )
+      : await sequelize.query("SELECT * FROM user", {
+          type: sequelize.QueryTypes.SELECT,
+        });
+
+    console.log(personas);
+    res.send(personas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+app.listen(port, function () {
+  console.log(`Sistema funcionando en el puerto ${port}`);
+});
