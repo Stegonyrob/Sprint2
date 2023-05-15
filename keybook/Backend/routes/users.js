@@ -89,17 +89,17 @@ router.post("/auth", async (req, res) => {
   }
 });
 
-router.get("/:userId", async (req, res) => {
-  const userId = req.params.userId;
-  const result = await sequelize.query(
-    `SELECT * FROM user WHERE id = ${userId}`
-  );
-  if (result[0].length) {
-    res.status(200).send(result[0][0]);
-  } else {
-    res.status(404).send({ error: "Usuario no encontrado" });
-  }
-});
+// router.get("/:userId", async (req, res) => {
+//   const userId = req.params.userId;
+//   const result = await sequelize.query(
+//     `SELECT * FROM user WHERE id = ${userId}`
+//   );
+//   if (result[0].length) {
+//     res.status(200).send(result[0][0]);
+//   } else {
+//     res.status(404).send({ error: "Usuario no encontrado" });
+//   }
+// });
 
 // DELETE user by ID
 router.delete("/:id/delete", async (req, res) => {
@@ -113,33 +113,33 @@ router.delete("/:id/delete", async (req, res) => {
   }
 });
 
-// //GET user by name or email (based on input)
-router.get("/user", async function (req, res) {
-  const { searchKey } = req.query;
-  console.log("instance");
-  try {
-    const userId = req.user.id;
-    const personas = searchKey
-      ? await sequelize.query(
-          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :userId`,
-          {
-            replacements: { searchKey, userId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        )
-      : await sequelize.query("SELECT * FROM user WHERE id != :userId", {
-          //id!=:userId excluiria al logueado
-          replacements: { userId },
-          type: sequelize.QueryTypes.SELECT,
-        });
+// // //GET user by name or email (based on input)
+// router.get("/user", async function (req, res) {
+//   const { searchKey } = req.query;
+//   console.log("instance");
+//   try {
+//     const userId = req.user.id;
+//     const personas = searchKey
+//       ? await sequelize.query(
+//           `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :userId`,
+//           {
+//             replacements: { searchKey, userId },
+//             type: sequelize.QueryTypes.SELECT,
+//           }
+//         )
+//       : await sequelize.query("SELECT * FROM user WHERE id != :userId", {
+//           //id!=:userId excluiria al logueado
+//           replacements: { userId },
+//           type: sequelize.QueryTypes.SELECT,
+//         });
 
-    console.log(personas);
-    res.send(personas);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
-  }
-});
+//     console.log(personas);
+//     res.send(personas);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal server error");
+//   }
+// });
 
 // router.listen(port, function () {
 //   console.log(`Sistema funcionando en el puerto ${port}`);
@@ -208,5 +208,30 @@ router.get("/user", async function (req, res) {
 // router.listen(port, function () {
 //   console.log(`Sistema funcionando en el puerto ${port}`);
 // });
+
+//GET user by name or email (based on input)
+router.get("/user", async function (req, res) {
+  const { searchKey } = req.query;
+  console.log(searchKey);
+  try {
+    const personas = searchKey
+      ? await sequelize.query(
+          `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
+          {
+            replacements: { searchKey },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        )
+      : await sequelize.query("SELECT * FROM user", {
+          type: sequelize.QueryTypes.SELECT,
+        });
+
+    console.log(personas);
+    res.send(personas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 module.exports = router;
