@@ -143,6 +143,12 @@ global.debug = function () {
   debugger;
 };
 // //GET user by name or email (based on input)
+//para ver que funcona en postman se debe colocar en params key :searchKey y en value el nombre a buscar ej:adrian
+/* en body pegar este json {
+  "loggedInUserId": 1
+} que seria el id del usuario logeado para que no lo muestre en el grid de amigos
+la url sera http://localhost:3000/users/user?searchKey=adrian y metodo get*/
+
 router.get("/user", async function (req, res) {
   const { searchKey } = req.query;
   const { loggedInUserId } = req.body; // obtener el ID del usuario logueado del cuerpo de la solicitud
