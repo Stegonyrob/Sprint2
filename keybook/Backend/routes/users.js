@@ -113,22 +113,23 @@ router.delete("/:id/delete", async (req, res) => {
   }
 });
 
-module.exports = router;
-
-//GET user by name or email (based on input)
-app.get("/user", async function (req, res) {
+// //GET user by name or email (based on input)
+router.get("/user", async function (req, res) {
   const { searchKey } = req.query;
   console.log("instance");
   try {
+    const userId = req.user.id;
     const personas = searchKey
       ? await sequelize.query(
-          `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
+          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :userId`,
           {
-            replacements: { searchKey },
+            replacements: { searchKey, userId },
             type: sequelize.QueryTypes.SELECT,
           }
         )
-      : await sequelize.query("SELECT * FROM user", {
+      : await sequelize.query("SELECT * FROM user WHERE id != :userId", {
+          //id!=:userId excluiria al logueado
+          replacements: { userId },
           type: sequelize.QueryTypes.SELECT,
         });
 
@@ -140,6 +141,72 @@ app.get("/user", async function (req, res) {
   }
 });
 
-app.listen(port, function () {
-  console.log(`Sistema funcionando en el puerto ${port}`);
-});
+// router.listen(port, function () {
+//   console.log(`Sistema funcionando en el puerto ${port}`);
+// });
+//GET user by name or email (based on input)
+// router.get("/user", async function (req, res) {
+//   const { searchKey } = req.query;
+//   console.log("instance");
+//   try {
+//     const userId = req.user.id;
+//     const personas = searchKey
+//       ? await sequelize.query(
+//           `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :userId`,
+//           {
+//             replacements: { searchKey, userId },
+//             type: sequelize.QueryTypes.SELECT,
+//           }
+//         )
+//       : await sequelize.query("SELECT * FROM user WHERE id != :userId", {
+//           //id!=:userId excluiria al logueado
+//           replacements: { userId },
+//           type: sequelize.QueryTypes.SELECT,
+//         });
+
+//     console.log(personas);
+//     res.send(personas);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal server error");
+//   }
+// });
+// app.listen(port, function () {
+//   console.log(`Sistema funcionando en el puerto ${port}`);
+// });
+// module.exports = router;
+
+// router.get("/user", async function (req, res) {
+//   const { searchKey } = req.query;
+//   console.log("instance");
+//   try {
+//     const userId = req.user.id;
+//     const personas = searchKey
+//       ? await sequelize.query(
+//           `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :userId`,
+//           {
+//             replacements: { searchKey, userId },
+//             type: sequelize.QueryTypes.SELECT,
+//           }
+//         )
+//       : await sequelize.query("SELECT * FROM user WHERE id != :userId", {
+//           //id!=:userId excluiria al logueado
+//           replacements: { userId },
+//           type: sequelize.QueryTypes.SELECT,
+//         });
+
+//     console.log(personas);
+//     res.send(personas);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal server error");
+//   }
+// });
+
+// const port = 3000; // Define port variable and assign a value
+
+// router.listen(port, function () {
+//   console.log(`Sistema funcionando en el puerto ${port}`);
+// });
+
+module.exports = router;
