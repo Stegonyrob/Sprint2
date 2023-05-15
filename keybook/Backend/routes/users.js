@@ -89,17 +89,17 @@ router.post("/auth", async (req, res) => {
   }
 });
 
-// router.get("/:userId", async (req, res) => {
-//   const userId = req.params.userId;
-//   const result = await sequelize.query(
-//     `SELECT * FROM user WHERE id = ${userId}`
-//   );
-//   if (result[0].length) {
-//     res.status(200).send(result[0][0]);
-//   } else {
-//     res.status(404).send({ error: "Usuario no encontrado" });
-//   }
-// });
+router.get("/user/:id.", async (req, res) => {
+  const userId = req.params.id;
+  const result = await sequelize.query(
+    `SELECT * FROM user WHERE id = ${userId}`
+  );
+  if (result[0].length) {
+    res.status(200).send(result[0][0]);
+  } else {
+    res.status(404).send({ error: "Usuario no encontrado" });
+  }
+});
 
 // DELETE user by ID
 router.delete("/:id/delete", async (req, res) => {
@@ -130,6 +130,41 @@ router.get("/user", async function (req, res) {
           type: sequelize.QueryTypes.SELECT,
         });
 
+    console.log(personas);
+    res.send(personas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+// Funcion que hace debugg
+global.debug = function () {
+  debugger;
+};
+// //GET user by name or email (based on input)
+router.get("/user", async function (req, res) {
+  const { searchKey } = req.query;
+  const { loggedInUserId } = req.body; // obtener el ID del usuario logueado del cuerpo de la solicitud
+
+  try {
+    const personas = searchKey
+      ? await sequelize.query(
+          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
+          {
+            replacements: { searchKey, loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        )
+      : await sequelize.query(
+          "SELECT * FROM user WHERE id != :loggedInUserId",
+          {
+            replacements: { loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        );
+
+    global.debug(); // Detener la ejecución y examinar el objeto "personas"
     console.log(personas);
     res.send(personas);
   } catch (error) {
