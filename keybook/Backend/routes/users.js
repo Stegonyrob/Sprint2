@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 const sequelize = require("../db/connection");
 var router = express.Router();
 const bcrypt = require("bcrypt");
@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const salt = 10;
 
 /* GET users listing. */
-router.get('/', async function (req, res, next) {
+router.get("/", async function (req, res, next) {
   try {
     const usersList = await sequelize.query("SELECT * FROM user", {
       type: sequelize.QueryTypes.SELECT,
@@ -17,7 +17,6 @@ router.get('/', async function (req, res, next) {
     res.status(500).send("Error interno del servidor");
   }
 });
-
 
 //POST create new user
 router.post("/register", async function (req, res) {
@@ -90,8 +89,8 @@ router.post("/auth", async (req, res) => {
   }
 });
 
-router.get("/:userId", async (req, res) => {
-  const userId = req.params.userId;
+router.get("/user/:id.", async (req, res) => {
+  const userId = req.params.id;
   const result = await sequelize.query(
     `SELECT * FROM user WHERE id = ${userId}`
   );
@@ -111,6 +110,72 @@ router.delete("/:id/delete", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: "Error al borrar cuenta" });
+  }
+});
+
+// //GET user by name or email (based on input)
+// router.get("/user", async function (req, res) {
+//   const { searchKey } = req.query;
+//   console.log(searchKey);
+//   try {
+//     const personas = searchKey
+//       ? await sequelize.query(
+//           `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
+//           {
+//             replacements: { searchKey },
+//             type: sequelize.QueryTypes.SELECT,
+//           }
+//         )
+//       : await sequelize.query("SELECT * FROM user", {
+//           type: sequelize.QueryTypes.SELECT,
+//         });
+
+//     console.log(personas);
+//     res.send(personas);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal server error");
+//   }
+// });
+
+// Funcion que hace debugg
+global.debug = function () {
+  debugger;
+};
+// //GET user by name or email (based on input)
+//para ver que funcona en postman se debe colocar en params key :searchKey y en value el nombre a buscar ej:adrian
+/* en body pegar este json {
+  "loggedInUserId": 1
+} que seria el id del usuario logeado para que no lo muestre en el grid de amigos
+la url sera http://localhost:3000/users/user?searchKey=adrian y metodo get*/
+
+router.get("/user", async function (req, res) {
+  const { searchKey } = req.query;
+  const { loggedInUserId } = req.body; // obtener el ID del usuario logueado del cuerpo de la solicitud
+
+  try {
+    const personas = searchKey
+      ? await sequelize.query(
+          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
+          {
+            replacements: { searchKey, loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        )
+      : await sequelize.query(
+          "SELECT * FROM user WHERE id != :loggedInUserId",
+          {
+            replacements: { loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        );
+
+    global.debug(); // Detener la ejecución y examinar el objeto "personas"
+    console.log(personas);
+    res.send(personas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
   }
 });
 
