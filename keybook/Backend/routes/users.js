@@ -113,30 +113,30 @@ router.delete("/:id/delete", async (req, res) => {
   }
 });
 
-//GET user by name or email (based on input)
-router.get("/user", async function (req, res) {
-  const { searchKey } = req.query;
-  console.log(searchKey);
-  try {
-    const personas = searchKey
-      ? await sequelize.query(
-          `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
-          {
-            replacements: { searchKey },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        )
-      : await sequelize.query("SELECT * FROM user", {
-          type: sequelize.QueryTypes.SELECT,
-        });
+// //GET user by name or email (based on input)
+// router.get("/user", async function (req, res) {
+//   const { searchKey } = req.query;
+//   console.log(searchKey);
+//   try {
+//     const personas = searchKey
+//       ? await sequelize.query(
+//           `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
+//           {
+//             replacements: { searchKey },
+//             type: sequelize.QueryTypes.SELECT,
+//           }
+//         )
+//       : await sequelize.query("SELECT * FROM user", {
+//           type: sequelize.QueryTypes.SELECT,
+//         });
 
-    console.log(personas);
-    res.send(personas);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
-  }
-});
+//     console.log(personas);
+//     res.send(personas);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal server error");
+//   }
+// });
 
 // Funcion que hace debugg
 global.debug = function () {
