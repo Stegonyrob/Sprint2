@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HelpButton from './HelpButton/helpButton';
+import HelpButton from './Incremental 46 formulario/HelpButton/helpButton';
 import HelpForm from './HelpForm/HelpForm';
 
 function App() {
