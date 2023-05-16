@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import HelpButton from './HelpButton/helpButton';
+import HelpForm from './HelpForm/HelpForm';
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
+  const handleFormClose = () => {
+    setShowForm(false);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>¡Bienvenido a mi red social!</h1>
+      <HelpButton onClick={handleButtonClick} />
+      {showForm && <HelpForm onClose={handleFormClose} />}
     </div>
   );
 }
-
 export default App;
