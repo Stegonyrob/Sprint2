@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
-import HelpButton from './Incremental 46 formulario/HelpButton/helpButton';
-import HelpForm from './Incremental 46 formulario/HelpForm/HelpForm';
+import React from 'react';
+import Register from './components/Registration';
 
 function App() {
-  const [showForm, setShowForm] = useState(false);
-  const handleButtonClick = () => {
-    setShowForm(true);
-  };
-  const handleFormClose = () => {
-    setShowForm(false);
-  };
+  
   return (
-    <div className="App">
-      <h1>¡Bienvenido a mi red social!</h1>
-      <HelpButton onClick={handleButtonClick} />
-      {showForm && <HelpForm onClose={handleFormClose} />}
-    </div>
+    <>
+      <Register/>
+    </>
   );
 }
 export default App;
