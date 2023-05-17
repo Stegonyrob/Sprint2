@@ -68,9 +68,10 @@ router.post("/register", async function (req, res) {
 //POST login
 router.post("/auth", async (req, res) => {
   try {
-    const { user, password } = req.body;
+    const { email, password } = req.body;
+
     const result = await sequelize.query(
-      `SELECT * FROM user WHERE  email = '${user.email}'`
+      `SELECT * FROM user WHERE  email = '${email}'`
     );
     if (result[0].length) {
       const validPassword = await bcrypt.compare(
@@ -78,14 +79,17 @@ router.post("/auth", async (req, res) => {
         result[0][0].password
       );
       if (validPassword) {
-        res.status(200).send({ id: result[0][0].id });
+        // const token = jwt.sign({ id: result[0][0].id }, process.env.JWT_KEY, { expiresIn: "2h" });
+        res.status(200).send({ id: result[0][0].id /*, token: token */})
       } else {
         res.status(400).send({ error: "Contraseña incorrecta" });
       }
+    } else {
+      res.status(400).send({ error: "Email no encontrado en base de datos" });
     }
   } catch (e) {
     console.log(e);
-    res.status(400).send({ error: "Email no encontrado en base de datos" });
+    res.status(400).send({ error: e.message });
   }
 });
 
@@ -113,31 +117,6 @@ router.delete("/:id/delete", async (req, res) => {
   }
 });
 
-// //GET user by name or email (based on input)
-// router.get("/user", async function (req, res) {
-//   const { searchKey } = req.query;
-//   console.log(searchKey);
-//   try {
-//     const personas = searchKey
-//       ? await sequelize.query(
-//           `SELECT * FROM user WHERE name = :searchKey OR email = :searchKey`,
-//           {
-//             replacements: { searchKey },
-//             type: sequelize.QueryTypes.SELECT,
-//           }
-//         )
-//       : await sequelize.query("SELECT * FROM user", {
-//           type: sequelize.QueryTypes.SELECT,
-//         });
-
-//     console.log(personas);
-//     res.send(personas);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Internal server error");
-//   }
-// });
-
 // Funcion que hace debugg
 global.debug = function () {
   debugger;
@@ -156,19 +135,19 @@ router.get("/user", async function (req, res) {
   try {
     const personas = searchKey
       ? await sequelize.query(
-          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
-          {
-            replacements: { searchKey, loggedInUserId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        )
+        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
+        {
+          replacements: { searchKey, loggedInUserId },
+          type: sequelize.QueryTypes.SELECT,
+        }
+      )
       : await sequelize.query(
-          "SELECT * FROM user WHERE id != :loggedInUserId",
-          {
-            replacements: { loggedInUserId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        );
+        "SELECT * FROM user WHERE id != :loggedInUserId",
+        {
+          replacements: { loggedInUserId },
+          type: sequelize.QueryTypes.SELECT,
+        }
+      );
 
     global.debug(); // Detener la ejecución y examinar el objeto "personas"
     console.log(personas);

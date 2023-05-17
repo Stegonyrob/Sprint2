@@ -1,5 +1,14 @@
-import axios from "axios"
+const url = "http://localhost:3001/";
 
-const baseUrl = axios.create({baseURL: 'http://localhost:3000'})
+export default async function request({ method, endpoint, body }) {
+    const response = await fetch(url + endpoint, {
+        method: method.toUpperCase(),
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+    const result = await response.json();
 
-export default baseUrl
+    return result;
+}

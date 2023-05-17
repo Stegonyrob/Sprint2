@@ -1,66 +1,84 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+import request from "../utils/url";
 
-function Register() {
-
-    const [name, setName] = useState("")
-    const [heading, setHeading] = useState("")
-    
+export default function Register() {
+    const [user, setUser] = useState({ name: "", lastName: "" });
+    const [error, setError] = useState(false);
 
     function handleChange(e) {
-        setName(e.target.value)
-        console.log(e.target.value)
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+        setError(false);
     }
 
-    function handleClick(e){      
-        
-        setHeading(name)
-        e.preventDefault()
-    }
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const { name, lastName } = user;
 
+        const response = await request({
+            method: "POST",
+            endpoint: "/users/register",
+            body: { name, lastName },
+        });
+
+        const result = await response.json();
+
+        if (result.userId) {
+            window.location.href = "/main";
+        } else {
+            setError(true);
+        }
+    }
 
     return (
-        <form onClick={handleClick}
-            className="p-3 mb-5 default-card"
-            id="form-register"
-            action="/register"
-            method="POST"
-        >
-        <h1>Hello {heading}</h1>
+        <div>
+        {error && (
+                <div style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
+                    Usuario o contraseña incorrectos
+                </div>
+            )}
+            <form onSubmit={handleSubmit}
+                className="p-3 mb-5 default-card"
+                id="form-register"
+                action="/register"
+                method="POST"
+            >
 
-            <div className="row justify-content-center">
-                <div className="col-md-11">
-                    <div className="form-group">
-                        <label for="name">Nombre</label>
-                        <input onChange={handleChange} value={name} type="text" className="form-control" id="name" required />
+
+                <div className="row justify-content-center">
+                    <div className="col-md-11">
+                        <div className="form-group">
+                            <label for="name">Nombre</label>
+                            <input onChange={handleChange} value={user.name} type="text" className="form-control" id="name" required />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="row justify-content-center">
-                <div className="col-md-11">
-                    <div className="form-group">
-                        <label for="lastName">Apellidos</label>
-                        <input type="text" className="form-control" id="lastName" required />
+                <div className="row justify-content-center">
+                    <div className="col-md-11">
+                        <div className="form-group">
+                            <label for="lastName">Apellidos</label>
+                            <input value={user.lastName}
+                                onChange={handleChange} type="text" className="form-control" id="lastName" required />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="row justify-content-center" id="register-form-buttons">
-                <div className="col-md-11">
-                    <button 
-                        type="submit"
-                        className="btn btn-warning btn-block"
-                        id="register-send"
-                    >
-                        Enviar
-                    </button>
-                    <button type="reset" className="btn btn-outline-warning btn-block">
-                        Restablecer
-                    </button>
+                <div className="row justify-content-center" id="register-form-buttons">
+                    <div className="col-md-11">
+                        <button
+                            type="submit"
+                            className="btn btn-warning btn-block"
+                            id="register-send"
+                        >
+                            Enviar
+                        </button>
+                        <button type="reset" className="btn btn-outline-warning btn-block">
+                            Restablecer
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>            
+        </div>
     );
 }
 
-
-export default Register;

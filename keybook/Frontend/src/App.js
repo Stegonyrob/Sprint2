@@ -1,11 +1,15 @@
 import React from 'react';
 import Register from './components/Registration';
+import Login from './components/Login';
+import "./App.css";
 
-function App() {
-  
+function App() {  
   return (
     <>
-      <Register/>
+    <div className='App'>
+      {/* <Register/> */}
+      <Login/>
+      </div>
     </>
   );
 }
