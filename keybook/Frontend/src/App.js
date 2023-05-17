@@ -1,10 +1,8 @@
-import React from 'react';
 import React, { useState } from 'react';
 import "./App.css";
-import Register from './components/Registration';
+// import Register from './components/Registration';
 import Login from './components/Login';
-import Footer from '../src/Components/Footer';
-
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -12,7 +10,7 @@ function App() {
       <div className='App'>
         {/* <Register/> */}
         <Login />
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
 
