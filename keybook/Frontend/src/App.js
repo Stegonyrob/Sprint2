@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import HelpButton from './Incremental 46 formulario/HelpButton/helpButton';
-import HelpForm from './HelpForm/HelpForm';
+import HelpForm from './Incremental 46 formulario/HelpForm/HelpForm';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
