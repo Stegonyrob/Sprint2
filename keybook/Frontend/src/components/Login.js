@@ -1,5 +1,5 @@
 import { useState } from "react";
-import request from "../utils/url";
+// import request from "../utils/url";
 
 export default function Login() {
     const [keys, setKeys] = useState({ email: "", password: "" });
@@ -45,7 +45,7 @@ export default function Login() {
                     <div className="card">
                         <div className="card-header">
                             <h3>Incio de Sesión</h3>
-                            <div className="d-flex justify-content-end social_icon">
+                            {/* <div className="d-flex justify-content-end social_icon">
                                 <span>
                                     <i className="fab fa-facebook-square" />
                                 </span>
@@ -55,7 +55,7 @@ export default function Login() {
                                 <span>
                                     <i className="fab fa-twitter-square" />
                                 </span>
-                            </div>
+                            </div> */}
                         </div>
                         {error && (
                             <div style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
@@ -67,7 +67,7 @@ export default function Login() {
                                 <div className="col-12">
                                     <div className="input-group form-group">
                                         <div className="input-group-prepend">
-                                            <span className="input-group-text">
+                                            <span className="input-group-text">✉
                                                 <i className="fas fa-user" />
                                             </span>
                                         </div>
@@ -87,8 +87,8 @@ export default function Login() {
                                 <div className="col-12">
                                     <div className="input-group form-group">
                                         <div className="input-group-prepend">
-                                            <span className="input-group-text">
-                                                <i className="fas fa-key" />
+                                            <span className="input-group-text">🔑
+                                                {/* <i className="fas fa-key" /> */}
                                             </span>
                                         </div>
                                         <input
@@ -102,8 +102,7 @@ export default function Login() {
                                         />
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit">Iniciar Sesión</button>
+                            </div>                   
                             <div className="row">
                                 <div className="col-12">
                                     <div className="row align-items-center remember">
@@ -111,12 +110,12 @@ export default function Login() {
                                         Recuerdame
                                     </div>
                                     <div className="form-group">
-                                        {/* <input
+                                        <input
                                             type="submit"
                                             defaultValue="Login"
                                             className="btn float-right login_btn"
                                             id="submitBtn"
-                                        /> */}
+                                        />
                                     </div>
                                 </div>
                             </div> 
