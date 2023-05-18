@@ -22,47 +22,47 @@ router.get("/", async function (req, res, next) {
 router.post("/register", async function (req, res) {
   try {
     const { name, lastName, dob, city, country, phone, email, password } =
-      req.body;
+        req.body;
     const blankPhoto = "https://i.postimg.cc/SNk2LBzX/blank-Avatar.png";
 
     const hashPassword = await bcrypt.hash(password, salt);
 
     const emailExists = await sequelize.query(
-      "SELECT * FROM user WHERE email = ?",
-      { type: sequelize.QueryTypes.SELECT, replacements: [email] }
+        "SELECT * FROM user WHERE email = ?",
+        { type: sequelize.QueryTypes.SELECT, replacements: [email] }
     );
     if (emailExists.length > 0) {
-      return res.status(400).json({ error: "El email ya está registrado" });
+        return res.status(400).json({ error: "El email ya está registrado" });
     } else {
-      const newUser = await sequelize.query(
-        `INSERT INTO user (name, last_name, email, password, date_of_birth, profile_picture, city, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        {
-          type: sequelize.QueryTypes.INSERT,
-          replacements: [
+        const newUser = await sequelize.query(
+            `INSERT INTO user (name, last_name, email, password, date_of_birth, profile_picture, city, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            {
+                type: sequelize.QueryTypes.INSERT,
+                replacements: [
+                    name,
+                    lastName,
+                    email,
+                    hashPassword,
+                    dob,
+                    blankPhoto,
+                    city,
+                    country,
+                    phone,
+                ],
+            }
+        );
+        res.status(200).send({
+            user_id: newUser[0],
             name,
-            lastName,
             email,
             hashPassword,
-            dob,
-            blankPhoto,
-            city,
-            country,
-            phone,
-          ],
-        }
-      );
-      res.status(200).send({
-        user_id: newUser[0],
-        name,
-        email,
-        hashPassword,
-      });
-      console.log("Usuario creado con éxito");
+        });
+        console.log("Usuario creado con éxito");
     }
-  } catch (e) {
+} catch (e) {
     console.log(e);
     res.status(400).send({ error: e.message });
-  }
+}
 });
 
 //POST login
