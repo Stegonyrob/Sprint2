@@ -1,6 +1,8 @@
 import { useState } from "react";
-// import request from "../utils/url";
+import request from "../utils/url";
 import Footer from './Footer';
+import { InputRegister } from "./InputRegister";
+import { ButtonDefault } from "./ButtonDefault";
 
 export default function Register() {
     const [keys, setKeys] = useState({ name: "", lastName: "", dob: "", city: "", country: "", phone: "", email: "", password: "" });
@@ -9,6 +11,7 @@ export default function Register() {
     function handleChange(e) {
         const { name, value } = e.target;
         setKeys({ ...keys, [name]: value });
+        console.log(keys)
         setError(false);
     }
 
@@ -16,28 +19,13 @@ export default function Register() {
         e.preventDefault();
         const { name, lastName, dob, city, country, phone, email, password } = keys
 
-        const newUser = {
-            name: name,
-            lastName: lastName,
-            dob: dob,
-            city: city,
-            country: country,
-            phone: phone,
-            email: email,
-            password: password
-        }
-
-        const response = await fetch("http://localhost:3000/users/register", {
+        const response = await request({
             method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(newUser)
+            endpoint: "users/register",
+            body: { name, lastName, dob, city, country, phone, email, password },
         });
 
-        const result = await response.json();
-
-        if (result) {
+        if (response.id) {
             alert("Usuario creado con éxito")
             //   window.location.href = "/main";
         } else {
@@ -58,108 +46,37 @@ export default function Register() {
                             Datos incorrectos
                         </div>
                     )}
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label for="name">Nombre</label>
-                                <input onChange={handleChange} value={keys.name} name="name" type="text" className="form-control" id="name" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label for="lastName">Apellidos</label>
-                                <input value={keys.lastName}
-                                    onChange={handleChange} name="lastName" type="text" className="form-control" id="lastName" required />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="dob">Año de nacimiento</label>
-                                <input value={keys.dob}
-                                    onChange={handleChange} name="dob" type="text" className="form-control" id="dob" required="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="city">Ciudad</label>
-                                <input value={keys.city}
-                                    onChange={handleChange} name="city" type="text" className="form-control" id="city" required="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="country">País</label>
-                                <input value={keys.country}
-                                    onChange={handleChange} name="country" type="text" className="form-control" id="country" required="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="phone">Teléfono</label>
-                                <input value={keys.phone}
-                                    onChange={handleChange} name="phone" type="text" className="form-control" id="phone" required="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <input value={keys.email}
-                                    onChange={handleChange} name="email" type="email" className="form-control" id="email" required="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="password">Contraseña</label>
-                                <input value={keys.password}
-                                    onChange={handleChange} name="password"
-                                    type="password"
-                                    className="form-control"
-                                    id="password"
-                                    required=""
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-11">
-                            <div className="form-group">
-                                <label htmlFor="repeat-password">Repita Contraseña</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    id="repeat-password"
-                                    required=""
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <InputRegister label="Nombre"
+                        type="text"
+                        onChange={handleChange} value={keys.name} name="name" />
+                    <InputRegister label="Apellidos"
+                        type="text"
+                        onChange={handleChange} value={keys.lastName} name="lastName" />
+                    <InputRegister label="Año de nacimiento"
+                        type="text"
+                        onChange={handleChange} value={keys.dob} name="dob" />
+                    <InputRegister label="Ciudad"
+                        type="text"
+                        onChange={handleChange} value={keys.city} name="city" />
+                    <InputRegister label="País"
+                        type="text"
+                        onChange={handleChange} value={keys.country} name="country" />
+                    <InputRegister label="Teléfono"
+                        type="text"
+                        onChange={handleChange} value={keys.phone} name="phone" />
+                    <InputRegister label="Correo electrónico"
+                        type="email"
+                        onChange={handleChange} value={keys.email} name="email" />
+                    <InputRegister label="Contraseña"
+                        type="password"
+                        onChange={handleChange} value={keys.password} name="password" />
+                    <InputRegister label="Repita contraseña"
+                        type="password"
+                        name="repeat-password" />
                     <div className="row justify-content-center" id="register-form-buttons">
                         <div className="col-md-11">
-                            <button
-                                type="submit"
-                                className="btn btn-warning btn-block"
-                                id="register-send"
-                            >
-                                Enviar
-                            </button>
-                            <button type="reset" className="btn btn-outline-warning btn-block">
-                                Restablecer
-                            </button>
+                            <ButtonDefault type="submit" content="Enviar" id="register-send" />
+                            <ButtonDefault type="reset" content="Restablecer" />
                         </div>
                     </div>
                 </form>
