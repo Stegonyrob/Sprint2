@@ -4,6 +4,8 @@ import "./App.css";
 // import Register from './components/Registration';
 // import Login from './components/Login';
 // import Footer from './components/Footer';
+// import Home from './components/Home';
+// import Profile from './components/Profile';
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
       <div className='App'>
         {/* <Register/> */}
         {/* <Login /> */}
-         {/* <Footer />  */}
+        {/* <Home /> */}
+        {/* <Profile /> */}
+        {/* <Footer /> */}
       </div>
     </>
 
