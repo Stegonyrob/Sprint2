@@ -6,13 +6,15 @@ import Login from './components/Login';
 // import Footer from './components/Footer';
 // import Home from './components/Home';
 // import Profile from './components/Profile';
+import UsersGrid from './Components/UsersGrid';
+// import GetUsers from './Components/GetUsers';
 
 function App() {
   return (
     <>
       <div className='App'>
-        <Register/>
-        <Login />
+        {/* <Register/> */}
+        {/* <Login /> */}
         {/* <Home /> */}
         {/* <Profile /> */}
         {/* <Footer /> */}
