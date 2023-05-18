@@ -7,7 +7,6 @@ function UsersGrid() {
 
     return (
         <>
-
             <main>
                 {/*Menu  búsqueda amigos*/}
                 <div className="container main-structure">
