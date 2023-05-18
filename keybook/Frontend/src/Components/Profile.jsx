@@ -4,25 +4,6 @@ import Footer from './Footer';
 function Profile() {
   return (
     <>
-      <meta charSet="UTF-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Mi Perfil</title>
-      {/* BOOTSTRAP CSS */}
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-        crossOrigin="anonymous"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-      />
-      {/* FONT AWESOME */}
-      {/* CSS STYLESHEETS (después de Bootstrap!)*/}
-      <link rel="stylesheet" href="../css/styles.css" />
-      {/*BARRA DE NAVEGACIÓN*/}
       <main>
         {/* PERSONAL PROFILE */}
         <div id="cuenta">
@@ -192,14 +173,7 @@ function Profile() {
           Eliminar cuenta
         </button>
       </main>
-      <footer className="footer">
-        <div className="text-center p-3">
-          2023 Keybook ©
-          <a className="footer-url" href="#">
-            Keybook.com
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </>
 
   );

@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="text-center p-3">
         2023 Keybook ©
-        <a className='footer-url' href="#"> Keybook.com</a>
+        <span className="footer-url">Keybook.com</span>
       </div>
     </footer>
   );
