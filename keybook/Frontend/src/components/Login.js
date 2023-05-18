@@ -20,7 +20,7 @@ export default function Login() {
             password: password
         }
 
-        const response = await fetch("http://localhost:3001/users/auth", {
+        const response = await fetch("http://localhost:3000/users/auth", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
