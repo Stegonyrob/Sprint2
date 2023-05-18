@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function getUsers() {
+export function GetUsers() {
     const [randomUsers, setRandomUsers] = useState([]);
     useEffect(() => {
         async function fetchData() {
@@ -35,4 +35,4 @@ export function getUsers() {
         </>
     );
 }
-export default getUsers;
+export default GetUsers;

@@ -1,12 +1,13 @@
 import React from 'react';
 // import GrayScale from './GrayScale';
-import getUsers from './GetUsers'
+import GetUsers from './GetUsers';
+import Footer from './Footer';
 
 function UsersGrid() {
 
     return (
         <>
-            {getUsers()}
+            <GetUsers />
             <meta charSet="UTF-8" />
             <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,7 +92,7 @@ function UsersGrid() {
                     </nav>
                 </div>
             </main>
-
+            <Footer />
         </>
     );
 }

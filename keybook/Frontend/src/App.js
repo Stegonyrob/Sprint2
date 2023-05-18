@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
-import HelpButton from './Incremental 46 formulario/HelpButton/helpButton';
-import HelpForm from './Incremental 46 formulario/HelpForm/HelpForm';
-import Footer from '../src/Components/Footer';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+// import Register from './components/Registration';
+// import Login from './components/Login';
+// import Footer from './components/Footer';
+// import Home from './components/Home';
+// import Profile from './components/Profile';
+import UsersGrid from './Components/UsersGrid';
 
 function App() {
   return (
-    <div className="App">
-      <h1>¡Bienvenido a Keybook!</h1>
-      <HelpButton onClick={handleButtonClick} />
-      {showForm && <HelpForm onClose={handleFormClose} />}
-      <Footer />
-    </div>
+    <>
+      <div className='App'>
+        <UsersGrid />
+        {/* <Register/> */}
+        {/* <Login /> */}
+        {/* <Home /> */}
+        {/* <Profile /> */}
+        {/* <Footer /> */}
+      </div>
+    </>
+
   );
 }
 
