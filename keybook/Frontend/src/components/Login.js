@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import request from "../utils/url";
+import request from "../utils/url";
 import logo from '../imgs/logo.png';
 import Footer from './Footer';
 
@@ -23,22 +23,13 @@ export default function Login() {
         e.preventDefault();
         const { email, password } = keys;
 
-        const user = {
-            email: email,
-            password: password
-        }
-
-        const response = await fetch("http://localhost:3000/users/auth", {
+        const response = await request({
             method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(user)
+            endpoint: "users/auth",
+            body: { email, password },
         });
 
-        const result = await response.json();
-
-        if (result.id) {
+        if (response.id) {
             alert("Usuario logueado. Redireccionando a home")
             //   window.location.href = "/main";
         } else {
@@ -48,8 +39,8 @@ export default function Login() {
     }
     return (
         <>
-            <div class="container login-container">
-                <div class="card">
+            <div className="container login-container">
+                <div className="card">
                     {MyLogo()}
                     <div id="slogan-container">
                         <h2>Keybook: donde los programadores comparten sus claves</h2>
@@ -94,7 +85,7 @@ export default function Login() {
                                                     type="text"
                                                     className="form-control"
                                                     placeholder="Email"
-                                                    id="email"
+                                                    id="email-login"
                                                 />
                                             </div>
                                         </div>
@@ -114,7 +105,7 @@ export default function Login() {
                                                     type="password"
                                                     className="form-control"
                                                     placeholder="Contraseña"
-                                                    id="password"
+                                                    id="password-login"
                                                 />
                                             </div>
                                         </div>
@@ -127,7 +118,7 @@ export default function Login() {
                                             </div>
                                             <div className="form-group">
                                                 <input
-                                                    type="submit" value="Login" class="btn float-right login_btn" id="submitBtn"
+                                                    type="submit" value="Login" className="btn float-right login_btn" id="submitBtn"
                                                 />
                                             </div>
                                         </div>

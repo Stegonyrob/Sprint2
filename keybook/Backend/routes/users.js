@@ -52,7 +52,7 @@ router.post("/register", async function (req, res) {
             }
         );
         res.status(200).send({
-            user_id: newUser[0],
+            id: newUser[0],
             name,
             email,
             hashPassword,

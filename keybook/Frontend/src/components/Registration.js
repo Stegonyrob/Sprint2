@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import request from "../utils/url";
+import request from "../utils/url";
 import Footer from './Footer';
 
 export default function Register() {
@@ -14,37 +14,22 @@ export default function Register() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const { name, lastName, dob, city, country, phone, email, password } = keys
+        const { name, lastName, dob, city, country, phone, email, password } = keys      
 
-        const newUser = {
-            name: name,
-            lastName: lastName,
-            dob: dob,
-            city: city,
-            country: country,
-            phone: phone,
-            email: email,
-            password: password
-        }
-
-        const response = await fetch("http://localhost:3000/users/register", {
+        const response = await request({
             method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(newUser)
-        });
+            endpoint: "users/register",
+            body:  { name, lastName, dob, city, country, phone, email, password } ,
+        });     
 
-        const result = await response.json();
-
-        if (result) {
+        if (response.id) {
             alert("Usuario creado con éxito")
             //   window.location.href = "/main";
         } else {
             alert("Ocurrió un error")
             setError(true);
         }
-    }
+    } 
 
     return (
         <>
@@ -61,7 +46,7 @@ export default function Register() {
                     <div className="row justify-content-center">
                         <div className="col-md-11">
                             <div className="form-group">
-                                <label for="name">Nombre</label>
+                                <label htmlFor="name">Nombre</label>
                                 <input onChange={handleChange} value={keys.name} name="name" type="text" className="form-control" id="name" required />
                             </div>
                         </div>
@@ -69,7 +54,7 @@ export default function Register() {
                     <div className="row justify-content-center">
                         <div className="col-md-11">
                             <div className="form-group">
-                                <label for="lastName">Apellidos</label>
+                                <label htmlFor="lastName">Apellidos</label>
                                 <input value={keys.lastName}
                                     onChange={handleChange} name="lastName" type="text" className="form-control" id="lastName" required />
                             </div>
