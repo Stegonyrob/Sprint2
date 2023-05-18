@@ -1,9 +1,12 @@
 import React from 'react';
 // import GrayScale from './GrayScale';
+import getUsers from './GetUsers'
 
 function UsersGrid() {
+
     return (
         <>
+            {getUsers()}
             <meta charSet="UTF-8" />
             <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
