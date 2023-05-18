@@ -2,6 +2,7 @@ var express = require("express");
 const sequelize = require("../db/connection");
 var router = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const salt = 10;
 
@@ -52,7 +53,7 @@ router.post("/register", async function (req, res) {
             }
         );
         res.status(200).send({
-            user_id: newUser[0],
+            id: newUser[0],
             name,
             email,
             hashPassword,
@@ -79,8 +80,8 @@ router.post("/auth", async (req, res) => {
         result[0][0].password
       );
       if (validPassword) {
-        // const token = jwt.sign({ id: result[0][0].id }, process.env.JWT_KEY, { expiresIn: "2h" });
-        res.status(200).send({ id: result[0][0].id /*, token: token */})
+        const token = jwt.sign({ id: result[0][0].id }, process.env.JWT_KEY, { expiresIn: "2h" });
+        res.status(200).send({ id: result[0][0].id, token: token })
       } else {
         res.status(400).send({ error: "Contraseña incorrecta" });
       }

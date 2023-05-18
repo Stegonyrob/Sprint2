@@ -1,11 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-// import Register from './components/Registration';
-// import Login from './components/Login';
+// import Register from "./components/Registration";
+// import Login from "./components/Login";
 // import Footer from './components/Footer';
 // import Home from './components/Home';
 // import Profile from './components/Profile';
+// import UsersGrid from "./Components/UsersGrid";
+// import GetUsers from './Components/GetUsers';
 import NavBar from "./Components/NavBar";
 
 function App() {
