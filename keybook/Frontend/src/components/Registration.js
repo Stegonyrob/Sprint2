@@ -2,6 +2,7 @@ import { useState } from "react";
 import request from "../utils/url";
 import Footer from './Footer';
 import { InputRegister } from "./InputRegister";
+import { ButtonDefault } from "./ButtonDefault";
 
 export default function Register() {
     const [keys, setKeys] = useState({ name: "", lastName: "", dob: "", city: "", country: "", phone: "", email: "", password: "" });
@@ -74,16 +75,8 @@ export default function Register() {
                         name="repeat-password" />
                     <div className="row justify-content-center" id="register-form-buttons">
                         <div className="col-md-11">
-                            <button
-                                type="submit"
-                                className="btn btn-warning btn-block"
-                                id="register-send"
-                            >
-                                Enviar
-                            </button>
-                            <button type="reset" className="btn btn-outline-warning btn-block">
-                                Restablecer
-                            </button>
+                            <ButtonDefault type="submit" content="Enviar" id="register-send" />
+                            <ButtonDefault type="reset" content="Restablecer" />
                         </div>
                     </div>
                 </form>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import request from "../utils/url";
 import logo from '../imgs/logo.png';
 import Footer from './Footer';
+import { ButtonDefault } from "./ButtonDefault";
 
 function MyLogo() {
     return (
@@ -120,9 +121,7 @@ export default function Login() {
                                                 Recuerdame
                                             </div>
                                             <div className="form-group">
-                                                <input
-                                                    type="submit" value="Login" className="btn float-right login_btn" id="submitBtn"
-                                                />
+                                                <ButtonDefault type="submit" content="Login" id="register-send" />
                                             </div>
                                         </div>
                                     </div>
@@ -133,11 +132,11 @@ export default function Login() {
                                                     Si no tienes cuenta
                                                     <a href="./formRegistration.html">Registrate</a>
                                                 </div>
-                                                <div className="d-flex justify-content-center">
+                                                {/* <div className="d-flex justify-content-center">
                                                     <a href="./formResetPassword.html">
                                                         ¿Olvidaste tu contraseña?
                                                     </a>
-                                                </div>
+                                                </div> */}
                                                 {/* <div className="infinity-button" onclick="toggleGrayScale()">
                                             <i className="fa fa-infinity icon" title="Blanco y Negro" />
                                         </div> */}
