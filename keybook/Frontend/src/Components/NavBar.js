@@ -102,13 +102,11 @@ export default function NavBar() {
                 </li>
                 {/*Logout*/}
                 <li className="nav-item">
-                  <Logout className="dropdown-item active" id="logout" href="#">
-                    <FontAwesomeIcon
-                      icon={faSignOutAlt}
-                      className="icon"
-                      title="Desconectarse"
-                    />
-                  </Logout>
+                  <Logout
+                    className="dropdown-item active"
+                    id="logout"
+                    href="#"
+                  ></Logout>
                 </li>
                 <li className="nav-item search-bar-dropdown d-lg-none  mx-auto">
                   {isSearchVisible && <SearchBar />}
