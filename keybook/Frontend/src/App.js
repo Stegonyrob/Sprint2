@@ -1,24 +1,27 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import Register from './components/Registration';
-// import Login from './components/Login';
-// import Footer from './components/Footer';
+import RegisterView from './views/RegisterView';
+import LoginView from './views/LoginView';
 // import Home from './components/Home';
 // import Profile from './components/Profile';
 // import UsersGrid from './components/UsersGrid';
-// import GetUsers from './Components/GetUsers';
+
 
 function App() {
   return (
     <>
       <div className='App'>
-      {/* <UsersGrid/> */}
-        <Register/>
-        {/* <Login /> */}
-        {/* <Home /> */}
-        {/* <Profile /> */}
-        {/* <Footer /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/register" element={<RegisterView />} />
+            <Route path="/login" element={<LoginView />} />
+            {/* <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/community" element={<UsersGrid />} /> */}
+          </Routes>
+        </BrowserRouter>
       </div>
     </>
 
