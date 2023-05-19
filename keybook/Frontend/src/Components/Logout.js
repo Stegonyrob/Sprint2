@@ -1,13 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentDots,
-  faBell,
-  faUser,
-  faCog,
-  faInfinity,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 const Logout = () => {
   const logout = () => {
     localStorage.removeItem("userId");
