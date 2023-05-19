@@ -5,19 +5,18 @@ import { InputRegister } from "./InputRegister";
 import { ButtonDefault } from "./ButtonDefault";
 
 export default function Register() {
-    const [keys, setKeys] = useState({ name: "", lastName: "", dob: "", city: "", country: "", phone: "", email: "", password: "" });
+    const [keys, setKeys] = useState({ name: "", lastName: "", dob: "", city: "", country: "", phone: "", email: "", password: "", repeatPassword: "" });
     const [error, setError] = useState(false);
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setKeys({ ...keys, [name]: value });
-        console.log(keys)
+        setKeys({ ...keys, [name]: value });     
         setError(false);
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const { name, lastName, dob, city, country, phone, email, password } = keys
+        const { name, lastName, dob, city, country, phone, email, password, repeatPassword } = keys
 
         const response = await request({
             method: "POST",
@@ -72,7 +71,7 @@ export default function Register() {
                         onChange={handleChange} value={keys.password} name="password" />
                     <InputRegister label="Repita contraseña"
                         type="password"
-                        name="repeat-password" />
+                        onChange={handleChange} value={keys.repeatPassword} name="repeatPassword" />
                     <div className="row justify-content-center" id="register-form-buttons">
                         <div className="col-md-11">
                             <ButtonDefault type="submit" content="Enviar" id="register-send" />
