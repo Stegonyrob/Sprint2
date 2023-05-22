@@ -1,15 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
-import Register from '../components/Registration'
+import Profile from '../components/Profile';
 import Footer from '../components/Footer';
 
-export default  function RegisterView() {
+export default function HomeView() {
     return (
         <>
-            <Register />          
-            <Footer />  
+            <Profile />      
+            <Footer/>     
         </>
     );
 }
-

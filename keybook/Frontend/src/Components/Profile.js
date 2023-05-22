@@ -1,7 +1,6 @@
 import React from 'react';
-import Footer from './Footer';
 
-function Profile() {
+export default function Profile() {
   return (
     <>
       <main>
@@ -172,11 +171,9 @@ function Profile() {
         <button id="eliminar-cuenta" className="btn btn-danger">
           Eliminar cuenta
         </button>
-      </main>
-      <Footer />
+      </main>   
     </>
 
   );
 }
 
-export default Profile;

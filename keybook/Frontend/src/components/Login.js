@@ -1,7 +1,6 @@
 import { useState } from "react";
 import request from "../utils/url";
 import logo from '../imgs/logo.png';
-import Footer from './Footer';
 import { ButtonDefault } from "./ButtonDefault";
 
 function MyLogo() {
@@ -54,18 +53,7 @@ export default function Login() {
                     <div className="d-flex justify-content-center h-100 login-container">
                         <div className="card">
                             <div className="card-header">
-                                <h3>Incio de Sesión</h3>
-                                {/* <div className="d-flex justify-content-end social_icon">
-                                <span>
-                                    <i className="fab fa-facebook-square" />
-                                </span>
-                                <span>
-                                    <i className="fab fa-google-plus-square" />
-                                </span>
-                                <span>
-                                    <i className="fab fa-twitter-square" />
-                                </span>
-                            </div> */}
+                                <h3>Incio de Sesión</h3>                              
                             </div>
                             {error && (
                                 <div style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
@@ -149,7 +137,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            <Footer />
+         
         </>
     );
 }

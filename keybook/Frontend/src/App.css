@@ -20,11 +20,6 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.error {
-  color: red;
-  /* display: none !important; */
-}
-
 input {
   background-color: aliceblue;
 }
@@ -401,6 +396,14 @@ textarea {
 }
 
 /* CREATE ACCOUNT FORM */
+
+.error {
+  color: aliceblue;
+  font-weight: bold;
+  text-align: center;
+  border-color: red;
+  background-color: red;
+ }
 
 .new-user-registration {
   text-align: center;

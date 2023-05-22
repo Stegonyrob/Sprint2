@@ -2,13 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import Login from '../components/Login'
+import Footer from '../components/Footer';
 
-function LoginView() {
+export default function LoginView() {
     return (
         <>
-            <Login />           
+            <Login />      
+            <Footer/>     
         </>
     );
 }
-
-export default LoginView;

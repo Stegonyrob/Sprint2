@@ -3,7 +3,7 @@ import React from 'react';
 export const InputRegister = ({ label, type, id, name, onChange, value }) => {
     return (
         <div className="row justify-content-center">
-            <div className="col-md-11">
+            <div className="col-md-10">
                 <div className="form-group">
                     <label htmlFor={name}>{label}</label>
                     <input
@@ -12,7 +12,7 @@ export const InputRegister = ({ label, type, id, name, onChange, value }) => {
                         name={name}
                         id={id}
                         type={type}
-                        className="form-control"
+                        className="form-control "
                         required
                     />
                 </div>
