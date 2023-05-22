@@ -43,19 +43,19 @@ export default function NavBar() {
 
   const navIcons = [
     {
-      link: "/",
+      link: "/home",
       icon: faHome,
       title: "Inicio",
       component: <HomeIcon />,
     },
     {
-      link: "/Profile",
+      link: "/profile",
       icon: faUser,
       title: "Mi Perfil",
       component: <UserIcon />,
     },
     {
-      link: "/UsersGrid",
+      link: "/users",
       icon: faAddressBook,
       title: "Amigos",
       component: <UsersGrid />,
