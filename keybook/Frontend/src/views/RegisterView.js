@@ -1,15 +1,14 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import Register from '../components/Registration'
-import Footer from '../components/Footer';
+import Register from "../Components/Registration";
+import Footer from "../Components/Footer";
 
 export default function RegisterView() {
-    return (
-        <>
-            <Register />
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <Register />
+      <Footer />
+    </>
+  );
 }
-
