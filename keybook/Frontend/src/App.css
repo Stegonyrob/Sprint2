@@ -23,11 +23,6 @@ html, body {
  
 }
 
-.error {
-  color: red;
-  /* display: none !important; */
-}
-
 input {
   background-color: aliceblue;
 }
@@ -447,24 +442,30 @@ textarea {
 
 /* CREATE ACCOUNT FORM */
 
+.error {
+  color: aliceblue;
+  font-weight: bold;
+  text-align: center;
+  border-color: red;
+  background-color: red;
+ }
+
 .new-user-registration {
   text-align: center;
   margin-top: 3%;
 }
 
 #form-register {
+  margin-top: 5%;
   text-align: center;
   width: 50%;
   margin-left: 25%;
 }
 
 #register-form-buttons {
-  margin-top: 2%;
+  margin-top: 5%;
 }
 
-#register-send {
-  margin-right: 5%;
-}
 #profilePicture::after {
   display: none;
 }

@@ -1,87 +1,80 @@
 import { useState } from "react";
 import request from "../utils/url";
-import Footer from './Footer';
-import { InputRegister } from "./InputRegister";
+import {FormInput} from "./FormInput";
 import { ButtonDefault } from "./ButtonDefault";
 
 export default function Register() {
-    const [keys, setKeys] = useState({ name: "", lastName: "", dob: "", city: "", country: "", phone: "", email: "", password: "" });
+    const [userInfo, setUserInfo] = useState({ name: "", lastName: "", dob: "", city: "", country: "", phone: "", email: "", password: "", repeatPassword: "" });
     const [error, setError] = useState(false);
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setKeys({ ...keys, [name]: value });
-        console.log(keys)
+        setUserInfo({ ...userInfo, [name]: value });
         setError(false);
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const { name, lastName, dob, city, country, phone, email, password } = keys
+        const { name, lastName, dob, city, country, phone, email, password, repeatPassword } = userInfo
 
-        const response = await request({
-            method: "POST",
-            endpoint: "users/register",
-            body: { name, lastName, dob, city, country, phone, email, password },
-        });
+        try {
+            const response = await request({
+                method: "POST",
+                endpoint: "users/register",
+                body: { name, lastName, dob, city, country, phone, email, password },
+            });
 
-        if (response.id) {
-            alert("Usuario creado con éxito")
-            //   window.location.href = "/main";
-        } else {
-            alert("Ocurrió un error")
-            setError(true);
+            if (response.id) {
+                alert("Usuario creado con éxito")
+            } else {
+                setError(true);
+            }
+        } catch {
+            alert("Ocurrió un error. Vuelva a intentarlo")
         }
     }
 
     return (
         <>
-            <div>
-                <form onSubmit={handleSubmit}
-                    className="p-3 mb-5 default-card"
-                    id="form-register"
-                >
-                    {error && (
-                        <div style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
-                            Datos incorrectos
-                        </div>
-                    )}
-                    <InputRegister label="Nombre"
-                        type="text"
-                        onChange={handleChange} value={keys.name} name="name" />
-                    <InputRegister label="Apellidos"
-                        type="text"
-                        onChange={handleChange} value={keys.lastName} name="lastName" />
-                    <InputRegister label="Año de nacimiento"
-                        type="text"
-                        onChange={handleChange} value={keys.dob} name="dob" />
-                    <InputRegister label="Ciudad"
-                        type="text"
-                        onChange={handleChange} value={keys.city} name="city" />
-                    <InputRegister label="País"
-                        type="text"
-                        onChange={handleChange} value={keys.country} name="country" />
-                    <InputRegister label="Teléfono"
-                        type="text"
-                        onChange={handleChange} value={keys.phone} name="phone" />
-                    <InputRegister label="Correo electrónico"
-                        type="email"
-                        onChange={handleChange} value={keys.email} name="email" />
-                    <InputRegister label="Contraseña"
-                        type="password"
-                        onChange={handleChange} value={keys.password} name="password" />
-                    <InputRegister label="Repita contraseña"
-                        type="password"
-                        name="repeat-password" />
-                    <div className="row justify-content-center" id="register-form-buttons">
-                        <div className="col-md-11">
-                            <ButtonDefault type="submit" content="Enviar" id="register-send" />
-                            <ButtonDefault type="reset" content="Restablecer" />
-                        </div>
+            <form onSubmit={handleSubmit}
+                className="p-3 mb-5 default-card"
+                id="form-register"
+            >
+                <h1 className="new-user-registration">Registrar Nuevo Usuario</h1>
+                {error && (
+                    <div className="error form-control ">
+                        La cuenta de correo ya está registrada
                     </div>
-                </form>
-            </div>
-            <Footer />
+                )}
+                <FormInput label="Nombre"
+                    type="text"
+                    onChange={handleChange} value={userInfo.name} name="name" />
+                <FormInput label="Apellidos"
+                    type="text"
+                    onChange={handleChange} value={userInfo.lastName} name="lastName" />
+                <FormInput label="Año de nacimiento"
+                    type="text"
+                    onChange={handleChange} value={userInfo.dob} name="dob" />
+                <FormInput label="Ciudad"
+                    type="text"
+                    onChange={handleChange} value={userInfo.city} name="city" />
+                <FormInput label="País"
+                    type="text"
+                    onChange={handleChange} value={userInfo.country} name="country" />
+                <FormInput label="Teléfono"
+                    type="text"
+                    onChange={handleChange} value={userInfo.phone} name="phone" />
+                <FormInput label="Correo electrónico"
+                    type="email"
+                    onChange={handleChange} value={userInfo.email} name="email" />
+                <FormInput label="Contraseña"
+                    type="password"
+                    onChange={handleChange} value={userInfo.password} name="password" />
+                <FormInput label="Repita contraseña"
+                    type="password"
+                    onChange={handleChange} value={userInfo.repeatPassword} name="repeatPassword" />
+                <ButtonDefault type="submit" content="Enviar" id="register-form-buttons" />
+            </form>
         </>
     );
 }
