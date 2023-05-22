@@ -1,13 +1,13 @@
 import React from 'react';
 import Footer from '../Components/Footer';
-import  NavBar from '../Components/NavBar'
+
 
 function Profile() {
   return (
     <>
       <main>
         {/* PERSONAL PROFILE */}
-        <NavBar/>
+      
         <div id="cuenta">
           <div className="container-fluid main-structure">
             <div className="row">

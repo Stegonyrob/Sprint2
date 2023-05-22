@@ -2,13 +2,13 @@ import React from 'react';
 // import GrayScale from './GrayScale';
 import GetUsers from './GetUsers';
 import Footer from './Footer';
-import NavBar from './NavBar';
+
 function UsersGrid() {
 
     return (
         <>
             <main>
-            <NavBar/>
+           
                 {/*Menu  búsqueda amigos*/}
                 <div className="container main-structure">
                     <div className="row">
