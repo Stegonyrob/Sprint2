@@ -1,6 +1,6 @@
 import { useState } from "react";
 import request from "../utils/url";
-import { InputRegister } from "./InputRegister";
+import {FormInput} from "./FormInput";
 import { ButtonDefault } from "./ButtonDefault";
 
 export default function Register() {
@@ -46,31 +46,31 @@ export default function Register() {
                         La cuenta de correo ya está registrada
                     </div>
                 )}
-                <InputRegister label="Nombre"
+                <FormInput label="Nombre"
                     type="text"
                     onChange={handleChange} value={userInfo.name} name="name" />
-                <InputRegister label="Apellidos"
+                <FormInput label="Apellidos"
                     type="text"
                     onChange={handleChange} value={userInfo.lastName} name="lastName" />
-                <InputRegister label="Año de nacimiento"
+                <FormInput label="Año de nacimiento"
                     type="text"
                     onChange={handleChange} value={userInfo.dob} name="dob" />
-                <InputRegister label="Ciudad"
+                <FormInput label="Ciudad"
                     type="text"
                     onChange={handleChange} value={userInfo.city} name="city" />
-                <InputRegister label="País"
+                <FormInput label="País"
                     type="text"
                     onChange={handleChange} value={userInfo.country} name="country" />
-                <InputRegister label="Teléfono"
+                <FormInput label="Teléfono"
                     type="text"
                     onChange={handleChange} value={userInfo.phone} name="phone" />
-                <InputRegister label="Correo electrónico"
+                <FormInput label="Correo electrónico"
                     type="email"
                     onChange={handleChange} value={userInfo.email} name="email" />
-                <InputRegister label="Contraseña"
+                <FormInput label="Contraseña"
                     type="password"
                     onChange={handleChange} value={userInfo.password} name="password" />
-                <InputRegister label="Repita contraseña"
+                <FormInput label="Repita contraseña"
                     type="password"
                     onChange={handleChange} value={userInfo.repeatPassword} name="repeatPassword" />
                 <ButtonDefault type="submit" content="Enviar" id="register-form-buttons" />

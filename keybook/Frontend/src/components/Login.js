@@ -1,7 +1,7 @@
 import { useState } from "react";
 import request from "../utils/url";
 import logo from '../imgs/logo.png';
-import { InputRegister } from "./InputRegister";
+import { FormInput } from "./FormInput";
 import { ButtonDefault } from "./ButtonDefault";
 
 function MyLogo() {
@@ -63,10 +63,10 @@ export default function Login() {
                             )}
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                    <InputRegister
+                                    <FormInput
                                         type="email"
                                         onChange={handleChange} value={loginInfo.email} name="email" placeholder="Email" />
-                                    <InputRegister
+                                    <FormInput
                                         type="password"
                                         onChange={handleChange} value={loginInfo.password} name="password" placeholder="Contraseña" />
                                     <ButtonDefault type="submit" content="Login" id="register-form-buttons" />

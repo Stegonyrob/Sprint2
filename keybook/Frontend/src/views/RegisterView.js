@@ -4,11 +4,11 @@ import "../App.css";
 import Register from '../components/Registration'
 import Footer from '../components/Footer';
 
-export default  function RegisterView() {
+export default function RegisterView() {
     return (
         <>
-            <Register />          
-            <Footer />  
+            <Register />
+            <Footer />
         </>
     );
 }
