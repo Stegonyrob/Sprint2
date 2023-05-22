@@ -9,9 +9,9 @@ import {
   faUser,
   faCog,
   faInfinity,
-  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Logout from "./Logout";
+import Logo from "./Logo";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,13 +48,7 @@ export default function NavBar() {
         <div className="container-fluid">
           <div className="row nav-body">
             <div className="col">
-              <a className="navbar-brand" href="home.html">
-                <img
-                  src="../imgs/logo.png"
-                  alt="Logo"
-                  className="keybook-logo d-block"
-                />
-              </a>
+              <Logo />
             </div>
             <div className="d-none d-lg-block">
               <SearchBar />
@@ -109,7 +103,7 @@ export default function NavBar() {
                   ></Logout>
                 </li>
                 <li className="nav-item search-bar-dropdown d-lg-none  mx-auto">
-                  {isSearchVisible && <SearchBar />}
+                  <SearchBar />
                 </li>
               </ul>
             </div>

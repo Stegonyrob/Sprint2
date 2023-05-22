@@ -5,7 +5,7 @@ function Logo() {
     <div className="col">
       <a className="navbar-brand" href="home.html">
         <img
-          src="../imgs/logo.png"
+          src="./imgs/logo.png"
           alt="Logo"
           className="keybook-logo d-block"
         />
