@@ -1,4 +1,5 @@
 import React from 'react';
+import UserProfile from './GetProfileLogged';
 import Footer from './Footer';
 
 function Profile() {
@@ -10,6 +11,7 @@ function Profile() {
           <div className="container-fluid main-structure">
             <div className="row">
               <div className="col-sm-5 col-md-4 col-lg-3">
+                <UserProfile />
                 <div className="default-card education">
                   <h4>
                     <i
