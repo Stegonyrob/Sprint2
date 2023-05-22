@@ -6,11 +6,14 @@ import UsersGrid from "./Components/UsersGrid";
 import NavBar from "./Components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
-// import Register from "./components/Registration";
-// import Login from "./components/Login";
+import Register from "./Components/Registration";
+import Login from "./Components/Login";
 // import Footer from './components/Footer';
-// import GetUsers from './Components/GetUsers';
+// import Home from './components/Home';
+// import Profile from './components/Profile';
+// import UsersGrid from "./Components/UsersGrid";
+//import SearchBarUsers from "./Components/SearchBarUsers";
+
 function App() {
   return (
     <>
