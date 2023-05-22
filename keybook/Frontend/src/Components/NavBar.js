@@ -55,7 +55,7 @@ export default function NavBar() {
       component: <UserIcon />,
     },
     {
-      link: "/Friends",
+      link: "/UsersGrid",
       icon: faAddressBook,
       title: "Amigos",
       component: <UsersGrid />,
@@ -90,7 +90,6 @@ export default function NavBar() {
                 <span className={`br-3 ${isMenuOpen ? "animado" : ""}`}></span>
               </button>
             </div>
-            <div className="col-1"></div>
             <div
               className={`collapse navbar-collapse col-sm-7 col-lg-6 ${
                 isMenuOpen ? "show" : ""

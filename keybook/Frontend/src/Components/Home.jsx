@@ -5,7 +5,7 @@ function Home() {
   return (
     <>      
       <main>
-      <NavBar/>
+   
         {/*Menu lateral izquierda*/}
         <div className="container-fluid main-structure">
           <div className="row">
