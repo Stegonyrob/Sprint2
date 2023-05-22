@@ -1,9 +1,11 @@
 import React from 'react';
-import Footer from './Footer';
+import Footer from '../Components/Footer';
+import NavBar from './NavBar';
 function Home() {
   return (
     <>      
       <main>
+      <NavBar/>
         {/*Menu lateral izquierda*/}
         <div className="container-fluid main-structure">
           <div className="row">

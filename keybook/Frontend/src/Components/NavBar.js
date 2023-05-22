@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
-import GrayScaleButton from "./GrayScaleButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SearchBar from "./SearchBar";
-import NavBarIcon from "./NavBarIcon";
 import {
-  faCommentDots,
-  faBell,
+  faHome,
+  faAddressBook,
   faUser,
   faCog,
   faInfinity,
 } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
+import GrayScaleButton from "./GrayScaleButton";
+import SearchBar from "./SearchBar";
+import NavBarIcon from "./NavBarIcon";
 import Logout from "./Logout";
 import Logo from "./Logo";
+import UsersGrid from "./UsersGrid";
+import HomeIcon from "./HomeIcon";
+import UserIcon from "./UserIcon";
+import CogIcon from "./CogIcon";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     const navIcons = document.querySelector(".nav-icons");
@@ -36,10 +42,31 @@ export default function NavBar() {
   }, []);
 
   const navIcons = [
-    { link: "#", icon: faCommentDots, title: "Mensajes" },
-    { link: "#", icon: faBell, title: "Notificaciones" },
-    { link: "profileLogged.html", icon: faUser, title: "Mi Perfil" },
-    { link: "#", icon: faCog, title: "Configuración" },
+    {
+      link: "/",
+      icon: faHome,
+      title: "Inicio",
+      component: <HomeIcon />,
+    },
+    {
+      link: "/Profile",
+      icon: faUser,
+      title: "Mi Perfil",
+      component: <UserIcon />,
+    },
+    {
+      link: "/Friends",
+      icon: faAddressBook,
+      title: "Amigos",
+      component: <UsersGrid />,
+    },
+
+    {
+      link: "#",
+      icon: faCog,
+      title: "Configuración",
+      component: <CogIcon />,
+    },
   ];
 
   return (
@@ -74,6 +101,7 @@ export default function NavBar() {
                 className="overlay"
                 style={{ display: isMenuOpen ? "block" : "none" }}
               ></div>
+
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav-icons">
                 {navIcons.map((icon) => (
                   <NavBarIcon
@@ -81,8 +109,18 @@ export default function NavBar() {
                     link={icon.link}
                     icon={icon.icon}
                     title={icon.title}
-                  />
-                ))}{" "}
+                    component={icon.component}
+                  >
+                    <NavLink
+                      to={icon.link}
+                      activeClassName="active-link"
+                      onClick={toggleMenu}
+                    >
+                      {icon.component}
+                    </NavLink>
+                  </NavBarIcon>
+                ))}
+
                 {/* Funcionalidad blanco y negro */}
                 <li className="nav-item">
                   <GrayScaleButton className="dropdown-item active">

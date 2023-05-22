@@ -1,4 +1,9 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Components/Home";
+import Profile from "./Components/Profile";
+import UsersGrid from "./Components/UsersGrid";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 // import Register from "./components/Registration";
@@ -14,6 +19,14 @@ function App() {
   return (
     <>
       <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/users" element={<UsersGrid />} />
+          </Routes>
+        </BrowserRouter>
+
         <NavBar />
         {/* <Register/> */}
         {/* <Login /> */}

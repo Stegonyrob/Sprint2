@@ -1,16 +1,16 @@
 html {
-
+  overflow-y: scroll;
   box-sizing: border-box;
   height: 100%;
 }
 *,* ::before, *::after{
   box-sizing: inherit;
+  
 }
 
 
 html, body {
-  overflow-y: auto;
-  color: rgb(44, 58, 129);
+   color: rgb(44, 58, 129);
   background-image: url("https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
   background-position: center;
   background-size: cover;
@@ -18,6 +18,7 @@ html, body {
   height: 100%;
   color: aliceblue;
   font-family: Arial, Helvetica, sans-serif;
+ 
 }
 
 .error {
@@ -91,7 +92,7 @@ input {
 
 .nav-icons {
   position: fixed;
-  left: 75%;
+  left: 78%;
   top:8px;
   /*no tocarmas*/
 } 
@@ -131,14 +132,14 @@ input {
     background-color:rgb(62, 130, 197);
 }
 
-
-
-
 /* DISPOSITIVOS MOVILES */
 
 @media (max-width: 992px) {
-  body {
+  
+   body {
     overflow: hidden;
+    overflow-y: scroll;
+  
   }
 
   .nav-body {
