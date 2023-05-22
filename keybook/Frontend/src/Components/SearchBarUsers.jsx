@@ -52,9 +52,9 @@ function SearchBarUsers({ onSearchResults }) {
         value={searchKey}
         onChange={(event) => setSearchKey(event.target.value)}
       />
-      <button className="btn btn-outline-success" type="submit">
+      <button className="btn search-input" type="submit">
         <i className="fa-solid fa-magnifying-glass icon search-icon" />
-        Search
+        Búsqueda
       </button>
       {noResults && (
         <p style={{ color: "red", marginTop: "10px" }}>

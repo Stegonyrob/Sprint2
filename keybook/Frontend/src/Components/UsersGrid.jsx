@@ -59,7 +59,7 @@ function UsersGrid() {
             {/* Menú amigos */}
             <div className="container main-structure">
                 <article className="row friends-row">
-                    {/* Renderizar los resultados de búsqueda en el artículo */}
+                    {/* para renderizar los resultados de búsqueda en el articulo */}
                     {filteredResults.map((userData) => (
                         <div className="col-sm-3 default-card friend-box" key={userData.id}>
                             <img
@@ -70,7 +70,7 @@ function UsersGrid() {
                             />
                             <a>{userData.name}</a>
                             <p>{userData.email}</p>
-                            <button className="btn btn-outline-warning btn-sm">Send Request</button>
+                            <button className="btn btn-outline-warning btn-sm">Enviar solicitud de Amistad</button>
                         </div>
                     ))}
                 </article>
