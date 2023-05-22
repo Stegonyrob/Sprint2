@@ -1,14 +1,10 @@
 import React from "react";
-
+import logo from "../imgs/logo.png";
 function Logo() {
   return (
     <div className="col">
       <a className="navbar-brand" href="home.html">
-        <img
-          src="./imgs/logo.png"
-          alt="Logo"
-          className="keybook-logo d-block"
-        />
+        <img src={logo} alt="Logo" className="keybook-logo d-block" />
       </a>
     </div>
   );

@@ -47,9 +47,8 @@ export default function NavBar() {
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <div className="row nav-body">
-            <div className="col">
-              <Logo />
-            </div>
+            <Logo />
+
             <div className="d-none d-lg-block">
               <SearchBar />
             </div>

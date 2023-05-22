@@ -41,12 +41,16 @@ input {
 }
 
 .keybook-logo {
+
   width: 60px;
   border-radius: 30%;
   position: fixed;
   right: 91%;
-  top: 5.5%;
+  top: 32px;
   transform: translate(-50%, -50%);
+  display: flex;
+ 
+  left: 30px;
 }
 
 @media (max-width: 480px) {
@@ -58,6 +62,7 @@ input {
     right: 91%;
     top: 2%;
     transform: none;/*no tocarmas*/
+    
   }
 }
 
@@ -147,7 +152,7 @@ input {
 
   }
   .navbar-toggler span{
- position: relative;
+    position: relative;
       background-color: #ffc312;
       display:block;
       height:3px;
@@ -177,6 +182,7 @@ input {
   }
 
   .keybook-logo {
+    display: flex;
     padding-left: 25px;
     left: 30px;
   }
