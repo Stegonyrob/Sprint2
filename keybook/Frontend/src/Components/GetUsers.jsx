@@ -7,7 +7,7 @@ function GetUsers() {
         async function fetchData() {
             try {
                 const response = await fetch('http://localhost:3000/users');
-                console.log(response);
+                // console.log(response);
                 const data = await response.json();
                 const randomUsers = data.sort(() => Math.random() - 0.5).slice(0, 8);
                 setRandomUsers(randomUsers);
