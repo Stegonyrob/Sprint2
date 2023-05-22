@@ -5,6 +5,7 @@ export default function Profile() {
     <>
       <main>
         {/* PERSONAL PROFILE */}
+      
         <div id="cuenta">
           <div className="container-fluid main-structure">
             <div className="row">

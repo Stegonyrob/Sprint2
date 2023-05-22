@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import diacriticless from "diacriticless";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 //hay que instalar diacritricless con npm diacritricless
 
 function SearchBarUsers({ onSearchResults }) {
@@ -41,6 +43,7 @@ function SearchBarUsers({ onSearchResults }) {
 
   return (
     <form id="find-user-form" className="d-flex" onSubmit={handleSubmit}>
+     <span className="input-group-text" id="basic-addon1">
       <input
         className="form-control me-2 search-content-input"
         id="searchFriends"
@@ -48,19 +51,21 @@ function SearchBarUsers({ onSearchResults }) {
         name="searchKey"
         placeholder="Búsqueda..."
         aria-label="Buscar"
-        size="50"
+        size={50}
         value={searchKey}
         onChange={(event) => setSearchKey(event.target.value)}
       />
       <button className="btn btn-outline-success" type="submit">
-        <i className="fa-solid fa-magnifying-glass icon search-icon" />
-        Search
+      <FontAwesomeIcon icon={faSearch} className="icon search-icon" />
       </button>
       {noResults && (
         <p style={{ color: "red", marginTop: "10px" }}>
           No se encontraron usuarios.
         </p>
+        
+      
       )}
+      </span>
     </form>
   );
 }
