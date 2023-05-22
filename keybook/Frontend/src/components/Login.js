@@ -1,6 +1,7 @@
 import { useState } from "react";
 import request from "../utils/url";
 import logo from '../imgs/logo.png';
+import { InputRegister } from "./InputRegister";
 import { ButtonDefault } from "./ButtonDefault";
 
 function MyLogo() {
@@ -10,18 +11,18 @@ function MyLogo() {
 }
 
 export default function Login() {
-    const [keys, setKeys] = useState({ email: "", password: "" });
+    const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
     const [error, setError] = useState(false);
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setKeys({ ...keys, [name]: value });
+        setLoginInfo({ ...loginInfo, [name]: value });
         setError(false);
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const { email, password } = keys;
+        const { email, password } = loginInfo;
 
         const response = await request({
             method: "POST",
@@ -30,10 +31,10 @@ export default function Login() {
         });
 
         if (response.id) {
-            alert("Usuario logueado. Redireccionando a home")
+            alert("Usuario logueado con éxito. Redireccionando a home")
             localStorage.setItem("userData", JSON.stringify("userId", response.id))
             localStorage.setItem("token", JSON.stringify("token", response.token))
-            // window.location.href = "./home.html";
+            window.location.href = "/home";
 
         } else {
             alert("Ocurrió un error")
@@ -53,7 +54,7 @@ export default function Login() {
                     <div className="d-flex justify-content-center h-100 login-container">
                         <div className="card">
                             <div className="card-header">
-                                <h3>Incio de Sesión</h3>                              
+                                <h1>Incio de Sesión</h1>
                             </div>
                             {error && (
                                 <div style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
@@ -62,57 +63,14 @@ export default function Login() {
                             )}
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="input-group form-group">
-                                                <div className="input-group-prepend">
-                                                    <span className="input-group-text">✉
-                                                        <i className="fas fa-user" />
-                                                    </span>
-                                                </div>
-                                                <input
-                                                    value={keys.email}
-                                                    onChange={handleChange}
-                                                    name="email"
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Email"
-                                                    id="email-login"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="input-group form-group">
-                                                <div className="input-group-prepend">
-                                                    <span className="input-group-text">🔑
-                                                        {/* <i className="fas fa-key" /> */}
-                                                    </span>
-                                                </div>
-                                                <input
-                                                    value={keys.password}
-                                                    onChange={handleChange}
-                                                    name="password"
-                                                    type="password"
-                                                    className="form-control"
-                                                    placeholder="Contraseña"
-                                                    id="password-login"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="row align-items-center remember">
-                                                <input type="checkbox" />
-                                                Recuerdame
-                                            </div>
-                                            <div className="form-group">
-                                                <ButtonDefault type="submit" content="Login" id="register-send" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <InputRegister
+                                        type="email"
+                                        onChange={handleChange} value={loginInfo.email} name="email" placeholder="Email" />
+                                    <InputRegister
+                                        type="password"
+                                        onChange={handleChange} value={loginInfo.password} name="password" placeholder="Contraseña" />
+                                    <ButtonDefault type="submit" content="Login" id="register-form-buttons" />
+
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="card-footer">
@@ -137,7 +95,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-         
+
         </>
     );
 }

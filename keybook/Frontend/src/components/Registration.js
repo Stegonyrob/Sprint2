@@ -18,7 +18,6 @@ export default function Register() {
         const { name, lastName, dob, city, country, phone, email, password, repeatPassword } = userInfo
 
         try {
-
             const response = await request({
                 method: "POST",
                 endpoint: "users/register",
@@ -27,7 +26,6 @@ export default function Register() {
 
             if (response.id) {
                 alert("Usuario creado con éxito")
-                //   window.location.href = "/main";
             } else {
                 setError(true);
             }
@@ -38,11 +36,11 @@ export default function Register() {
 
     return (
         <>
-            <h1 className="new-user-registration">Registrar Nuevo Usuario</h1>
             <form onSubmit={handleSubmit}
                 className="p-3 mb-5 default-card"
                 id="form-register"
             >
+                <h1 className="new-user-registration">Registrar Nuevo Usuario</h1>
                 {error && (
                     <div className="error form-control ">
                         La cuenta de correo ya está registrada
@@ -75,12 +73,7 @@ export default function Register() {
                 <InputRegister label="Repita contraseña"
                     type="password"
                     onChange={handleChange} value={userInfo.repeatPassword} name="repeatPassword" />
-
-                <div id="register-form-buttons">
-                    <div >
-                        <ButtonDefault type="submit" content="Enviar" id="register-send" />
-                    </div>
-                </div>         
+                <ButtonDefault type="submit" content="Enviar" id="register-form-buttons" />
             </form>
         </>
     );

@@ -411,18 +411,16 @@ textarea {
 }
 
 #form-register {
+  margin-top: 5%;
   text-align: center;
   width: 50%;
   margin-left: 25%;
 }
 
 #register-form-buttons {
-  margin-top: 2%;
+  margin-top: 5%;
 }
 
-#register-send {
-  margin-right: 5%;
-}
 #profilePicture::after {
   display: none;
 }
