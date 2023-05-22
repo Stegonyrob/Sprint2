@@ -1,12 +1,11 @@
 import React from 'react';
-import UserProfile from './GetProfileLogged';
-import Footer from './Footer';
 
-function Profile() {
+export default function Profile() {
   return (
     <>
       <main>
         {/* PERSONAL PROFILE */}
+
         <div id="cuenta">
           <div className="container-fluid main-structure">
             <div className="row">
@@ -175,10 +174,8 @@ function Profile() {
           Eliminar cuenta
         </button>
       </main>
-      <Footer />
     </>
 
   );
 }
 
-export default Profile;

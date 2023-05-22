@@ -1,14 +1,13 @@
 import React from 'react';
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="footer">
       <div className="text-center p-3">
-        2023 Keybook ©
-        <span className="footer-url">Keybook.com</span>
+        {new Date().getFullYear()} Keybook ©
+        <a class="footer-url" href="https://github.com/Ensenada-group-4/Sprint2"> Keybook.com</a>
       </div>
     </footer>
   );
 }
 
-export default Footer;

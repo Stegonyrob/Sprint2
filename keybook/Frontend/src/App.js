@@ -1,29 +1,29 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Router, Navigate } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import Register from './Components/Registration';
-import Login from './Components/Login';
-// import Footer from './Components/Footer';
-import Home from './Components/Home';
-import Profile from './Components/Profile';
-import UsersGrid from './Components/UsersGrid';
-import UserProfile from './Components/GetProfileLogged';
-// import SearchBarUsers from './Components/SearchBarUsers';
-// import GetUsers from './Components/GetUsers';
+import RegisterView from './views/RegisterView';
+import LoginView from './views/LoginView';
+import HomeView from './views/HomeView';
+import ProfileView from './views/ProfileView';
+import UsersView from './views/UsersView';
 
 function App() {
   return (
     <>
       <div className='App'>
-        {/* <UsersGrid /> */}
-        {/* <Register/> */}
-        {/* <Login /> */}
-        {/* <Home /> */}
-        <Profile />
-        {/* <Footer /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/register" element={<RegisterView />} />
+            <Route path="/login" element={<LoginView />} />
+            <Route path="/home" element={<HomeView />} />
+            <Route path="/profile" element={<ProfileView />} />
+            <Route path="/users" element={<UsersView />} />
+            <Route path='*' element={<Navigate to='/' />} /> {/* Si la ruta no existe lleva a página vacía (hasta que hagamos el componente error) */}
+          </Routes>
+        </BrowserRouter>
       </div>
     </>
-
   );
 }
 
