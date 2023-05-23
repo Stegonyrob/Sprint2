@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const salt = 10;
 
 /* GET users listing. */
-router.get("/", async function (req, res, next) {
+router.get("/", async function (req, res) {
   try {
     const usersList = await sequelize.query("SELECT * FROM user", {
       type: sequelize.QueryTypes.SELECT,
