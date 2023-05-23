@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
+import GrayScaleButton from "./GrayScaleButton";
+import SearchBar from "./SearchBar";
+import { CogIcon, UsersGrid, HomeIcon, Profile } from "./fontawesome";
+import Logout from "./Logout";
+import Logo from "./Logo";
+import NavBarIcon from "./NavBarIcon";
 import {
-  faHome,
   faAddressBook,
+  faHome,
   faUser,
   faCog,
   faInfinity,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
-import GrayScaleButton from "./GrayScaleButton";
-import SearchBar from "./SearchBar";
-import NavBarIcon from "./NavBarIcon";
-import Logout from "./Logout";
-import Logo from "./Logo";
-import UsersGrid from "./UsersGrid";
-import HomeIcon from "./HomeIcon";
-import UserIcon from "./UserIcon";
-import CogIcon from "./CogIcon";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,7 +49,7 @@ export default function NavBar() {
       link: "/profile",
       icon: faUser,
       title: "Mi Perfil",
-      component: <UserIcon />,
+      component: <Profile />,
     },
     {
       link: "/users",
@@ -75,7 +72,6 @@ export default function NavBar() {
         <div className="container-fluid">
           <div className="row nav-body">
             <Logo />
-
             <div className="d-none d-lg-block">
               <SearchBar />
             </div>
