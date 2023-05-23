@@ -3,7 +3,7 @@ const sequelize = require("../db/connection");
 var router = express.Router();
 
 /* GET studies listing. */
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
     try {
         const studiesList = await sequelize.query(
             "SELECT * FROM studies", {
@@ -27,6 +27,5 @@ router.get("/:studies_user_id", async function (req, res) {
         res.status(404).send({ error: "Usuario no encontrado" });
     }
 });
-
 
 module.exports = router;

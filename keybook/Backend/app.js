@@ -14,7 +14,7 @@ var studiesRouter = require('./routes/studies');
 var hobbiesRouter = require('./routes/hobbies');
 var languagesRouter = require('./routes/languages');
 var toolsRouter = require('./routes/tools');
-var friendsRouter = require('./routes/friends');
+var followRouter = require('./routes/follow');
 
 require("./db/connection.js");
 
@@ -68,7 +68,7 @@ app.use('/studies', studiesRouter);
 app.use('/hobbies', hobbiesRouter);
 app.use('/languages', languagesRouter);
 app.use('/tools', toolsRouter);
-app.use('/friends', friendsRouter);
+app.use('/follow', followRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
