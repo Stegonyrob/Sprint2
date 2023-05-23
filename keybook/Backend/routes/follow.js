@@ -18,9 +18,9 @@ router.get('/', async function (req, res) {
 
 //GET following users list
 router.get('/following/:user_id', async function (req, res) {
-    const userId = req.params.user_id
+    const loggedId = req.params.user_id
     try {
-        const following = await sequelize.query(`SELECT DISTINCT * FROM user INNER JOIN friend ON friend.user_friend2_id  = user.id WHERE friend.user_friend1_id = "${userId}" AND friend.status = 1`)
+        const following = await sequelize.query(`SELECT DISTINCT * FROM user INNER JOIN friend ON friend.user_friend2_id  = user.id WHERE friend.user_friend1_id = "${loggedId}" AND friend.status = 1`)
         res.status(200).send(following[0]);
     } catch (error) {
         console.error(error);
