@@ -20,16 +20,19 @@ function ProfileHobbies() {
     }, []);
 
     return (
-        <div className="default-card">
-            <h2>Hobby del usuario</h2>
+        <>
             {hobby && (
-                <div>
-                    <p>{hobby.hobby_name}</p>
-                    <p>{hobby.description}</p>
-                    {/* Otras propiedades del hobby */}
+                <div class="default-card interests">
+                    <h4>
+                        <i class="fa-solid fa-person-walking icon"></i>INTERESES y HOBBIS
+                    </h4>
+                    <ul class="profile-data">
+                        <li>Listado de intereses</li>
+                        <p>{hobby.hobby_name}</p>
+                    </ul>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

@@ -20,15 +20,23 @@ function ProfileStudies() {
     }, []);
 
     return (
-        <div className="default-card">
-            <h2>Formación</h2>
+        <>
             {studies && (
-                <div>
-                    <p>{studies.studies_course}</p>
-                    <p>{studies.studies_date}</p>
+                <div class="default-card education">
+                    <h4>
+                        <i class="fa-solid fa-user-graduate icon" title="Formacion"></i>
+                        FORMACION
+                    </h4>
+                    <ul class="profile-data">
+                        <a id="formacion">
+                            <p>Títulación</p>
+                            <p>{studies.studies_course}</p>
+                            <p>{studies.studies_date}</p>
+                        </a>
+                    </ul>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

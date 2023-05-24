@@ -20,14 +20,20 @@ function ProfileTools() {
     }, []);
 
     return (
-        <div className="default-card">
-            <h2>Herramientas</h2>
+        <>
             {Tools && (
-                <div>
-                    <p>{Tools.tools_name}</p>
+                <div class="default-card habilidades">
+                    <h4>
+                        <i class="fa-solid fa-computer icon" title="Técnicas"></i>
+                        HERRAMIENTAS
+                    </h4>
+                    <ul class="profile-data">
+                        <li>Listado de habilidades</li>
+                        <p>{Tools.tools_name}</p>
+                    </ul>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

@@ -20,14 +20,23 @@ function ProfileLanguajes() {
     }, []);
 
     return (
-        <div className="default-card">
-            <h2>Idiomas</h2>
+        <>
             {languages && (
-                <div>
-                    <p>{languages.language_name}</p>
+                <div class="default-card languages">
+                    <h4>
+                        <i class="fa-solid fa-language icon" title="Idiomas"></i>
+                        IDIOMAS
+                    </h4>
+                    <ul class="profile-data">
+                        <a>
+                            Idioma
+                            <p>{languages.language_name}</p>
+                            <p>Nivel</p>
+                        </a>
+                    </ul>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 
