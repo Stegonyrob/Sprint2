@@ -2,24 +2,24 @@ var express = require('express');
 const sequelize = require("../db/connection");
 var router = express.Router();
 
-/* GET studies listing. */
+/* GET languages listing. */
 router.get('/', async function (req, res) {
     try {
-        const studiesList = await sequelize.query(
-            "SELECT * FROM studies", {
+        const languagesList = await sequelize.query(
+            "SELECT * FROM languages", {
             type: sequelize.QueryTypes.SELECT,
         })
-        res.status(200).send(studiesList);
+        res.status(200).send(languagesList);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error interno del servidor");
     }
 });
-// GET studies from the user being logged
-router.get("/:studies_user_id", async function (req, res) {
-    const userId = req.params.studies_user_id;
+// GET languages of specific user
+router.get("/:language_user_id", async function (req, res) {
+    const userId = req.params.language_user_id;
     const result = await sequelize.query(
-        `SELECT * FROM studies WHERE studies_user_id = ${userId}`
+        `SELECT * FROM languages WHERE language_user_id = ${userId}`
     );
     if (result[0].length) {
         res.status(200).send(result[0][0]);

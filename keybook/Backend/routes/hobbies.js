@@ -2,24 +2,24 @@ var express = require('express');
 const sequelize = require("../db/connection");
 var router = express.Router();
 
-/* GET studies listing. */
+/* GET hobbies listing. */
 router.get('/', async function (req, res) {
     try {
-        const studiesList = await sequelize.query(
-            "SELECT * FROM studies", {
+        const hobbiesList = await sequelize.query(
+            "SELECT * FROM hobbies", {
             type: sequelize.QueryTypes.SELECT,
         })
-        res.status(200).send(studiesList);
+        res.status(200).send(hobbiesList);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error interno del servidor");
     }
 });
-// GET studies from the user being logged
-router.get("/:studies_user_id", async function (req, res) {
-    const userId = req.params.studies_user_id;
+// GET hobbies of specific user
+router.get("/:hobby_user_id", async function (req, res) {
+    const userId = req.params.hobby_user_id;
     const result = await sequelize.query(
-        `SELECT * FROM studies WHERE studies_user_id = ${userId}`
+        `SELECT * FROM hobbies WHERE hobby_user_id = ${userId}`
     );
     if (result[0].length) {
         res.status(200).send(result[0][0]);

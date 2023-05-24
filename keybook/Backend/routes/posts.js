@@ -3,7 +3,7 @@ const sequelize = require("../db/connection");
 var router = express.Router();
 
 /* GET posts listing. */
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
     try {
         const postsList = await sequelize.query(
             "SELECT * FROM post", {
