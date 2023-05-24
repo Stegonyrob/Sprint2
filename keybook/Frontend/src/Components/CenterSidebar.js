@@ -1,53 +1,93 @@
 import React from "react";
-import { format } from "date-fns";
+import { FormInput } from "./FormInput";
+import { ButtonDefault } from "./ButtonDefault";
+import {
+  faHeartCrack,
+  faHeart,
+  faLocationDot,
+  faImage,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function PostList(props) {
+function handleClick() {
+  const location = "New York"; // Replace with the actual location
+  router.post("/locations", { location }).then((response) => {
+    console.log(response.data);
+  });
+}
+
+function handleUpload(event) {
+  const file = event.target.files[0];
+  const formData = new FormData();
+  formData.append("image", file);
+  router.post("/upload", formData).then((response) => {
+    console.log(response.data);
+  });
+}
+
+function PostList() {
   return (
-    <div className="col-sm-7 col-md-7 col-lg-6">
-      <div className="new-post-card default-card">
-        <h3>
-          <i className="fa-solid fa-pen-nib icon" title="Nueva publicación"></i>
-          NUEVA PUBLICACIÓN
-        </h3>
-        <form onSubmit={props.handleSubmit} noValidate>
-          <textarea
-            value={props.content}
-            onChange={(event) => props.setContent(event.target.value)}
-            className="new-post"
+    <div className="default-card ">
+      <section id="post-list">
+        <h4>PUBLICACIONES</h4>
+        <form id="write-new-post" action="/posts" method="POST" novalidate>
+          <FormInput
+            id="new-post-content"
+            class="new-post"
             cols="70"
             rows="2"
             placeholder="ESCRIBIR POST..."
-          ></textarea>
+            label="Post"
+            type="text"
+            // onChange={handleChange}
+            // value={userInfo.post}
+            name="post"
+          />
           <div className="insert">
-            <i className="fa-solid fa-image icon"></i>
-            <i className="fa-solid fa-location-dot icon"></i>
-            <i className="fa-solid fa-file icon"></i>
-            <button type="submit" className="btn-post btn btn-warning btn-sm">
-              Enviar
-            </button>
+            <ButtonDefault
+              type="submit"
+              content="Enviar"
+              title="Enviar"
+              id="send-new-post"
+              class="btn-post btn btn-warning btn-sm"
+            />
+            <ButtonDefault
+              type="button"
+              onClick={() => handleClick()}
+              content={<FontAwesomeIcon icon={faHeart} />}
+              id="register-form-buttons"
+              title="like"
+            />
+            <ButtonDefault
+              type="button"
+              onClick={() => handleClick()}
+              content={<FontAwesomeIcon icon={faHeartCrack} />}
+              id="register-form-buttons"
+              title="dislike"
+            />
+            {/* <input
+              type="file"
+              id="image-input"
+              onChange={(event) => handleUpload(event)}
+            /> */}
+            <ButtonDefault
+              type="button"
+              onClick={() => handleClick()}
+              content={<FontAwesomeIcon icon={faImage} />}
+              id="register-form-buttons"
+              title="Upload image"
+            />
+            <ButtonDefault
+              type="button"
+              onClick={() => handleClick()}
+              content={<FontAwesomeIcon icon={faLocationDot} />}
+              id="register-form-buttons"
+              title="Insert location"
+            />
           </div>
-        </form>
-      </div>
-      <section id="post-list">
-        {props.posts.map((post) => (
-          <div key={post.id} className="default-card">
-            <div className="post-author">
-              <img
-                src={post.author.avatarUrl}
-                alt="avatar"
-                className="avatar"
-              />
-              <h4>{post.author.name}</h4>
-            </div>
-            <p>{post.content}</p>
 
-            <button className="buttonLike fa-solid fa-heart btn btn-lg "></button>
-            <span className="count">{post.likes} Me gusta</span>
-            <span className="date">
-              {format(post.createdAt, "dd/MM/yyyy HH:mm")}
-            </span>
-          </div>
-        ))}
+          <span className="date"></span>
+        </form>
       </section>
     </div>
   );
