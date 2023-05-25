@@ -23,47 +23,47 @@ router.get("/", async function (req, res) {
 router.post("/register", async function (req, res) {
   try {
     const { name, lastName, dob, city, country, phone, email, password } =
-        req.body;
+      req.body;
     const blankPhoto = "https://i.postimg.cc/SNk2LBzX/blank-Avatar.png";
 
     const hashPassword = await bcrypt.hash(password, salt);
 
     const emailExists = await sequelize.query(
-        "SELECT * FROM user WHERE email = ?",
-        { type: sequelize.QueryTypes.SELECT, replacements: [email] }
+      "SELECT * FROM user WHERE email = ?",
+      { type: sequelize.QueryTypes.SELECT, replacements: [email] }
     );
     if (emailExists.length > 0) {
-        return res.status(400).json({ error: "El email ya está registrado" });
+      return res.status(400).json({ error: "El email ya está registrado" });
     } else {
-        const newUser = await sequelize.query(
-            `INSERT INTO user (name, last_name, email, password, date_of_birth, profile_picture, city, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            {
-                type: sequelize.QueryTypes.INSERT,
-                replacements: [
-                    name,
-                    lastName,
-                    email,
-                    hashPassword,
-                    dob,
-                    blankPhoto,
-                    city,
-                    country,
-                    phone,
-                ],
-            }
-        );
-        res.status(200).send({
-            id: newUser[0],
+      const newUser = await sequelize.query(
+        `INSERT INTO user (name, last_name, email, password, date_of_birth, profile_picture, city, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        {
+          type: sequelize.QueryTypes.INSERT,
+          replacements: [
             name,
+            lastName,
             email,
             hashPassword,
-        });
-        console.log("Usuario creado con éxito");
+            dob,
+            blankPhoto,
+            city,
+            country,
+            phone,
+          ],
+        }
+      );
+      res.status(200).send({
+        id: newUser[0],
+        name,
+        email,
+        hashPassword,
+      });
+      console.log("Usuario creado con éxito");
     }
-} catch (e) {
+  } catch (e) {
     console.log(e);
     res.status(400).send({ error: e.message });
-}
+  }
 });
 
 //POST login
@@ -80,8 +80,10 @@ router.post("/auth", async (req, res) => {
         result[0][0].password
       );
       if (validPassword) {
-        const token = jwt.sign({ id: result[0][0].id }, process.env.JWT_KEY, { expiresIn: "2h" });
-        res.status(200).send({ id: result[0][0].id, token: token })
+        const token = jwt.sign({ id: result[0][0].id }, process.env.JWT_KEY, {
+          expiresIn: "2h",
+        });
+        res.status(200).send({ id: result[0][0].id, token: token });
       } else {
         res.status(400).send({ error: "Contraseña incorrecta" });
       }
@@ -118,41 +120,30 @@ router.delete("/:id/delete", async (req, res) => {
   }
 });
 
-// Funcion que hace debugg
-global.debug = function () {
-  debugger;
-};
 // //GET user by name or email (based on input)
-//para ver que funcona en postman se debe colocar en params key :searchKey y en value el nombre a buscar ej:adrian
-/* en body pegar este json {
-  "loggedInUserId": 1
-} que seria el id del usuario logeado para que no lo muestre en el grid de amigos
-la url sera http://localhost:3000/users/user?searchKey=adrian y metodo get*/
 
 router.get("/user", async function (req, res) {
   const { searchKey } = req.query;
-  const { loggedInUserId } = req.body; // obtener el ID del usuario logueado del cuerpo de la solicitud
+  const { loggedInUserId } = req.body;
 
   try {
-    const personas = searchKey
+    const people = searchKey
       ? await sequelize.query(
-        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
-        {
-          replacements: { searchKey, loggedInUserId },
-          type: sequelize.QueryTypes.SELECT,
-        }
-      )
+          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
+          {
+            replacements: { searchKey, loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        )
       : await sequelize.query(
-        "SELECT * FROM user WHERE id != :loggedInUserId",
-        {
-          replacements: { loggedInUserId },
-          type: sequelize.QueryTypes.SELECT,
-        }
-      );
+          "SELECT * FROM user WHERE id != :loggedInUserId",
+          {
+            replacements: { loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        );
 
-    global.debug(); // Detener la ejecución y examinar el objeto "personas"
-    console.log(personas);
-    res.send(personas);
+    res.send(people);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");

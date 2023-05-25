@@ -1,16 +1,12 @@
 import React from "react";
 import { FormInput } from "./FormInput";
 import { ButtonDefault } from "./ButtonDefault";
-import {
-  faHeartCrack,
-  faHeart,
-  faLocationDot,
-  faImage,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LikeDislike from "./ButtonLikeDislike";
 
 function handleClick() {
-  const location = "New York"; // Replace with the actual location
+  const location = "New York";
   router.post("/locations", { location }).then((response) => {
     console.log(response.data);
   });
@@ -33,11 +29,10 @@ function PostList() {
         <form id="write-new-post" action="/posts" method="POST" novalidate>
           <FormInput
             id="new-post-content"
-            class="new-post"
+            className="new-post"
             cols="70"
             rows="2"
             placeholder="ESCRIBIR POST..."
-            label="Post"
             type="text"
             // onChange={handleChange}
             // value={userInfo.post}
@@ -49,22 +44,9 @@ function PostList() {
               content="Enviar"
               title="Enviar"
               id="send-new-post"
-              class="btn-post btn btn-warning btn-sm"
+              className="btn-post btn btn-warning buttonLike btn-sm"
             />
-            <ButtonDefault
-              type="button"
-              onClick={() => handleClick()}
-              content={<FontAwesomeIcon icon={faHeart} />}
-              id="register-form-buttons"
-              title="like"
-            />
-            <ButtonDefault
-              type="button"
-              onClick={() => handleClick()}
-              content={<FontAwesomeIcon icon={faHeartCrack} />}
-              id="register-form-buttons"
-              title="dislike"
-            />
+
             {/* <input
               type="file"
               id="image-input"
@@ -84,6 +66,7 @@ function PostList() {
               id="register-form-buttons"
               title="Insert location"
             />
+            <LikeDislike />
           </div>
 
           <span className="date"></span>

@@ -7,7 +7,7 @@ function RightSidebar() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("/users")
+    fetch("http://localhost:3000/users/user")
       .then((response) => response.json())
       .then((data) => setUsers(data));
   }, []);
