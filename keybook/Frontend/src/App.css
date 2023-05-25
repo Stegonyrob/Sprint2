@@ -285,7 +285,6 @@ input {
   border-radius: 10px;
   margin: 0 0 10px;
   background-color: rgba(0, 0, 0, 0.8);
-
 }
 
 /* MAIN PAGE */
@@ -313,7 +312,7 @@ li {
   list-style-type: none;
   font-weight: bold;
   margin: 15px 0;
-  display: flex;
+  
   align-items: center;
 }
 
@@ -322,6 +321,7 @@ li {
 .avatar {
   width: 80px;
   cursor: pointer;
+ 
 }
 
 .avatar-perfil {
@@ -662,13 +662,64 @@ input:focus {
   float: left;
   width: 20%;
   display: block;
+ 
   
+}
+.default-card-left {
+  justify-content: center!important;
+  align-items: center!important;
+  text-align: center!important;
+  padding: 5%;
+  border-radius: 10px;
+  margin: 0 0 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: block!important;
+
 }
 .col-right {
   float: right;
   width: 20%;
   display: block;
+  justify-content: center;
   
+}
+.default-card-right {
+  justify-content: center!important;
+  align-items: center!important;
+  text-align: center!important;
+  padding: 5%;
+  border-radius: 10px;
+  margin: 0 0 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: block!important;
+
+}
+.btn-post-btn {
+  font: black;
+  background-color: transparent;
+  border: none;
+  width: 65px;
+  height: 30px;
+  justify-content: center!important;
+}
+.icon-btn{
+  font-size: 25px;
+  padding: 0 10px;
+  color: #ffc312;
+    }
+  
+ 
+  
+.icon-btn:hover {
+    color: lightskyblue;/*no tocarmas*/
+  }
+
+
+
+.pagination{
+  justify-content: center!important;
+  align-items: center!important;
+  text-align: center!important;
 }
 .col-center {
   display: block;

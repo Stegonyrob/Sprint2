@@ -5,8 +5,8 @@ import { ButtonDefault } from "./ButtonDefault";
 
 function LeftSidebar() {
   const [users, setUsers] = useState([]);
-  const userId = localStorage.getItem("userId");
-
+  // const userId = localStorage.getItem("userId");
+  const userId = 1;
   async function fetchUsers() {
     try {
       const response = await fetch(
@@ -25,19 +25,21 @@ function LeftSidebar() {
   }, []);
 
   return (
-    <div className="default-card ">
+    <div className="default-card-left ">
       <h4>AMIGOS</h4>
 
       {users.map((user) => (
         <li key={user.id}>
           <a title={`Perfil ${user.name}`}>
             <img src={user.profile_picture} alt="Avatar" className="avatar" />
-            {user.name}
-            <ButtonDefault
-              type="submit"
-              content="Enviar"
-              id="register-form-buttons"
-            />
+            <li>{user.name} </li>
+            <li>
+              <ButtonDefault
+                type="submit"
+                content="Ver"
+                id="register-form-buttons"
+              />
+            </li>
           </a>
         </li>
       ))}

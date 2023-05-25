@@ -1,32 +1,71 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FormInput } from "./FormInput";
-import { ButtonDefault } from "./ButtonDefault";
-import { faLocationDot, faImage } from "@fortawesome/free-solid-svg-icons";
+import SubmitButton from "./ButtonStyle";
+import {
+  faLocationDot,
+  faImage,
+  faPenNib,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LikeDislike from "./ButtonLikeDislike";
+import PostCard from "./PostCard";
 
-function handleClick() {
-  const location = "New York";
-  router.post("/locations", { location }).then((response) => {
-    console.log(response.data);
-  });
-}
+function PostList({ loggedUserId }) {
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
 
-function handleUpload(event) {
-  const file = event.target.files[0];
-  const formData = new FormData();
-  formData.append("image", file);
-  router.post("/upload", formData).then((response) => {
-    console.log(response.data);
-  });
-}
+  useEffect(() => {
+    fetch(
+      `http://localhost:3000/posts?page=${page}&limit=5&not_friends_with=${loggedUserId}`
+    )
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, [loggedUserId, page]);
 
-function PostList() {
+  function handleNextPage() {
+    setPage((prevPage) => prevPage + 1);
+  }
+
+  function handlePreviousPage() {
+    setPage((prevPage) => prevPage - 1);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const postContent = event.target.elements.post.value;
+    const postUserId = loggedUserId;
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        post_content: postContent,
+        post_id_user: postUserId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts((prevPosts) => [data, ...prevPosts]);
+        event.target.reset();
+      })
+      .catch((error) => console.error(error));
+  }
+
   return (
     <div className="default-card ">
       <section id="post-list">
-        <h4>PUBLICACIONES</h4>
         <form id="write-new-post" action="/posts" method="POST" novalidate>
+          <h3>
+            <SubmitButton
+              content={<FontAwesomeIcon icon={faPenNib} />}
+              id="send-new-post"
+              title="Upload image"
+            />
+            NUEVA PUBLICACIÓN
+          </h3>
+
+          <h4>PUBLICACIONES</h4>
+
           <FormInput
             id="new-post-content"
             className="new-post"
@@ -34,43 +73,49 @@ function PostList() {
             rows="2"
             placeholder="ESCRIBIR POST..."
             type="text"
-            // onChange={handleChange}
-            // value={userInfo.post}
             name="post"
           />
           <div className="insert">
-            <ButtonDefault
+            <SubmitButton
               type="submit"
               content="Enviar"
               title="Enviar"
               id="send-new-post"
-              className="btn-post btn btn-warning buttonLike btn-sm"
+              className="btn-post-btn"
             />
-
-            {/* <input
-              type="file"
-              id="image-input"
-              onChange={(event) => handleUpload(event)}
-            /> */}
-            <ButtonDefault
-              type="button"
+            <SubmitButton
+              type="submit"
               onClick={() => handleClick()}
               content={<FontAwesomeIcon icon={faImage} />}
-              id="register-form-buttons"
+              id="send-new-post"
               title="Upload image"
             />
-            <ButtonDefault
-              type="button"
+
+            <SubmitButton
+              type="submit"
               onClick={() => handleClick()}
               content={<FontAwesomeIcon icon={faLocationDot} />}
-              id="register-form-buttons"
-              title="Insert location"
+              title="Enviar"
+              id="send-new-post"
             />
-            <LikeDislike />
           </div>
 
           <span className="date"></span>
         </form>
+        <ul>
+          <li>
+            {posts.map((post, index) => (
+              <PostCard post={post} key={index} />
+            ))}
+          </li>
+        </ul>
+
+        <div className="pagination">
+          <button onClick={handlePreviousPage} disabled={page === 1}>
+            Anterior
+          </button>
+          <button onClick={handleNextPage}>Siguiente</button>
+        </div>
       </section>
     </div>
   );
