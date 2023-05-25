@@ -6,7 +6,7 @@ function ProfileHobbies() {
     useEffect(() => {
         const fetchHobby = async () => {
             try {
-                const userId = 1;
+                const userId = localStorage.getItem('userId');
                 const response = await fetch(`http://localhost:3000/hobbies/${userId}`);
                 const data = await response.json();
                 setHobby(data);
@@ -22,9 +22,9 @@ function ProfileHobbies() {
     return (
         <>
             {hobby && (
-                <div class="default-card interests">
+                <div class="default-card">
                     <h4>
-                        <i class="fa-solid fa-person-walking icon"></i>INTERESES y HOBBIS
+                        INTERESES y HOBBIS
                     </h4>
                     <ul class="profile-data">
                         <li>Listado de intereses</li>

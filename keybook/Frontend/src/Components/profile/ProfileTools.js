@@ -6,7 +6,7 @@ function ProfileTools() {
     useEffect(() => {
         const fetchTools = async () => {
             try {
-                const userId = 1;
+                const userId = localStorage.getItem('userId');
                 const response = await fetch(`http://localhost:3000/tools/${userId}`);
                 const data = await response.json();
                 setTools(data);
@@ -22,7 +22,7 @@ function ProfileTools() {
     return (
         <>
             {Tools && (
-                <div class="default-card habilidades">
+                <div class="default-card">
                     <h4>
                         <i class="fa-solid fa-computer icon" title="Técnicas"></i>
                         HERRAMIENTAS

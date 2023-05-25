@@ -6,7 +6,7 @@ function ProfileStudies() {
     useEffect(() => {
         const fetchStudie = async () => {
             try {
-                const userId = 1;
+                const userId = localStorage.getItem('userId');
                 const response = await fetch(`http://localhost:3000/studies/${userId}`);
                 const data = await response.json();
                 setStudie(data);
@@ -22,16 +22,14 @@ function ProfileStudies() {
     return (
         <>
             {studies && (
-                <div class="default-card education">
+                <div class="default-card">
                     <h4>
-                        <i class="fa-solid fa-user-graduate icon" title="Formacion"></i>
                         FORMACION
                     </h4>
                     <ul class="profile-data">
                         <a id="formacion">
                             <p>Títulación</p>
                             <p>{studies.studies_course}</p>
-                            <p>{studies.studies_date}</p>
                         </a>
                     </ul>
                 </div>

@@ -6,7 +6,7 @@ function ProfileCard() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const userId = 1;
+                const userId = localStorage.getItem('userId');
                 const response = await fetch(`http://localhost:3000/users/user/${userId}`);
                 const data = await response.json();
                 setUser(data);
