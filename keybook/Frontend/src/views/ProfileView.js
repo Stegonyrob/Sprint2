@@ -5,7 +5,7 @@ import Profile from "../Components/profile/Profile";
 import Footer from "../Components/Footer";
 import NavBar from "../Components/NavBar";
 
-export default function HomeView() {
+export default function ProfileView() {
   return (
     <>
       <NavBar />
