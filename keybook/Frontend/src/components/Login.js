@@ -32,7 +32,7 @@ export default function Login() {
 
         if (response.id) {
             alert("Usuario logueado con éxito. Redireccionando a home")
-            localStorage.setItem("userData", JSON.stringify("userId", response.id))
+            localStorage.setItem('userId', response.id);
             localStorage.setItem("token", JSON.stringify("token", response.token))
             window.location.href = "/home";
 
