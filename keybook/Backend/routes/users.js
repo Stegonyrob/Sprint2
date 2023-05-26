@@ -96,7 +96,7 @@ router.post("/auth", async (req, res) => {
   }
 });
 
-router.get("/user/:id.", async (req, res) => {
+router.get("/user/:id", async (req, res) => {
   const userId = req.params.id;
   const result = await sequelize.query(
     `SELECT * FROM user WHERE id = ${userId}`
