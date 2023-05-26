@@ -19,12 +19,29 @@ const salt = 10;
 //   }
 // });
 
+//GET user by id
+router.get("/user/:id", async (req, res) => {
+  const userId = req.params.id;
+  const result = await sequelize.query(
+    `SELECT * FROM user WHERE id = ${userId}`
+  );
+  if (result[0].length) {
+    res.status(200).send(result[0][0]);
+  } else {
+    res.status(404).send({ error: "Usuario no encontrado" });
+  }
+});
+
 //POST create new user
 router.post("/register", async function (req, res) {
   try {
-    const { name, lastName, dob, city, country, phone, email, password } =
+    const { name, lastName, dob, city, country, phone, email, password, linkedin } =
       req.body;
     const blankPhoto = "https://i.postimg.cc/SNk2LBzX/blank-Avatar.png";
+    const education = "Añada formación"
+    const tools = "Añada herramientas"
+    const language = "Añada idiomas"
+    const hobby = "Añada  hobbies"
 
     const hashPassword = await bcrypt.hash(password, salt);
 
@@ -36,7 +53,7 @@ router.post("/register", async function (req, res) {
       return res.status(400).json({ error: "El email ya está registrado" });
     } else {
       const newUser = await sequelize.query(
-        `INSERT INTO user (name, last_name, email, password, date_of_birth, profile_picture, city, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO user (name, last_name, email, password, date_of_birth, profile_picture, city, country, phone, studies_course, tools_name, language_name, hobby_name, linkedin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         {
           type: sequelize.QueryTypes.INSERT,
           replacements: [
@@ -49,14 +66,16 @@ router.post("/register", async function (req, res) {
             city,
             country,
             phone,
+            education,
+            tools,
+            language,
+            hobby,
+            linkedin
           ],
         }
       );
       res.status(200).send({
-        id: newUser[0],
-        name,
-        email,
-        hashPassword,
+        id: newUser[0]
       });
       console.log("Usuario creado con éxito");
     }
@@ -96,20 +115,39 @@ router.post("/auth", async (req, res) => {
   }
 });
 
-router.get("/user/:id", async (req, res) => {
+//PUT user by id
+router.put("/:id", async (req, res) => {
   const userId = req.params.id;
-  const result = await sequelize.query(
-    `SELECT * FROM user WHERE id = ${userId}`
-  );
-  if (result[0].length) {
-    res.status(200).send(result[0][0]);
-  } else {
-    res.status(404).send({ error: "Usuario no encontrado" });
+  const { name, lastName, dob, city, country, phone, password, linkedin, education, tools, languages, hobbies } = req.body;
+  const email = ""  
+  const hashPassword = await bcrypt.hash(password, salt);
+  try {
+    await sequelize.query(
+      `UPDATE user SET 
+      name =  IF('${name}' = "", name, '${name}'),
+      last_name = IF('${lastName}' = "", last_name, '${lastName}'),       
+      email = IF('${email}' = "", email, '${email}'),
+      password = IF('${hashPassword}' = "", password, '${hashPassword}'),
+      date_of_birth = IF('${dob}' = "", date_of_birth, '${dob}'),
+      city = IF('${city}' = "", city, '${city}'),
+      country= IF( '${country}' = "", country, '${country}'),
+      phone = IF( '${phone}' = "", phone, '${phone}'),
+      studies_course = IF('${education}' =  "", studies_course, '${education}'),
+      tools_name = IF('${tools}' = "", tools_name, '${tools}'),
+      language_name = IF('${languages}' = "", language_name, '${languages}'),
+      hobby_name = IF('${hobbies}' = "", hobby_name, '${hobbies}'),
+      linkedin = IF('${linkedin}' = "", linkedin, '${linkedin}')
+      WHERE id = ${userId}`
+    );
+    res.status(200).send({ message: "Datos de usuario actualizados correctamente" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Error al actualizar datos de usuario" });
   }
 });
 
 // DELETE user by ID
-router.delete("/:id/delete", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     await sequelize.query(`DELETE FROM user WHERE id = ${userId}`);
