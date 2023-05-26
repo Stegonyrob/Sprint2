@@ -24,26 +24,36 @@ function PostCard() {
 
   return (
     <div>
-      {posts.slice(0, 2).map((post) => (
+      {posts.slice(0, 3).map((post) => (
         <div className="default-card" key={post.id}>
           <div className="post-author">
             <div className="post-card">
-              <img
-                src={post.user_profile_picture}
-                alt="Avatar"
-                className="avatar"
-              />
+              <a href={`/users/${post.user_id}`}>
+                <img
+                  src={"/" + post.user_profile_picture}
+                  alt="Avatar"
+                  className="avatar"
+                />
+              </a>
+
               <label>{post.post_content}</label>
               <a title={`Perfil ${post.user_name}`} href="#"></a>
-
-              <SubmitButton
-                className="buttonLike btn btn-lg"
-                onClick={() => handleLikeClick(post.id)}
-              >
-                <FontAwesomeIcon icon={faHeart} /> Like
-              </SubmitButton>
-              <span className="count">{post.likes} Me gusta</span>
-              <ReplyBox />
+              <div>
+                <div className="insert">
+                  <SubmitButton
+                    onClick={() => handleLikeClick(post.id)}
+                    className="count"
+                    content={
+                      <a>
+                        <FontAwesomeIcon icon={faHeart} />
+                        {post.likes}
+                      </a>
+                    }
+                    title="Like"
+                  />
+                  <ReplyBox />
+                </div>
+              </div>
             </div>
           </div>
         </div>

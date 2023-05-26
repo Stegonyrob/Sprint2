@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SubmitButton from "./ButtonStyle";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenNib,
+  faPaperPlane,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SubmitResponse from "./SubmitResponse";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../App.css";
 function ReplyBox({ onReply }) {
   const [replyText, setReplyText] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -29,32 +33,46 @@ function ReplyBox({ onReply }) {
 
   return (
     <div>
-      <button className="reply btn btn-warning" onClick={handleReplyClick}>
-        Responder
-      </button>
-      {isOpen && (
-        <div className="reply">
-          <form onSubmit={handleSubmit}>
-            <textarea
-              rows="2"
-              cols="70"
-              value={replyText}
-              onChange={handleInputChange}
-            />
-            <SubmitButton className="buttonLike btn btn-lg">
-              Enviar
-            </SubmitButton>
-            <SubmitButton
-              className="buttonLike btn btn-lg"
-              onClick={handleCloseClick}
-              id="close-button"
-            >
-              Cerrar
-            </SubmitButton>
-          </form>
-        </div>
-      )}
+      <div className="btn-post-btn-font">
+        <SubmitButton
+          type="button"
+          onClick={handleReplyClick}
+          content={<FontAwesomeIcon icon={faPenNib} />}
+          id="new-post-image"
+          title="open"
+        />
+
+        {isOpen && (
+          <div className="reply">
+            <div className="card reply-box">
+              <textarea
+                rows="2"
+                cols="70"
+                value={replyText}
+                onChange={handleInputChange}
+                className="reply-box-textarea"
+              />
+              <SubmitButton
+                type="submit"
+                onClick={handleSubmit}
+                content={<FontAwesomeIcon icon={faPaperPlane} />}
+                id="new-post-submit"
+                title="reply"
+              />
+              <SubmitButton
+                type="button"
+                content={<FontAwesomeIcon icon={faTimes} />}
+                title="Cerrar"
+                className="btn-post-btn"
+                onClick={handleCloseClick}
+                id="close-button"
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
 export default ReplyBox;

@@ -13,17 +13,15 @@ function NewPost({ loggedUserId }) {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetch(
-      `http://localhost:3000/posts?page=${page}&limit=5&not_friends_with=${loggedUserId}`
-    )
+    fetch(`http://localhost:3000/posts`)
       .then((response) => response.json())
       .then((data) => setPosts(data));
-  }, [loggedUserId, page]);
-
+  });
   function handleSubmit(event) {
     event.preventDefault();
     const postContent = event.target.elements.post.value;
-    const postUserId = loggedUserId;
+    console.log(postContent);
+    const postUserId = 1;
     fetch("http://localhost:3000/posts", {
       method: "POST",
       headers: {
@@ -51,17 +49,17 @@ function NewPost({ loggedUserId }) {
       <label>
         <form id="write-new-post" action="/posts" method="POST" noValidate>
           <h3>
-            <SubmitButton
-              content={<FontAwesomeIcon icon={faPenNib} />}
-              title="NUEVA PUBLICACIÓN"
-              id="new-post-pen"
-            />
+            <a>
+              <FontAwesomeIcon
+                icon={faPenNib}
+                className="icon-btn btn-post-btn"
+              />
+            </a>
             NUEVA PUBLICACIÓN
           </h3>
           <div className="new-post-content">
             <FormInput
               id="new-post-content"
-              className="new-post"
               cols="70"
               rows="2"
               placeholder="ESCRIBIR POST..."

@@ -707,10 +707,11 @@ input:focus {
 }
 .btn-post-btn {
   font: black;
-  background-color: transparent;
-  border: none;
-  width: 285px;
-  height: 60px;
+  background-color:transparent;
+  border-color: #ffc312;
+  
+  width: 80px;
+  height: 40px;
   justify-content: center!important;
 }
 .btn-post-btn-font{
@@ -732,6 +733,7 @@ input:focus {
     color: lightskyblue;/*no tocarmas*/
 }
 
+
 .pagination{
   justify-content: center!important;
   align-items: center!important;
@@ -741,4 +743,15 @@ input:focus {
   display: block;
   justify-content: center;
   width: 60%;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card textarea {
+  width: 80%;
+  height: 200px;
 }

@@ -28,6 +28,14 @@ export default function NavBar() {
       navIcons.classList.remove("activado");
     }
   };
+  function getUserId() {
+    return localStorage.getItem(userId);
+  }
+
+  function handleProfileClick() {
+    const userId = getUserId();
+    window.location.href = `/profile/${userId}`;
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,6 +58,7 @@ export default function NavBar() {
       icon: faUser,
       title: "Mi Perfil",
       component: <Profile />,
+      onClick: handleProfileClick,
     },
     {
       link: "/users",
