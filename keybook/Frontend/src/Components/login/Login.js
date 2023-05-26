@@ -1,41 +1,34 @@
 import { useState } from "react";
-import request from "../utils/url";
-import logo from '../imgs/logo.png';
-import { FormInput } from "./FormInput";
-import { ButtonDefault } from "./ButtonDefault";
-
+import request from "../../utils/url";
+import logo from '../../imgs/logo.png';
+import { FormInput } from "../registration/FormInput";
+import { ButtonDefault } from "../ButtonDefault";
 function MyLogo() {
     return (
         <img src={logo} alt="Keybook logo" id="main-logo" />
     );
 }
-
 export default function Login() {
     const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
     const [error, setError] = useState(false);
-
     function handleChange(e) {
         const { name, value } = e.target;
         setLoginInfo({ ...loginInfo, [name]: value });
         setError(false);
     }
-
     async function handleSubmit(e) {
         e.preventDefault();
         const { email, password } = loginInfo;
-
         const response = await request({
             method: "POST",
             endpoint: "users/auth",
             body: { email, password },
         });
-
         if (response.id) {
             alert("Usuario logueado con éxito. Redireccionando a home")
             localStorage.setItem('userId', response.id);
-            localStorage.setItem("token", JSON.stringify("token", response.token))
+            localStorage.setItem("token", response.token)
             window.location.href = "/home";
-
         } else {
             alert("Ocurrió un error")
             setError(true);
@@ -70,7 +63,6 @@ export default function Login() {
                                         type="password"
                                         onChange={handleChange} value={loginInfo.password} name="password" placeholder="Contraseña" />
                                     <ButtonDefault type="submit" content="Login" id="register-form-buttons" />
-
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="card-footer">
@@ -95,7 +87,6 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-
         </>
     );
 }
