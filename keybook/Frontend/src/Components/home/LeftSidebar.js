@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
-import { ButtonDefault } from "./ButtonDefault";
+import "../../App.css";
+import { ButtonDefault } from "../ButtonDefault";
 
 function LeftSidebar() {
   const [users, setUsers] = useState([]);

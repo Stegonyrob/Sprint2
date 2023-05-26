@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SubmitButton from "./ButtonStyle";
+import SubmitButton from "../ButtonStyle";
 import {
   faPenNib,
   faPaperPlane,
@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
+import "../../App.css";
 function ReplyBox({ onReply }) {
   const [replyText, setReplyText] = useState("");
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FormInput } from "./FormInput";
-import SubmitButton from "./ButtonStyle";
+
+import SubmitButton from "../ButtonStyle";
 import {
   faLocationDot,
   faImage,

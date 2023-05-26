@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
-import NewPost from "./NewPost";
-import PostCard from "./PostCard";
+import "../../App.css";
+import NewPost from "../home/NewPost";
+import PostCard from "../home/PostCard";
 function PostList({ loggedUserId }) {
   const [page, setPage] = useState(1);
 
