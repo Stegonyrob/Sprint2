@@ -39,7 +39,6 @@ function RightSidebar({ loggedUserId }) {
               </li>
               {user.name}
               <li>
-                {" "}
                 <ButtonDefault
                   type="submit"
                   content="Seguir"

@@ -19,30 +19,30 @@ function NewPost({ loggedUserId }) {
   });
   function handleSubmit(event) {
     event.preventDefault();
-    const postContent = event.target.elements.post.value;
+    const postContent = event.target.elements.inputPost.value;
     console.log(postContent);
-    const postUserId = 1;
-    fetch("http://localhost:3000/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        post_content: postContent,
-        post_id_user: postUserId,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setPosts((prevPosts) => [data, ...prevPosts]);
-        event.target.reset();
-      })
-      .catch((error) => console.error(error));
+    // const postUserId = 1;
+    // fetch("http://localhost:3000/posts", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     post_content: postContent,
+    //     post_id_user: postUserId,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setPosts((prevPosts) => [data, ...prevPosts]);
+    //     event.target.reset();
+    //   })
+    //   .catch((error) => console.error(error));
   }
 
-  function handleImageClick() {}
+  // function handleImageClick() {}
 
-  function handleLocationClick() {}
+  // function handleLocationClick() {}
 
   return (
     <div className="default-card-center">
@@ -58,17 +58,22 @@ function NewPost({ loggedUserId }) {
             NUEVA PUBLICACIÓN
           </h3>
           <div className="new-post-content">
-            <FormInput
+            <input
+              placeholder="ESCRIBIR POST..."
+              type="text"
+              name="inputPost"
+            ></input>
+            {/* <FormInput
               id="new-post-content"
               cols="70"
               rows="2"
               placeholder="ESCRIBIR POST..."
               type="text"
-              name="post"
-            />
+              name="inputPost"
+            /> */}
           </div>
           <div className="insert">
-            <SubmitButton
+            {/* <SubmitButton
               type="button"
               onClick={handleImageClick}
               content={<FontAwesomeIcon icon={faImage} />}
@@ -82,7 +87,7 @@ function NewPost({ loggedUserId }) {
               content={<FontAwesomeIcon icon={faLocationDot} />}
               title="Enviar"
               id="new-post-location"
-            />
+            /> */}
             <div className="btn-post-btn-font">
               <SubmitButton
                 type="submit"
