@@ -3,6 +3,8 @@ import RightSidebar from "./RightSidebar";
 import LeftSidebar from "./LeftSidebar";
 import PostList from "./CenterSidebar";
 import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Container, Row, Col } from "react-bootstrap";
 export default function Home() {
   return (

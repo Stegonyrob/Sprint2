@@ -4,7 +4,7 @@ function SubmitButton(props) {
   return (
     <button
       type="submit"
-      className={`icon btn-post-btn  ${props.className}`}
+      className={`icon-btn btn-post-btn  ${props.className}`}
       id={props.id}
       title={props.title}
       disabled={props.disabled}

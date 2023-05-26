@@ -363,7 +363,7 @@ textarea {
 
 /* NEWS FEED */
 .post-author {
-  display: flex;
+
   align-items: center;
 }
 
@@ -694,27 +694,43 @@ input:focus {
   display: block!important;
 
 }
+.default-card-center {
+  justify-content: center!important;
+  align-items: center!important;
+  text-align: center!important;
+  padding: 5%;
+  border-radius: 10px;
+  margin: 0 0 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: block!important;
+
+}
 .btn-post-btn {
   font: black;
   background-color: transparent;
   border: none;
-  width: 65px;
+  width: 285px;
+  height: 60px;
+  justify-content: center!important;
+}
+.btn-post-btn-font{
+  font: black;
+  background-color: transparent;
+  border-color: #ffc312;
+  width: 25px;
   height: 30px;
   justify-content: center!important;
 }
 .icon-btn{
-  font-size: 25px;
+  font-size: 20px;
   padding: 0 10px;
   color: #ffc312;
-    }
   
- 
   
+}
 .icon-btn:hover {
     color: lightskyblue;/*no tocarmas*/
-  }
-
-
+}
 
 .pagination{
   justify-content: center!important;

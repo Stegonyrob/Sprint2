@@ -61,7 +61,7 @@ router.get("/", async function (req, res) {
          JOIN post ON user.id = post.post_id_user
          WHERE user.id
          ORDER BY post.id DESC
-         LIMIT 5;`,
+         LIMIT 4;`,
       { type: sequelize.QueryTypes.SELECT }
     );
     res.send(posts);

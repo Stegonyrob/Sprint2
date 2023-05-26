@@ -1,33 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import SubmitButton from "./ButtonStyle";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReplyBox from "./ReplyBox";
+import axios from "axios";
+// se debe instalar axios con npm i axios
+function PostCard() {
+  const [posts, setPosts] = useState([]);
 
-function PostCard({ post }) {
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/posts")
+      .then((response) => setPosts(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleLikeClick = (postId) => {
+    const newPosts = [...posts];
+    const index = newPosts.findIndex((post) => post.id === postId);
+    newPosts[index].likes = newPosts[index].likes + 1;
+    setPosts(newPosts);
+  };
+
   return (
-    <div className="default-card">
-      <div className="post-author">
-        <div className="post-card">
-          <img
-            src={post.user_profile_picture}
-            alt="Avatar"
-            className="avatar"
-          />
-          {post.post_content}
-          <a title={`Perfil ${post.user_name}`}></a>
-          <button className="reply btn btn-warning">Responder</button>
-          <div className="reply" style={{ display: "none" }}>
-            <textarea rows="2" cols="70"></textarea>
-            <button className="send-reply btn btn-warning">
-              Enviar respuesta
-            </button>
-            <button className="close-reply btn btn-warning" id="close-button">
-              Cerrar
-            </button>
+    <div>
+      {posts.slice(0, 2).map((post) => (
+        <div className="default-card" key={post.id}>
+          <div className="post-author">
+            <div className="post-card">
+              <img
+                src={post.user_profile_picture}
+                alt="Avatar"
+                className="avatar"
+              />
+              <label>{post.post_content}</label>
+              <a title={`Perfil ${post.user_name}`} href="#"></a>
+
+              <SubmitButton
+                className="buttonLike btn btn-lg"
+                onClick={() => handleLikeClick(post.id)}
+              >
+                <FontAwesomeIcon icon={faHeart} /> Like
+              </SubmitButton>
+              <span className="count">{post.likes} Me gusta</span>
+              <ReplyBox />
+            </div>
           </div>
-          <button className="buttonLike fa-solid fa-heart btn btn-lg ">
-            Like
-          </button>
-          <span className="count">0 Me gusta</span>
         </div>
-      </div>
+      ))}
     </div>
   );
 }
