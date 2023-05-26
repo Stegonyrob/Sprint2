@@ -10,7 +10,6 @@ function ProfileHobbies() {
                 const response = await fetch(`http://localhost:3000/users/user/${userId}`);
                 const data = await response.json();
                 setHobby(data);
-                console.log(data);
             } catch (error) {
                 console.error(error);
             }

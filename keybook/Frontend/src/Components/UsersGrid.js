@@ -33,6 +33,10 @@ function UsersGrid() {
         }
     };
 
+    const handleProfileClick = (userId) => {
+        localStorage.setItem('selectedUserId', userId);
+    };
+
     return (
         <main>
             <div className="container main-structure">
@@ -59,7 +63,10 @@ function UsersGrid() {
                 <article className="row friends-row">
                     {filteredResults.map((userData) => (
                         <div className="col-sm-3 default-card friend-box" key={userData.id}>
-                            <Link to={{ pathname: '/profile', state: { user: userData } }}>
+                            <Link
+                                to="/profile"
+                                onClick={() => handleProfileClick(userData.id)}
+                            >
                                 <img
                                     className="friend-avatar"
                                     style={{ borderRadius: '50%', width: '150px', height: '150px' }}

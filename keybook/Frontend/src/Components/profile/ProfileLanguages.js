@@ -10,7 +10,6 @@ function ProfileLanguajes() {
                 const response = await fetch(`http://localhost:3000/users/user/${userId}`);
                 const data = await response.json();
                 setLanguages(data);
-                console.log(data);
             } catch (error) {
                 console.error(error);
             }

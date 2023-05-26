@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import ProfileCard from './ProfileCard';
 import ProfileHobbies from './ProfileHobbies';
 import ProfileStudies from './ProfileStudies';
 import ProfileLanguages from './ProfileLanguages';
 import ProfileTools from './ProfileTools';
 
-function Profile(props) {
+function Profile() {
   const [user, setUser] = useState();
 
+  const { userId } = useParams();
+  const location = useLocation();
+
   useEffect(() => {
+    const selectedUserId = localStorage.getItem('selectedUserId');
+    console.log('ID del usuario seleccionado:', selectedUserId);
     const fetchUser = async () => {
-      const userId = props.match.params.userId || localStorage.getItem('userId');
-      const response = await fetch(`http://localhost:3000/users/user/${userId}`);
+      let selectedUser;
+
+      if (location.state?.user) {
+        selectedUser = location.state.user;
+      } else {
+        const loggedInUserId = localStorage.getItem('userId');
+        selectedUser = { id: userId || loggedInUserId };
+      }
+
+      const response = await fetch(`http://localhost:3000/users/user/${selectedUser.id}`);
       const data = await response.json();
       setUser(data);
     };
 
     fetchUser();
-  }, [props.match.params.userId]);
-
-  // function Profile() {
-  //   const [user, setUser] = useState();
-
-  //   useEffect(() => {
-  //     const fetchUser = async () => {
-  //       const userId = localStorage.getItem('userId');
-  //       const response = await fetch(`http://localhost:3000/users/user/${userId}`);
-  //       const data = await response.json();
-  //       setUser(data);
-  //     };
-
-  //     fetchUser();
-  //   }, []);
+  }, [userId, location.state]);
 
   return (
     <div id="cuenta">
@@ -56,3 +55,4 @@ function Profile(props) {
 }
 
 export default Profile;
+
