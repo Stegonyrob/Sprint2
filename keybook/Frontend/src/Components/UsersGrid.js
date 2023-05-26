@@ -64,7 +64,7 @@ function UsersGrid() {
                     {filteredResults.map((userData) => (
                         <div className="col-sm-3 default-card friend-box" key={userData.id}>
                             <Link
-                                to="/profile"
+                                to={`/profile/${userData.id}`}
                                 onClick={() => handleProfileClick(userData.id)}
                             >
                                 <img

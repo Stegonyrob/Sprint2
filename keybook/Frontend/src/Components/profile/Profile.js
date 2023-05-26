@@ -7,52 +7,54 @@ import ProfileLanguages from './ProfileLanguages';
 import ProfileTools from './ProfileTools';
 
 function Profile() {
-  const [user, setUser] = useState();
-
+  const [user, setUser] = useState({});
   const { userId } = useParams();
-  const location = useLocation();
+
+
 
   useEffect(() => {
-    const selectedUserId = localStorage.getItem('selectedUserId');
-    console.log('ID del usuario seleccionado:', selectedUserId);
     const fetchUser = async () => {
-      let selectedUser;
+      const userLog = localStorage.getItem('userId')
+      //   const selectedUserId = localStorage.getItem('selectedUserId');
+      //   console.log('ID del usuario seleccionado:', selectedUserId);
 
-      if (location.state?.user) {
-        selectedUser = location.state.user;
-      } else {
-        const loggedInUserId = localStorage.getItem('userId');
-        selectedUser = { id: userId || loggedInUserId };
-      }
+      //   let selectedUser;
 
-      const response = await fetch(`http://localhost:3000/users/user/${selectedUser.id}`);
+      //   if (selectedUserId) {
+      const response = await fetch(`http://localhost:3000/users/user/${userId || userLog}`);
       const data = await response.json();
+      // selectedUser = data;
+      // } else {
+      //   const loggedInUserId = localStorage.getItem('userId');
+      // selectedUser = { id: userId || loggedInUserId };
       setUser(data);
-    };
+      console.log({ userId });
+      console.log(data);
+    }
+
 
     fetchUser();
-  }, [userId, location.state]);
+  }, [userId]);
 
   return (
     <div id="cuenta">
       <div className="container-fluid main-structure">
         <div className="row">
           <div className="col-sm-5 col-md-4 col-lg-3">
-            {user && <ProfileStudies userId={user.id} />}
-            {user && <ProfileTools userId={user.id} />}
+            {user && <ProfileStudies user={user} />}
+            {user && <ProfileTools user={user} />}
           </div>
           <div className="col-sm-7 col-md-7 col-lg-6">
-            {user && <ProfileCard userId={user.id} />}
+            {user && <ProfileCard user={user} />}
           </div>
           <div className="col-sm-5 col-md-4 col-lg-3">
-            {user && <ProfileHobbies userId={user.id} />}
-            {user && <ProfileLanguages userId={user.id} />}
+            {user && <ProfileHobbies user={user} />}
+            {user && <ProfileLanguages user={user} />}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
 export default Profile;
 
