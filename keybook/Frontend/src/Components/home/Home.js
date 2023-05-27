@@ -1,11 +1,11 @@
 import React from "react";
 import RightSidebar from "./RightSidebar";
 import LeftSidebar from "./LeftSidebar";
-import PostList from "./CenterSidebar";
+import CenterMenu from "./CenterMenu";
 import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { Container, Row, Col } from "react-bootstrap";
+
 export default function Home() {
   return (
     <Container fluid className="main-container">
@@ -14,7 +14,7 @@ export default function Home() {
           <LeftSidebar />
         </Col>
         <Col xs={{ span: 6, order: 2 }} className="col-center">
-          <PostList />
+          <CenterMenu />
         </Col>
         <Col xs={{ span: 3, order: 3 }} className="col-right">
           <RightSidebar />

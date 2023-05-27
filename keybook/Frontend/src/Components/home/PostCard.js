@@ -15,45 +15,22 @@ function PostCard() {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleLikeClick = (postId) => {
-    const newPosts = [...posts];
-    const index = newPosts.findIndex((post) => post.id === postId);
-    newPosts[index].likes = newPosts[index].likes + 1;
-    setPosts(newPosts);
-  };
-
   return (
     <div>
-      {posts.slice(0, 3).map((post) => (
+      {posts.slice(0, 5).map((post) => (
         <div className="default-card" key={post.id}>
           <div className="post-author">
             <div className="post-card">
               <a href={`/users/${post.user_id}`}>
                 <img
-                  src={"/" + post.user_profile_picture}
-                  alt="Avatar"
+                  src={`${posts.profile_picture}`}
+                  alt="avatar"
+                  // style="border-radius: 50%; width: 100px; height: 100px;"
                   className="avatar"
                 />
               </a>
-
-              <label>{post.post_content}</label>
-              <a title={`Perfil ${post.user_name}`} href="#"></a>
-              <div>
-                <div className="insert">
-                  <SubmitButton
-                    onClick={() => handleLikeClick(post.id)}
-                    className="count"
-                    content={
-                      <a>
-                        <FontAwesomeIcon icon={faHeart} />
-                        {post.likes}
-                      </a>
-                    }
-                    title="Like"
-                  />
-                  <ReplyBox />
-                </div>
-              </div>
+              <p>{post.post_content}</p>
+              <h4>{post.name} </h4>
             </div>
           </div>
         </div>
