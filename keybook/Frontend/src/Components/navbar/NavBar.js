@@ -5,7 +5,7 @@ import GrayScaleButton from "./GrayScaleButton";
 import SearchBar from "./SearchBar";
 import { CogIcon, UsersGrid, HomeIcon, Profile } from "./fontawesome";
 import Logout from "./Logout";
-import Logo from "./Logo";
+import { Logo } from "../logo/Logo";
 import NavBarIcon from "./NavBarIcon";
 import {
   faAddressBook,
@@ -80,7 +80,11 @@ export default function NavBar() {
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <div className="row nav-body">
-            <Logo />
+            <div className="col">
+              <a className="navbar-brand" href="/home">
+                <Logo className="keybook-logo d-block" />
+              </a>
+            </div>
             <div className="d-none d-lg-block">
               <SearchBar />
             </div>
@@ -96,9 +100,8 @@ export default function NavBar() {
               </button>
             </div>
             <div
-              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${
-                isMenuOpen ? "show" : ""
-              }`}
+              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${isMenuOpen ? "show" : ""
+                }`}
               id="navbarNav"
             >
               <div
@@ -139,8 +142,7 @@ export default function NavBar() {
                 <li className="nav-item">
                   <Logout
                     className="dropdown-item active"
-                    id="logout"
-                    href="#"
+                    id="logout"                
                   ></Logout>
                 </li>
                 <li className="nav-item search-bar-dropdown d-lg-none  mx-auto">

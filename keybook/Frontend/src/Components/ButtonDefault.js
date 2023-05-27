@@ -1,11 +1,13 @@
 import React from "react";
 
-export const ButtonDefault = ({ content, id, type }) => {
+export const ButtonDefault = ({ content, type, className, onClick, style }) => {
   return (
     <button
       type={type}
-      className="btn btn-warning btn-block"
-      id="register-form-buttons"
+      className={`btn btn-warning  ${className}`}
+      onClick={onClick}
+      id="register-form-buttons" 
+      style={{style}}  
     >
       {content}
     </button>

@@ -652,7 +652,6 @@ input:focus {
   color: #ffc312;
 }
 
-
 /*HOMEVIEW*/
 .main-container {
   padding-top: 60px;
@@ -661,8 +660,6 @@ input:focus {
   float: left;
   width: 20%;
   display: block;
- 
-  
 }
 .default-card-left {
   justify-content: center!important;
@@ -673,14 +670,12 @@ input:focus {
   margin: 0 0 10px;
   background-color: rgba(0, 0, 0, 0.8);
   display: block!important;
-
 }
 .col-right {
   float: right;
   width: 20%;
   display: block;
   justify-content: center;
-  
 }
 .default-card-right {
   justify-content: center!important;
@@ -691,7 +686,6 @@ input:focus {
   margin: 0 0 10px;
   background-color: rgba(0, 0, 0, 0.8);
   display: block!important;
-
 }
 .default-card-center {
   justify-content: center!important;
@@ -702,21 +696,18 @@ input:focus {
   margin: 0 0 10px;
   background-color: rgba(0, 0, 0, 0.8);
   display: block!important;
-
 }
 .btn-post-btn {
   font: black;
-  background-color:transparent;
-  border-color: #ffc312;
-  
+  background-color:#ffc312;
+  border-color: #FFC312;
+  border-radius: 5px;
   width: 80px;
   height: 40px;
   justify-content: center!important;
 }
 .btn-post-btn-font{
   font: black;
-  background-color: transparent;
-  border-color: #ffc312;
   width: 25px;
   height: 30px;
   justify-content: center!important;
@@ -724,15 +715,11 @@ input:focus {
 .icon-btn{
   font-size: 20px;
   padding: 0 10px;
-  color: #ffc312;
-  
-  
+  color:  black;
 }
 .icon-btn:hover {
     color: lightskyblue;/*no tocarmas*/
 }
-
-
 .pagination{
   justify-content: center!important;
   align-items: center!important;
@@ -749,7 +736,6 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-
 .card textarea {
   width: 80%;
   height: 200px;

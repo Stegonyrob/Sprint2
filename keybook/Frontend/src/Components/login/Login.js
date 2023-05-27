@@ -1,11 +1,9 @@
 import { useState } from "react";
 import request from "../../utils/url";
-import logo from "../../imgs/logo.png";
+import { Logo } from "../logo/Logo";
 import { FormInput } from "../registration/FormInput";
 import { ButtonDefault } from "../ButtonDefault";
-function MyLogo() {
-  return <img src={logo} alt="Keybook logo" id="main-logo" />;
-}
+
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const [error, setError] = useState(false);
@@ -36,7 +34,7 @@ export default function Login() {
     <>
       <div className="container login-container">
         <div className="card">
-          {MyLogo()}
+          <Logo id="main-logo"/>
           <div id="slogan-container">
             <h2>Keybook: donde los programadores comparten sus claves</h2>
           </div>

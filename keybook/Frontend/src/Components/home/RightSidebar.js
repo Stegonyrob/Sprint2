@@ -1,33 +1,58 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
-import { ButtonDefault } from "../ButtonDefault";
-
+import SubmitButton from "../ButtonStyle";
 function RightSidebar({ loggedUserId }) {
-  const [users, setUsers] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [page, setPage] = useState(1);
-
+  async function fetchRequests() {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users?page=${page}&limit=3&not_friends_with=${loggedUserId}`
+      );
+      const data = await response.json();
+      setRequests(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function followUser(userId) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/follow/follow/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_friend1_id: localStorage.getItem("userId"),
+            user_friend2_id: userId,
+            status: "accepted",
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  function handleFollowUser(user) {
+    followUser(user.id);
+    setRequests(requests.filter((request) => request.id !== user.id));
+    setFriends([...friends, user]);
+  }
   useEffect(() => {
-    fetch(
-      `http://localhost:3000/users?page=${page}&limit=3&not_friends_with=${loggedUserId}`
-    )
-      .then((response) => response.json())
-      .then((data) => setUsers(data));
-  }, [loggedUserId, page]);
-
-  function handleNextPage() {
-    setPage((prevPage) => prevPage + 1);
-  }
-
-  function handlePreviousPage() {
-    setPage((prevPage) => prevPage - 1);
-  }
-
+    fetchRequests();
+  }, [page]);
   return (
     <div className="default-card-right">
       <h4>SOLICITUDES</h4>
       <ul>
-        {users.map((user) => (
+        {requests.map((user) => (
           <li key={user.id}>
             <a title={`Perfil ${user.name}`}>
               <li>
@@ -37,12 +62,13 @@ function RightSidebar({ loggedUserId }) {
                   className="avatar"
                 />
               </li>
-              {user.name}
+              <li>{user.name}</li>
               <li>
-                <ButtonDefault
+                <SubmitButton
                   type="submit"
                   content="Seguir"
                   id="register-form-buttons"
+                  onClick={() => handleFollowUser(user)}
                 />
               </li>
             </a>
@@ -50,30 +76,17 @@ function RightSidebar({ loggedUserId }) {
         ))}
       </ul>
       <div className="pagination">
-        {/* <li>
-          <ButtonDefault
-            type="submit"
-            content=" Anterior"
-            id="register-form-buttons"
-            onClick={handlePreviousPage}
-            disabled={page === 1}
-          />
-        </li>
-        <li>
-          <ButtonDefault
-            type="submit"
-            content="Siguiente"
-            id="register-form-buttons"
-            onClick={handleNextPage}
-          />
-        </li> */}
-        <button onClick={handlePreviousPage} disabled={page === 1}>
+        <button
+          onClick={() => setPage((prevPage) => prevPage - 1)}
+          disabled={page === 1}
+        >
           Anterior
         </button>
-        <button onClick={handleNextPage}>Siguiente</button>
+        <button onClick={() => setPage((prevPage) => prevPage + 1)}>
+          Siguiente
+        </button>
       </div>
     </div>
   );
 }
-
 export default RightSidebar;
