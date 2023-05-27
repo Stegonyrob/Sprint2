@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import SubmitButton from "../ButtonStyle";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ReplyBox from "../home/ReplyBox";
-import axios from "axios";
-// se debe instalar axios con npm i axios
+
 function PostCard() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/posts")
-      .then((response) => setPosts(response.data))
+    fetch("http://localhost:3000/posts")
+      .then((response) => response.json())
+      .then((data) => setPosts(data))
       .catch((error) => console.log(error));
   }, []);
 

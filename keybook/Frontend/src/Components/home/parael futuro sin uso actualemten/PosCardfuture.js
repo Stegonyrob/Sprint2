@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SubmitButton from "../ButtonStyle";
+import SubmitButton from "../../ButtonStyle";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReplyBox from "./ReplyBox";

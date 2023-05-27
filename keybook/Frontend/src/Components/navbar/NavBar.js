@@ -12,7 +12,6 @@ import {
   faHome,
   faUser,
   faCog,
-  faInfinity,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
@@ -100,8 +99,9 @@ export default function NavBar() {
               </button>
             </div>
             <div
-              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${isMenuOpen ? "show" : ""
-                }`}
+              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${
+                isMenuOpen ? "show" : ""
+              }`}
               id="navbarNav"
             >
               <div
@@ -130,20 +130,11 @@ export default function NavBar() {
 
                 {/* Funcionalidad blanco y negro */}
                 <li className="nav-item">
-                  <GrayScaleButton className="dropdown-item active">
-                    <FontAwesomeIcon
-                      icon={faInfinity}
-                      className="icon"
-                      title="Blanco y Negro"
-                    />
-                  </GrayScaleButton>
+                  <GrayScaleButton className="dropdown-item active"></GrayScaleButton>
                 </li>
                 {/*Logout*/}
                 <li className="nav-item">
-                  <Logout
-                    className="dropdown-item active"
-                    id="logout"                
-                  ></Logout>
+                  <Logout className="dropdown-item active" id="logout"></Logout>
                 </li>
                 <li className="nav-item search-bar-dropdown d-lg-none  mx-auto">
                   <SearchBar />

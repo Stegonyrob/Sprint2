@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import SubmitButton from "../ButtonStyle";
+import Pagination from "../pagination";
 function RightSidebar({ loggedUserId }) {
   const [requests, setRequests] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -75,17 +76,7 @@ function RightSidebar({ loggedUserId }) {
           </li>
         ))}
       </ul>
-      <div className="pagination">
-        <button
-          onClick={() => setPage((prevPage) => prevPage - 1)}
-          disabled={page === 1}
-        >
-          Anterior
-        </button>
-        <button onClick={() => setPage((prevPage) => prevPage + 1)}>
-          Siguiente
-        </button>
-      </div>
+      <Pagination />
     </div>
   );
 }

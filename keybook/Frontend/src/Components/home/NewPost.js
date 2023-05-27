@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SubmitButton from "../ButtonStyle";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import getUser from "./GetUserforpost";
 
 function NewPost() {
   const [postContent, setPostContent] = useState("");
@@ -13,11 +14,13 @@ function NewPost() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const userId = 1;
+    const userId = await getUser();
     const data = {
       post_id_user: userId,
       post_content: postContent,
     };
+
+    console.log(data);
 
     try {
       const response = await fetch("http://localhost:3000/posts", {
@@ -28,12 +31,13 @@ function NewPost() {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+      } else {
+        const errorText = await response.text();
+        console.log(errorText);
       }
-
-      const responseData = await response.json();
-      console.log(responseData); // Aquí puedes hacer algo con la respuesta de la API
     } catch (error) {
       console.error(error);
     }
