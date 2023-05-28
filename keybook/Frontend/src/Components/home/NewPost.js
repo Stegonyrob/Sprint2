@@ -1,26 +1,23 @@
 import React, { useState } from "react";
-import SubmitButton from "../ButtonStyle";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import getUser from "./GetUserforpost";
+import { ButtonDefault } from "../ButtonDefault";
 
 function NewPost() {
   const [postContent, setPostContent] = useState("");
+  const [success, setSuccess] = useState(false);
 
   function handleInputChange(event) {
-    setPostContent(event.target.value);
+    setPostContent(event.target.value);   
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    const userId = await getUser();
+    const userId = localStorage.getItem("userId");
     const data = {
       post_id_user: userId,
       post_content: postContent,
     };
-
-    console.log(data);
 
     try {
       const response = await fetch("http://localhost:3000/posts", {
@@ -32,13 +29,14 @@ function NewPost() {
       });
 
       if (response.ok) {
-        const responseData = await response.json();
-        console.log(responseData);
+        setSuccess(true);
+        setPostContent("")
       } else {
         const errorText = await response.text();
         console.log(errorText);
       }
     } catch (error) {
+      alert("Error del servidor. Vuelva a intentarlo")
       console.error(error);
     }
   }
@@ -50,32 +48,31 @@ function NewPost() {
           <a>
             <FontAwesomeIcon
               icon={faPenNib}
-              className="icon-btn btn-post-btn"
+              className="icon"
             />
           </a>
           NUEVA PUBLICACIÓN
         </h3>
-        <div className="new-post-content">
-          <input
-            placeholder="ESCRIBIR POST..."
-            type="text"
-            name="inputPost"
-            value={postContent}
-            onChange={handleInputChange}
-          />
-        </div>
+        <textarea cols="70" rows="3"
+          placeholder="ESCRIBIR POST..."
+          type="text"
+          name="inputPost"
+          value={postContent}
+          onChange={handleInputChange}
+          className="new-post"
+        />
+        {success && (
+          <div className="success ">
+            Publicado con éxito ✔
+          </div>)}
         <div className="insert">
-          <div className="btn-post-btn-font">
-            <SubmitButton
+          <div >
+            <ButtonDefault
               type="submit"
-              content="Enviar"
-              title="Enviar"
-              id="new-post-submit"
-              className="btn-post-btn"
-            />
+              content="Publicar"
+              className="btn-lg" />
           </div>
         </div>
-        <span className="date"></span>
       </form>
     </div>
   );
