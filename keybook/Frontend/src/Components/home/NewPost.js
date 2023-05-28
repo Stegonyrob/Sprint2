@@ -14,7 +14,7 @@ function NewPost() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const userId = await getUser();
+    const userId = localStorage.getItem("userId");
     const data = {
       post_id_user: userId,
       post_content: postContent,
