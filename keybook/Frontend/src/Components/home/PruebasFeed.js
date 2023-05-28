@@ -28,6 +28,15 @@
 // }
 
 
+// const sortPosts = () => {
+   
+//   posts.post_name.sort((a,b) => {
+//       return b - a;
+//   });
+//   setPosts(posts);
+// }
+
+// const [categories, setCategories] = useState("")
 
 
 // class PostFeed extends Component() {

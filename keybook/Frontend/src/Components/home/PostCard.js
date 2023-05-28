@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { url } from "../../utils/url";
 
 function PostCard() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); 
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,14 +16,12 @@ function PostCard() {
       }
     }
     fetchPosts()
-  }, []);
-
-  const postList = posts.sort()
+  }, []);  
 
   return (
     <>
       
-      {postList.slice(0, 5).map((post) => (
+      {posts.slice(0, 5).map((post) => (
         <div className="default-card" key={post.post_id}>
           <div className="post-author">
             <a href={`/profile/${post.post_id_user}`}>
