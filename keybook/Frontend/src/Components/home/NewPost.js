@@ -42,7 +42,7 @@ function NewPost() {
   return (
     <div className="default-card-center">
       <form id="write-new-post" onSubmit={handleSubmit} noValidate>
-        <h3>
+        <h2>
           <a>
             <FontAwesomeIcon
               icon={faPenNib}
@@ -50,7 +50,7 @@ function NewPost() {
             />
           </a>
           NUEVA PUBLICACIÓN
-        </h3>
+        </h2>
         <textarea cols="70" rows="3"
           placeholder="ESCRIBIR POST..."
           type="text"

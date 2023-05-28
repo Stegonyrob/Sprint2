@@ -9,8 +9,7 @@ function PostCard() {
       try {
         const response = await fetch(url + "posts/feed")
         const data = await response.json();
-        setPosts(data)
-        console.log(data)
+        setPosts(data)        
       } catch (error) {
         alert("Error de servidor")
         console.log(error)
@@ -19,10 +18,12 @@ function PostCard() {
     fetchPosts()
   }, []);
 
+  const postList = posts.sort()
+
   return (
     <>
-      {/* .slice(0, 5) */}
-      {posts.map((post) => (
+      
+      {postList.slice(0, 5).map((post) => (
         <div className="default-card" key={post.post_id}>
           <div className="post-author">
             <a href={`/profile/${post.post_id_user}`}>
