@@ -56,8 +56,7 @@ function NewPost() {
           type="text"
           name="inputPost"
           value={postContent}
-          onChange={handleInputChange}
-          className="new-post"
+          onChange={handleInputChange}          
         />
         {success && (
           <div className="success ">

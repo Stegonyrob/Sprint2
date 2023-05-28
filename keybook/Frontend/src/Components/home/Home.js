@@ -11,13 +11,13 @@ export default function Home() {
     <Container fluid className="main-container">
       <Row>
         <Col xs={{ span: 3, order: 1 }} className="col-left">
-          <LeftSidebar />
+          {/* <LeftSidebar /> */}
         </Col>
         <Col xs={{ span: 6, order: 2 }} className="col-center">
           <CenterMenu />
         </Col>
         <Col xs={{ span: 3, order: 3 }} className="col-right">
-          <RightSidebar />
+          {/* <RightSidebar /> */}
         </Col>
       </Row>
     </Container>
