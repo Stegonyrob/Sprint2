@@ -9,12 +9,13 @@ function NewPost() {
   const [success, setSuccess] = useState(false);
 
   function handleInputChange(event) {
-    setPostContent(event.target.value);   
+    setPostContent(event.target.value);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const userId = localStorage.getItem("userId");
+
+    const userId = await getUser();
     const data = {
       post_id_user: userId,
       post_content: postContent,
@@ -25,16 +26,16 @@ function NewPost() {
         method: "POST",
         endpoint: "posts",
         body: data,
-    });     
+      });
       if (response) {
         setSuccess(true);
-        setPostContent("")
+        setPostContent("");
       } else {
         const errorText = await response.text();
         console.log(errorText);
       }
     } catch (error) {
-      alert("Error del servidor. Vuelva a intentarlo")
+      alert("Error del servidor. Vuelva a intentarlo");
       console.error(error);
     }
   }
@@ -44,30 +45,27 @@ function NewPost() {
       <form id="write-new-post" onSubmit={handleSubmit} noValidate>
         <h3>
           <a>
-            <FontAwesomeIcon
-              icon={faPenNib}
-              className="icon"
-            />
+            <FontAwesomeIcon icon={faPenNib} className="icon" />
           </a>
           NUEVA PUBLICACIÓN
         </h3>
-        <textarea cols="70" rows="3"
+        <textarea
+          cols="70"
+          rows="3"
           placeholder="ESCRIBIR POST..."
           type="text"
           name="inputPost"
           value={postContent}
-          onChange={handleInputChange}          
+          onChange={handleInputChange}
         />
-        {success && (
-          <div className="success ">
-            Publicado con éxito ✔
-          </div>)}
+        {success && <div className="success ">Publicado con éxito ✔</div>}
         <div className="insert">
-          <div >
+          <div>
             <ButtonDefault
               type="submit"
               content="Publicar"
-              className="btn-lg" />
+              className="btn-lg"
+            />
           </div>
         </div>
       </form>
