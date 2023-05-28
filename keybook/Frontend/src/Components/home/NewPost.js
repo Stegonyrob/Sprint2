@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonDefault } from "../ButtonDefault";
+import request from "../../utils/url";
 
 function NewPost() {
   const [postContent, setPostContent] = useState("");
@@ -20,15 +21,12 @@ function NewPost() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/posts", {
+      const response = await request({
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
+        endpoint: "posts",
+        body: data,
+    });     
+      if (response) {
         setSuccess(true);
         setPostContent("")
       } else {
