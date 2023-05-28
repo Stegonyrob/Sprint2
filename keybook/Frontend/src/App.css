@@ -334,6 +334,10 @@ li {
 
 /* NEW POST */
 
+.set-success{
+  color: aliceblue
+}
+
 .new-post-card {
   text-align: center;
   padding: 2%;
