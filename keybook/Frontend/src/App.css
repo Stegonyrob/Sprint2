@@ -311,9 +311,9 @@ li {
 /* IMAGES */
 
 .avatar {
-  width: 80px;
-  cursor: pointer;
- 
+  width: 100px;
+  height: 100px ;
+  border-radius: 50%;  
 }
 
 .avatar-perfil {
@@ -359,8 +359,13 @@ textarea {
 
 /* NEWS FEED */
 .post-author {
-
   align-items: center;
+  display: flex;  
+}
+
+.post-content{
+  font-size: large;
+ margin: 3%;
 }
 
 /* PROFILE LIST ITEMS */

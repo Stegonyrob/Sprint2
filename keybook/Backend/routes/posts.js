@@ -38,8 +38,8 @@ router.post("/", async function (req, res) {
   }
 });
 
-//GET posts
-router.get("/", async function (req, res) {
+//GET posts with user info
+router.get("/feed", async function (req, res) {
   try {
     const posts = await sequelize.query(
       `SELECT * FROM user
