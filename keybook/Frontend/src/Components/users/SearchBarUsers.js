@@ -61,8 +61,6 @@ function SearchBarUsers({ onSearchResults }) {
           <p style={{ color: "red", marginTop: "10px" }}>
             No se encontraron usuarios.
           </p>
-
-
         )}
       </span>
     </form>
