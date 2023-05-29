@@ -45,7 +45,7 @@ input {
   transform: translate(-50%, -50%);
   display: flex;
 
-  left: 30px;
+  left: 50px;
 }
 
 @media (max-width: 480px) {
@@ -57,6 +57,7 @@ input {
     right: 91%;
     top: 2%;
     transform: none; /*no tocarmas*/
+    
   }
 }
 
@@ -64,6 +65,7 @@ input {
   padding: 0 20%;
   margin-top: 1.5%; /*no tocarmas*/
   margin-bottom: 0.5%;
+  margin-left: 15%;
 }
 
 #basic-addon1 {
