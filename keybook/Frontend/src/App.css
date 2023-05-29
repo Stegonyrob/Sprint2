@@ -318,7 +318,8 @@ li {
 
 .avatar-perfil {
   box-sizing: content-box;
-  width: 30%;
+  /* width: 150px;
+  height: 150px; */
 }
 
 .logo {
@@ -329,7 +330,7 @@ li {
 }
 
 .profile-index .avatar-perfil {
-  width: 100%;
+  width: 90%;
 }
 
 /* NEW POST */

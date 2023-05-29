@@ -22,14 +22,13 @@ function PostFeed() {
     return (
         <>
             {/* .slice(0, 5) */}
-            {posts.map((post) => (
-                console.log(post.post_id_user, post.profile_picture),
+            {posts.map((post) => (                
                 <PostCard
                     key={post.post_id}
                     // href={`profile/${post.post_id_user}`}
                     // src={`${post.profile_picture}`}
-                    href={post.post_id_user}
-                    src={post.profile_picture}
+                    // href={post.post_id_user}
+                    // src={post.profile_picture}
                     name={post.name}               
                     lastName={post.last_name}
                     content={post.post_content}
