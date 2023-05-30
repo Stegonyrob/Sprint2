@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import SubmitButton from "../ButtonStyle";
 import Pagination from "../pagination";
+import Unfollow from "./UnFollowUser";
 function RightSidebar({ loggedUserId }) {
   const [requests, setRequests] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -73,6 +74,7 @@ function RightSidebar({ loggedUserId }) {
                 />
               </li>
             </a>
+            <Unfollow id={13} />
           </li>
         ))}
       </ul>

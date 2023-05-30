@@ -125,6 +125,11 @@ input {
 .nav-icon li:hover {
   background-color: rgb(62, 130, 197);
 }
+.nav-item active-link {
+  color: red;
+  text-decoration: underline;
+}
+
 
 /* DISPOSITIVOS MOVILES */
 

@@ -119,6 +119,7 @@ export default function NavBar() {
                     component={icon.component}
                   >
                     <NavLink
+                      exact
                       to={icon.link}
                       activeClassName="active-link"
                       onClick={toggleMenu}
