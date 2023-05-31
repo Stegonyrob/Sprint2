@@ -81,12 +81,12 @@ function NewFeedBack(props) {
                 )}
                 {errorMultipleRecommendations && (
                     <div className="error">
-                        No puedes publicar más de una recomendación &#10060;
+                        Error: Ya has recomendado a este usuario &#10060;
                     </div>
                 )}
                 {errorSelfFeedback && (
                     <div className="error">
-                        No puedes enviarte a ti mismo un feedback &#10060;
+                        No puedes escribirte una recomendación a ti mismo &#10060;
                     </div>
                 )}
                 <div className="insert">
