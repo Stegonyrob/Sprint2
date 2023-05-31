@@ -10,11 +10,11 @@ function Feedback({ user, userId }) {
     useEffect(() => {
         const fetchFeedback = async () => {
             try {
-                const response = await fetch(url + "feedback/feed");
+                const response = await fetch(url + `feedback/feed/${userId}`);
                 const data = await response.json();
                 setFeedback(data);
                 // console.log("data", data);
-                console.log("UserId", userId);
+                // console.log("UserId", userId);
             } catch (error) {
                 alert("Error de servidor");
                 console.log(error);
@@ -32,6 +32,8 @@ function Feedback({ user, userId }) {
                     name={feedbackItem.name}
                     last_name={feedbackItem.last_name}
                     content={feedbackItem.content}
+                    linkId={feedbackItem.id}
+                    avatar={`${feedbackItem.profile_picture} `}
                 />
             ))}
 

@@ -28,7 +28,7 @@ export default function NavBar() {
     }
   };
   function getUserId() {
-    return localStorage.getItem(userId);
+    return localStorage.getItem("userId");
   }
 
   function handleProfileClick() {
@@ -53,7 +53,7 @@ export default function NavBar() {
       component: <HomeIcon />,
     },
     {
-      link: "/profile",
+      link: `/profile/${getUserId()}`,
       icon: faUser,
       title: "Mi Perfil",
       component: <Profile />,
@@ -99,9 +99,8 @@ export default function NavBar() {
               </button>
             </div>
             <div
-              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${
-                isMenuOpen ? "show" : ""
-              }`}
+              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${isMenuOpen ? "show" : ""
+                }`}
               id="navbarNav"
             >
               <div
