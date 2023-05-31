@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import FollowButton from "../buttons/FollowButton";
-import UnfollowButton from "../buttons/UnfollowButton";
+import { Link } from "react-router-dom";
 import SearchBarUsers from "./SearchBarUsers";
-import UserProfile from "./UserProfile";
 
 function UsersGrid() {
   const [userList, setUserList] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [followingList, setFollowingList] = useState([]);
-  const userId = localStorage.getItem("userId");
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/users");
+        const response = await fetch(
+          "http://localhost:3000/users?friends_with=USER_ID"
+        );
         const data = await response.json();
         setUserList(data);
         setFilteredResults(data);
@@ -25,15 +25,6 @@ function UsersGrid() {
     fetchUsers();
   }, []);
 
-  const handleProfileClick = (userId) => {
-    const isFollowing = followingList.includes(userId);
-    if (isFollowing) {
-      setFollowingList(followingList.filter((id) => id !== userId));
-    } else {
-      setFollowingList([...followingList, userId]);
-    }
-  };
-
   const handleSearchResults = (results) => {
     setFilteredResults(results);
   };
@@ -43,6 +34,16 @@ function UsersGrid() {
     if (event.target.value === "") {
       setFilteredResults(userList);
     }
+  };
+
+  const handleProfileClick = (userId) => {
+    const isFollowing = followingList.includes(userId);
+    if (isFollowing) {
+      setFollowingList(followingList.filter((id) => id !== userId));
+    } else {
+      setFollowingList([...followingList, userId]);
+    }
+    localStorage.setItem("selectedUserId", userId);
   };
 
   return (
@@ -71,13 +72,10 @@ function UsersGrid() {
         <article className="row friends-row">
           {filteredResults.map((userData) => (
             <UserProfile
-              key={user.id}
+              key={userData.id}
               userData={userData}
               followingList={followingList}
               handleProfileClick={handleProfileClick}
-              Follow={FollowButton}
-              Unfollow={UnfollowButton}
-              loggedInUserId={userId}
             />
           ))}
         </article>

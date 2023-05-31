@@ -3,14 +3,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import Follow from "../buttons/FollowButton";
 
-function RightSidebar({ loggedUserId }) {
+function RightSidebar() {
   const [requests, setRequests] = useState([]);
-  const [friends, setFriends] = useState([]);
-  const [page, setPage] = useState(1);
+  const loggedUserId = localStorage.getItem("userId");
+  const [page] = useState(1);
+
   async function fetchRequests() {
     try {
       const response = await fetch(
-        `http://localhost:3000/users?page=${page}&limit=3&not_friends_with=${loggedUserId}`
+        `http://localhost:3000/follow/not-following/${loggedUserId}`
       );
       const data = await response.json();
       setRequests(data);
@@ -18,27 +19,34 @@ function RightSidebar({ loggedUserId }) {
     } catch (error) {
       console.error(error);
     }
-  }   
+  }
+
   useEffect(() => {
     fetchRequests();
-  }, [page]);
-  
+  }, [page, loggedUserId]);
+
   return (
     <div className="default-card-right">
       <h2>SUGERENCIAS</h2>
       <ul>
         {requests.map((user) => (
           <li key={user.id}>
-        <a  title={`Perfil ${user.name}`} href={`/profile/${user.id}`}>
-          <img src={user.profile_picture} alt="Avatar" className="avatar" /></a>
-          <li><h4>{user.name} {user.last_name}</h4></li>
-          <li>           
-           <Follow id={user.id}/>            
+            <a title={`Perfil ${user.name}`} href={`/profile/${user.id}`}>
+              <img src={user.profile_picture} alt="Avatar" className="avatar" />
+            </a>
+            <li>
+              <h4>
+                {user.name} {user.last_name}
+              </h4>
+            </li>
+            <li>
+              <Follow id={user.id} />
+            </li>
           </li>
-        </li>
         ))}
-      </ul>   
+      </ul>
     </div>
   );
 }
+
 export default RightSidebar;

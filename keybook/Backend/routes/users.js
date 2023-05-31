@@ -35,13 +35,22 @@ router.get("/user/:id", async (req, res) => {
 //POST create new user
 router.post("/register", async function (req, res) {
   try {
-    const { name, lastName, dob, city, country, phone, linkedin, email, password } =
-      req.body;
+    const {
+      name,
+      lastName,
+      dob,
+      city,
+      country,
+      phone,
+      linkedin,
+      email,
+      password,
+    } = req.body;
     const blankPhoto = "https://i.postimg.cc/SNk2LBzX/blank-Avatar.png";
-    const education = "Añada formación"
-    const tools = "Añada herramientas"
-    const language = "Añada idiomas"
-    const hobby = "Añada  hobbies"
+    const education = "Añada formación";
+    const tools = "Añada herramientas";
+    const language = "Añada idiomas";
+    const hobby = "Añada  hobbies";
 
     const hashPassword = await bcrypt.hash(password, salt);
 
@@ -70,12 +79,12 @@ router.post("/register", async function (req, res) {
             tools,
             language,
             hobby,
-            linkedin
+            linkedin,
           ],
         }
       );
       res.status(200).send({
-        id: newUser[0]
+        id: newUser[0],
       });
       console.log("Usuario creado con éxito");
     }
@@ -118,8 +127,21 @@ router.post("/auth", async (req, res) => {
 //PUT user by id
 router.put("/:id", async (req, res) => {
   const userId = req.params.id;
-  const { name, lastName, dob, city, country, phone, password, linkedin, education, tools, languages, hobbies } = req.body;
-  const email = ""
+  const {
+    name,
+    lastName,
+    dob,
+    city,
+    country,
+    phone,
+    password,
+    linkedin,
+    education,
+    tools,
+    languages,
+    hobbies,
+  } = req.body;
+  const email = "";
   const hashPassword = await bcrypt.hash(password, salt);
   try {
     await sequelize.query(
@@ -139,7 +161,9 @@ router.put("/:id", async (req, res) => {
       linkedin = IF('${linkedin}' = "", linkedin, '${linkedin}')
       WHERE id = ${userId}`
     );
-    res.status(200).send({ message: "Datos de usuario actualizados correctamente" });
+    res
+      .status(200)
+      .send({ message: "Datos de usuario actualizados correctamente" });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: "Error al actualizar datos de usuario" });
@@ -167,19 +191,19 @@ router.get("/user", async function (req, res) {
   try {
     const people = searchKey
       ? await sequelize.query(
-        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
-        {
-          replacements: { searchKey, loggedInUserId },
-          type: sequelize.QueryTypes.SELECT,
-        }
-      )
+          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
+          {
+            replacements: { searchKey, loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        )
       : await sequelize.query(
-        "SELECT * FROM user WHERE id != :loggedInUserId",
-        {
-          replacements: { loggedInUserId },
-          type: sequelize.QueryTypes.SELECT,
-        }
-      );
+          "SELECT * FROM user WHERE id != :loggedInUserId",
+          {
+            replacements: { loggedInUserId },
+            type: sequelize.QueryTypes.SELECT,
+          }
+        );
 
     res.send(people);
   } catch (error) {
