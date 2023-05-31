@@ -27,7 +27,7 @@ export default function Register() {
 
             if (response.id) {
                 alert("Usuario creado con éxito. Redireccionando a login")
-                window.location.href = "/login"
+                window.location.href = "/"
             } else {
                 setError(true);
             }
