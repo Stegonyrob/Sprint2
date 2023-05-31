@@ -3,10 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import Follow from "../buttons/FollowButton";
 
-function RightSidebar({ loggedUserId }) {
+function RightSidebar() {
   const [requests, setRequests] = useState([]);
-
+  const loggedUserId = localStorage.getItem("userId");
   const [page] = useState(1);
+
   async function fetchRequests() {
     try {
       const response = await fetch(
@@ -19,6 +20,7 @@ function RightSidebar({ loggedUserId }) {
       console.error(error);
     }
   }
+
   useEffect(() => {
     fetchRequests();
   }, [page, loggedUserId]);
@@ -46,4 +48,5 @@ function RightSidebar({ loggedUserId }) {
     </div>
   );
 }
+
 export default RightSidebar;
