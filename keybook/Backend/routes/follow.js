@@ -113,4 +113,27 @@ WHERE id NOT IN (
   }
 });
 
+//POST follow user using /follow/:user_friend2_id
+router.post("/:user_friend2_id", async (req, res) => {
+  const { user_friend2_id } = req.params;
+
+  // Check that the user ID exists
+  const user = await User.findOne({ where: { id: user_friend2_id } });
+  if (!user) {
+    return res.status(400).json({ error: "Invalid user ID" });
+  }
+
+  // Insert the new row into the friend table
+  try {
+    await Friend.create({
+      status: 1,
+      user_friend1_id: req.user.id,
+      user_friend2_id,
+    });
+    return res.json({ message: "Friend request sent" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Failed to send friend request" });
+  }
+});
 module.exports = router;
