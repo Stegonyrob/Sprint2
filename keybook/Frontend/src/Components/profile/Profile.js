@@ -12,6 +12,7 @@ function Profile() {
   const [user, setUser] = useState({});
   const { userId } = useParams();
 
+
   useEffect(() => {
     const fetchUser = async () => {
       const userLog = localStorage.getItem('userId');
@@ -36,7 +37,8 @@ function Profile() {
           <div className="col-sm-7 col-md-7 col-lg-6">
             {user && <ProfileCard user={user} />}
             {/* <NewFeedBack user={user} /> */}
-            <Feedback userId={userId} user={user} />
+            <Feedback userId={userId}
+              user={user} />
           </div>
           <div className="col-sm-5 col-md-4 col-lg-3">
             {user && <ProfileHobbies user={user} />}

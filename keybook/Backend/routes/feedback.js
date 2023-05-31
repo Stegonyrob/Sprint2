@@ -79,13 +79,15 @@ router.put("/:feedback_id", async function (req, res) {
 });
 
 //GET feedback with user info
-router.get("/feed", async function (req, res) {
+router.get("/feed/:id", async function (req, res) {
+    const profileId = req.params.id;
+
     try {
         const feedProfile = await sequelize.query(
             `SELECT * FROM user 
-          JOIN feedback ON user.id = feedback.user_id_from
-          WHERE user.id
-          ORDER BY feedback.feedback_id DESC;`,
+            JOIN feedback ON user.id = feedback.user_id_from
+            WHERE feedback.user_id_to = ${profileId}
+            ORDER BY feedback.feedback_id DESC;`,
             { type: sequelize.QueryTypes.SELECT }
         );
         res.send(feedProfile);
@@ -94,5 +96,6 @@ router.get("/feed", async function (req, res) {
         res.status(400).send({ error: e.message });
     }
 });
+
 
 module.exports = router;

@@ -10,7 +10,7 @@ function NewFeedBack(props) {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const { user, userId } = props;
-    console.log("UserId", userId);
+    // console.log("UserId", userId);
 
     function handleInputChange(event) {
         setFeedBackContent(event.target.value);
