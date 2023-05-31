@@ -1,7 +1,21 @@
 import { PostCard } from "./PostCard";
 
-function PostFeed(props) {
-  const posts = props.posts;
+function PostFeed() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(url + "posts/feed");
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        alert("Error de servidor");
+        console.log(error);
+      }
+    };
+    fetchPosts();
+  }, []);
 
   return (
     <>

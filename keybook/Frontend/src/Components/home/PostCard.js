@@ -14,7 +14,7 @@ export const PostCard = ({
             <img src={avatar} alt="avatar" className="avatar" />
           </a>
           <h3>
-            {name} {lastName}
+            {name} {lastName}{" "}
           </h3>
         </div>
         <p className="post-content">{content}</p>
