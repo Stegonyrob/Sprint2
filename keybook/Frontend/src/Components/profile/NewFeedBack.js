@@ -8,9 +8,9 @@ import { useParams } from 'react-router-dom';
 function NewFeedBack(props) {
     const [feedbackContent, setFeedBackContent] = useState("");
     const [success, setSuccess] = useState(false);
-    const [error, setError] = useState(false);
+    const [errorMultipleRecommendations, setErrorMultipleRecommendations] = useState(false);
+    const [errorSelfFeedback, setErrorSelfFeedback] = useState(false);
     const { user, userId } = props;
-    // console.log("UserId", userId);
 
     function handleInputChange(event) {
         setFeedBackContent(event.target.value);
@@ -20,6 +20,11 @@ function NewFeedBack(props) {
         event.preventDefault();
         const userFrom = localStorage.getItem("userId");
         const userTo = userId;
+
+        if (userFrom === userTo) {
+            setErrorSelfFeedback(true);
+            return;
+        }
 
         const data = {
             user_id_from: userFrom,
@@ -36,12 +41,13 @@ function NewFeedBack(props) {
             if (response.feedback_id) {
                 setSuccess(true);
                 setFeedBackContent("");
-                setError(false);
+                setErrorMultipleRecommendations(false);
+                setErrorSelfFeedback(false);
             } else {
-                setError(true);
+                setErrorMultipleRecommendations(true);
             }
         } catch (error) {
-            setError(true);
+            setErrorMultipleRecommendations(true);
             console.error(error);
         }
     }
@@ -58,7 +64,9 @@ function NewFeedBack(props) {
                     </a>
                     NUEVA RECOMENDACIÓN
                 </h2>
-                <textarea cols="70" rows="3"
+                <textarea
+                    cols="70"
+                    rows="3"
                     placeholder="ESCRIBIR RECOMENDACIÓN..."
                     type="text"
                     name="inputFeed"
@@ -71,9 +79,14 @@ function NewFeedBack(props) {
                         Publicado con éxito ✔
                     </div>
                 )}
-                {error && (
+                {errorMultipleRecommendations && (
                     <div className="error">
                         No puedes publicar más de una recomendación &#10060;
+                    </div>
+                )}
+                {errorSelfFeedback && (
+                    <div className="error">
+                        No puedes enviarte a ti mismo un feedback &#10060;
                     </div>
                 )}
                 <div className="insert">
