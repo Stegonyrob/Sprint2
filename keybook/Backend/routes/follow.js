@@ -2,28 +2,16 @@ var express = require("express");
 const sequelize = require("../db/connection");
 var router = express.Router();
 
-/* GET follow listing. */
-router.get("/", async function (req, res) {
-  try {
-    const hobbiesList = await sequelize.query("SELECT * FROM friend", {
-      type: sequelize.QueryTypes.SELECT,
-    });
-    res.status(200).send(hobbiesList);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error interno del servidor");
-  }
-});
-
 //GET following users list
 router.get("/following/:user_id", async function (req, res) {
   const loggedId = req.params.user_id;
+
   try {
     const following = await sequelize.query(`
         SELECT DISTINCT * FROM user 
         INNER JOIN friend ON friend.user_friend2_id = user.id 
         WHERE friend.user_friend1_id = "${loggedId}" AND friend.status = 1 
-        ORDER BY user.id DESC 
+        ORDER BY user.id 
         LIMIT 4
       `);
 
@@ -91,6 +79,37 @@ router.delete("/unfollow/:id", async (req, res) => {
     }
   } else {
     return res.status(400).json({ error: "Usuario no seguido" });
+  }
+});
+
+//GET NOT-following users list
+router.get("/not-following/:user_id", async function (req, res) {
+  const loggedId = req.params.user_id;
+  try {
+    const notFollowing = await sequelize.query(
+      `
+      SELECT DISTINCT *
+FROM user
+WHERE id NOT IN (
+  SELECT CASE
+    WHEN user_friend1_id = "${loggedId}" THEN user_friend2_id
+    ELSE user_friend1_id
+  END AS friend_id
+  FROM friend
+  WHERE user_friend1_id = "${loggedId}" OR user_friend2_id = "${loggedId}"
+) AND id <> "${loggedId}"
+
+      `,
+      {
+        type: sequelize.QueryTypes.SELECT,
+        replacements: [loggedId, loggedId],
+      }
+    );
+
+    res.status(200).send(notFollowing);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno del servidor");
   }
 });
 

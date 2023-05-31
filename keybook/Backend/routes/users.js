@@ -242,31 +242,3 @@ router.get("/", async function (req, res) {
     res.status(500).send("Error interno del servidor");
   }
 });
-
-router.get("/", async function (req, res) {
-  const friendsWith = req.query.friends_with;
-  const notFriendsWith = req.query.not_friends_with;
-  const page = req.query.page || 1;
-  const limit = req.query.limit || 10;
-  const offset = (page - 1) * limit;
-
-  try {
-    const usersList = await sequelize.query(
-      `
-      SELECT user.*, IF(friend.user_friend1_id IS NOT NULL, 1, 0) AS is_following FROM user
-      LEFT JOIN friend ON user.id = friend.user_friend2_id AND friend.user_friend1_id = "${friendsWith}" AND friend.status = 1
-      WHERE user.id != "${friendsWith}" AND friend.user_friend2_id IS NULL
-      ORDER BY user.id DESC
-      LIMIT ${limit}
-      OFFSET ${offset}
-    `,
-      {
-        type: sequelize.QueryTypes.SELECT,
-      }
-    );
-    res.status(200).send(usersList);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error interno del servidor");
-  }
-});
