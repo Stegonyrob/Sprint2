@@ -4,7 +4,7 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Logout = () => {
   const logout = () => {
-    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
     alert("Ha cerrado sesión. Volviendo a página de inicio");
     window.location.href = "/";
   };

@@ -28,6 +28,7 @@ function App() {
             <Route path="/" element={<LoginView />} />
             <Route path="/register" element={<RegisterView />} />
             <Route path="/error" element={<ErrorView />} />
+            <Route path="*" element={<Navigate to="/error" />} />
             {isAuthenticated ? (
               <>
                 <Route path="/home" element={<HomeView />} />
@@ -37,9 +38,8 @@ function App() {
                 <Route path="/edit" element={<EditProfileView />} />
               </>
             ) : (
-              <Route path="*" element={<Navigate to="/login" />} />
+              <Route path="/error" element={<Navigate to="/error" />} />
             )}
-            <Route path="*" element={<Navigate to="/error" />} />{" "}           
           </Routes>
         </BrowserRouter>
       </div>
