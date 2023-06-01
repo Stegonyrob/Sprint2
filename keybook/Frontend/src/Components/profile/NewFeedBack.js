@@ -10,7 +10,7 @@ function NewFeedBack(props) {
     const [success, setSuccess] = useState(false);
     const [errorMultipleRecommendations, setErrorMultipleRecommendations] = useState(false);
     const [errorSelfFeedback, setErrorSelfFeedback] = useState(false);
-    const { user, userId } = props;
+    const { user, userId, setFeedbackAdded } = props;
 
     function handleInputChange(event) {
         setFeedBackContent(event.target.value);
@@ -43,6 +43,7 @@ function NewFeedBack(props) {
                 setFeedBackContent("");
                 setErrorMultipleRecommendations(false);
                 setErrorSelfFeedback(false);
+                setFeedbackAdded(true);
             } else {
                 setErrorMultipleRecommendations(true);
             }
@@ -72,13 +73,9 @@ function NewFeedBack(props) {
                     name="inputFeed"
                     value={feedbackContent}
                     onChange={handleInputChange}
-                    className="new-feed"
+                    className="new-feedback"
                 />
-                {success && (
-                    <div className="success">
-                        Publicado con éxito ✔
-                    </div>
-                )}
+                {success && <div className="success ">Recomendación enviada ✔</div>}
                 {errorMultipleRecommendations && (
                     <div className="error">
                         Error: Ya has recomendado a este usuario &#10060;
@@ -93,7 +90,7 @@ function NewFeedBack(props) {
                     <div>
                         <ButtonDefault
                             type="submit"
-                            content="Publicar"
+                            content="Recomendar"
                             className="btn-lg"
                         />
                     </div>
