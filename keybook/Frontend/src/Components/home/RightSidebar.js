@@ -62,27 +62,27 @@ function RightSidebar() {
   return (
     <div className="default-card-right">
       <h2>SUGERENCIAS</h2>
-      <ul>
-        {requests.map((user) => (
-          <li key={user.id}>
+      <div>
+        {requests.slice(0, 4).map((user) => (
+          <div key={user.id}>
             <a title={`Perfil ${user.name}`} href={`/profile/${user.id}`}>
               <img src={user.profile_picture} alt="Avatar" className="avatar" />
             </a>
-            <li>
+            <div>
               <h4>
                 {user.name} {user.last_name}
               </h4>
-            </li>
-            <li>
+            </div>
+            <div>
               <FollowButton
                 id={user.id}
                 onClick={handleFollow}
                 setRequests={setRequests}
               />
-            </li>
-          </li>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

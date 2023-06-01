@@ -1,7 +1,7 @@
 import { PostCard } from "./PostCard";
 
 function PostFeed(props) {
-  const posts = props.posts;
+  const posts = props.posts.slice(0, 4);
 
   return (
     <>
