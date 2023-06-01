@@ -14,7 +14,8 @@ router.post("/", async function (req, res) {
         replacements: [post_id_user, post_content],
       }
     );
-    res.status(200).send({
+    console.log(newPost);
+    res.status(200).json({
       post_id: newPost[0],
       post_id_user,
       post_content,
@@ -27,8 +28,8 @@ router.post("/", async function (req, res) {
 
 //GET posts with user info of following users
 router.get("/feed/:id", async function (req, res) {
-  const loggedId = req.params.id
- 
+  const loggedId = req.params.id;
+
   try {
     const posts = await sequelize.query(
       `SELECT * FROM post
@@ -37,9 +38,9 @@ router.get("/feed/:id", async function (req, res) {
       OR post.post_id_user = ${loggedId}          
       ORDER BY post.post_id DESC
       LIMIT 6
-      `,      
+      `,
       { type: sequelize.QueryTypes.SELECT }
-    );    
+    );
     res.send(posts);
   } catch (e) {
     console.log(e);
