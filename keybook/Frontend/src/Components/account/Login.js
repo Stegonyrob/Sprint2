@@ -1,12 +1,15 @@
 import { useState } from "react";
 import request from "../../utils/url";
 import { Logo } from "../logo/Logo";
-import { FormInput } from "../registration/FormInput";
+import { FormInput } from "./FormInput";
 import { ButtonDefault } from "../buttons/ButtonDefault";
+import GrayScaleButton from "../navbar/GrayScaleButton";
 
 export default function Login() {
     const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
     const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
+
     function handleChange(e) {
         const { name, value } = e.target;
         setLoginInfo({ ...loginInfo, [name]: value });
@@ -23,10 +26,12 @@ export default function Login() {
                 body: { email, password },
             });
             if (response.id) {
-                alert("Usuario logueado con éxito. Redireccionando a home")
+                setSuccess(true);
                 localStorage.setItem('userId', response.id);
                 localStorage.setItem("token", response.token)
-                window.location.href = "/home";
+                setTimeout(() => {
+                    window.location.href = "/home"
+                }, 2000)
             } else {
                 setError(true);
             }
@@ -37,7 +42,7 @@ export default function Login() {
     }
     return (
         <>
-            <div className="container-fluid main-structure">
+            <div className="container-fluid main-structure min-vh-100">
                 <div className="row">
                     <div className="col-sm-5 col-md-6 col-lg-6">
                         <div className="default-card welcome-card">
@@ -50,22 +55,19 @@ export default function Login() {
                     <div className="col-sm-5 col-md-6 col-lg-6">
                         <div className="default-card welcome-card ">
                             <h1>Inicio de Sesión</h1>
-                            {error && (
-                                <div style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
-                                    Usuario o contraseña incorrectos
-                                </div>
-                            )}
+                            <GrayScaleButton className="dropdown-item"/>
                             <form onSubmit={handleSubmit}>
                                 <FormInput
                                     type="email"
-                                    onChange={handleChange} value={loginInfo.email} name="email" placeholder="Email" />
+                                    onChange={handleChange} value={loginInfo.email} name="email" placeholder="Email" required />
                                 <FormInput
                                     type="password"
-                                    onChange={handleChange} value={loginInfo.password} name="password" placeholder="Contraseña" />
+                                    onChange={handleChange} value={loginInfo.password} name="password" placeholder="Contraseña" required />
+                                {error && (<div className="error form-control"> Usuario o contraseña incorrectos </div>)}
+                                {success && <div className="success col-md-8  form-control ">Usuario correcto ✔ Redireccionando a Home</div>}
                                 <ButtonDefault type="submit" content="Login" id="register-form-buttons" className="btn-lg" />
-
                                 <div className="d-flex justify-content-center">
-                                    <p className="slogan-container">Si no tienes cuenta <a href="./formRegistration.html">Registrate</a></p>
+                                    <p className="slogan-container">Si no tienes cuenta <a href="/register">Registrate</a></p>
                                 </div>
                             </form>
                         </div>
@@ -73,5 +75,5 @@ export default function Login() {
                 </div>
             </div>
         </>
-    );
+    )
 }
