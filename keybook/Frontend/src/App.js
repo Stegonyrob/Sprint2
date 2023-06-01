@@ -17,6 +17,9 @@ import EditProfileView from "./views/EditProfileView";
 import ErrorView from "./views/ErrorView";
 
 function App() {
+  const isAuthenticated = !!localStorage.getItem("token");
+  console.log(isAuthenticated);
+
   return (
     <>
       <div className="App">
@@ -24,14 +27,19 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginView />} />
             <Route path="/register" element={<RegisterView />} />
-            <Route path="/home" element={<HomeView />} />
-            <Route path="/profile" element={<ProfileView />} />
-            <Route path="/profile/:userId" element={<ProfileView />} />
-            <Route path="/users" element={<UsersView />} />
-            <Route path="/edit" element={<EditProfileView />} />
             <Route path="/error" element={<ErrorView />} />
-            <Route path="*" element={<Navigate to="/error" />} />{" "}
-            {/* Si la ruta no existe lleva a página vacía (hasta que hagamos el componente error) */}
+            {isAuthenticated ? (
+              <>
+                <Route path="/home" element={<HomeView />} />
+                <Route path="/profile" element={<ProfileView />} />
+                <Route path="/profile/:userId" element={<ProfileView />} />
+                <Route path="/users" element={<UsersView />} />
+                <Route path="/edit" element={<EditProfileView />} />
+              </>
+            ) : (
+              <Route path="*" element={<Navigate to="/login" />} />
+            )}
+            <Route path="*" element={<Navigate to="/error" />} />{" "}           
           </Routes>
         </BrowserRouter>
       </div>
