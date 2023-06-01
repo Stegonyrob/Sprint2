@@ -23,15 +23,17 @@ router.post("/", async function (req, res) {
         const loggedId = req.body.user_id_from;
         const followId = req.body.user_id_to;
         const content = req.body.content;
+
+        if (loggedId === followId) {
+            return res.status(400).json({ error: "No puedes enviarte a ti mismo un feedback" });
+        }
         const hasSentFeedback = await sequelize.query(
             "SELECT * FROM feedback WHERE user_id_from = ? AND user_id_to = ?",
             { type: sequelize.QueryTypes.SELECT, replacements: [loggedId, followId] }
         );
 
         if (hasSentFeedback.length > 0) {
-            return res
-                .status(400)
-                .json({ error: "Ya has enviado un feedback a este usuario" });
+            return res.status(400).json({ error: "Ya has enviado un feedback a este usuario" });
         } else {
             const newFeedback = await sequelize.query(
                 "INSERT INTO feedback (user_id_from, user_id_to, content) VALUES (?, ?, ?)",
@@ -79,13 +81,15 @@ router.put("/:feedback_id", async function (req, res) {
 });
 
 //GET feedback with user info
-router.get("/feed", async function (req, res) {
+router.get("/feed/:id", async function (req, res) {
+    const profileId = req.params.id;
+
     try {
         const feedProfile = await sequelize.query(
             `SELECT * FROM user 
-          JOIN feedback ON user.id = feedback.user_id_from
-          WHERE user.id
-          ORDER BY feedback.feedback_id DESC;`,
+            JOIN feedback ON user.id = feedback.user_id_from
+            WHERE feedback.user_id_to = ${profileId}
+            ORDER BY feedback.feedback_id DESC;`,
             { type: sequelize.QueryTypes.SELECT }
         );
         res.send(feedProfile);
