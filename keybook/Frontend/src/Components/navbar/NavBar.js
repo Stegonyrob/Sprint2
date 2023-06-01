@@ -83,7 +83,11 @@ export default function NavBar() {
               <a className="navbar-brand" href="/home">
                 <Logo className="keybook-logo d-block" />
               </a>
+              <div className="slogan-container-nav">
+                <h2>Donde los programadores comparten sus claves</h2>
+              </div>
             </div>
+
             <div className="d-none d-lg-block">
               <SearchBar />
             </div>
@@ -99,8 +103,9 @@ export default function NavBar() {
               </button>
             </div>
             <div
-              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${isMenuOpen ? "show" : ""
-                }`}
+              className={`collapse navbar-collapse col-sm-7 col-lg-6 ${
+                isMenuOpen ? "show" : ""
+              }`}
               id="navbarNav"
             >
               <div

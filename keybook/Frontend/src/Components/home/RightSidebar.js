@@ -60,7 +60,7 @@ function RightSidebar() {
   }
 
   return (
-    <div className="default-card">
+    <div className="default-card-right">
       <h2>SUGERENCIAS</h2>
       <ul>
         {requests.map((user) => (

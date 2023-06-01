@@ -4,7 +4,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function SearchBar() {
   return (
-    <div className="col-8 search-bar ">
+    <div className="col-8 search-bar d-none">
       <form className="d-flex">
         <div className="input-group">
           <span className="input-group-text" id="basic-addon1">
