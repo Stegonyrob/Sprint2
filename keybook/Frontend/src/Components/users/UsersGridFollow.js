@@ -1,0 +1,65 @@
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../../src/App.css";
+
+import Unfollow from "../buttons/UnfollowButton";
+import { Link } from "react-router-dom";
+
+function UsersGridFollow({}) {
+  const [users, setUsers] = useState([]);
+  const userId = localStorage.getItem("userId");
+
+  async function fetchUsers() {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/follow/following/${userId}`
+      );
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchUsers();
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, [users]);
+
+  return (
+    <>
+      {users.map((user) => (
+        <div className="col-sm-3" key={user.id}>
+          <div className="default-card friend-box">
+            <Link
+              to={`/profile/${user.id}`}
+              onClick={() => handleProfileClick(user.id)}
+            >
+              <img
+                className="friend-avatar"
+                style={{
+                  borderRadius: "50%",
+                  width: "150px",
+                  height: "150px",
+                }}
+                src={user.profile_picture}
+                alt={user.name}
+              />
+            </Link>
+            <h5>
+              {user.name} {user.last_name}
+            </h5>
+            <Unfollow id={user.id} setUsers={setUsers} />
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+export default UsersGridFollow;

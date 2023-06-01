@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../App.css";
+import { Link } from "react-router-dom";
+
+import "../../../src/App.css";
 import FollowButton from "../buttons/FollowButton";
 
-function RightSidebar() {
+function UsersGridUnfollow() {
   const [requests, setRequests] = useState([]);
   const loggedUserId = localStorage.getItem("userId");
   const [page] = useState(1);
@@ -60,31 +61,34 @@ function RightSidebar() {
   }
 
   return (
-    <div className="default-card">
-      <h2>SUGERENCIAS</h2>
-      <ul>
-        {requests.map((user) => (
-          <li key={user.id}>
-            <a title={`Perfil ${user.name}`} href={`/profile/${user.id}`}>
-              <img src={user.profile_picture} alt="Avatar" className="avatar" />
-            </a>
-            <li>
-              <h4>
-                {user.name} {user.last_name}
-              </h4>
-            </li>
-            <li>
-              <FollowButton
-                id={user.id}
-                onClick={handleFollow}
-                setRequests={setRequests}
+    <>
+      {requests.map((user) => (
+        <div className="col-sm-3" key={user.id}>
+          <div className="default-card friend-box">
+            <Link to={`/profile/${user.id}`}>
+              <img
+                className="friend-avatar"
+                style={{
+                  borderRadius: "50%",
+                  width: "150px",
+                  height: "150px",
+                }}
+                src={user.profile_picture}
+                alt={user.name}
               />
-            </li>
-          </li>
-        ))}
-      </ul>
-    </div>
+            </Link>
+            <h5>
+              {user.name} {user.last_name}
+            </h5>
+            <FollowButton
+              id={user.id}
+              onClick={() => handleFollow(user.id)}
+              setRequests={setRequests}
+            />
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
-
-export default RightSidebar;
+export default UsersGridUnfollow;
