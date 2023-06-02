@@ -10,12 +10,36 @@ router.get("/following/:user_id", async function (req, res) {
     const following = await sequelize.query(`
         SELECT DISTINCT * FROM user 
         INNER JOIN friend ON friend.user_friend2_id = user.id 
-        WHERE friend.user_friend1_id = "${loggedId}" AND friend.status = 1 
-        ORDER BY user.id 
-        LIMIT 4
+        WHERE friend.user_friend1_id = "${loggedId}" AND friend.status = 1               
       `);
-
     res.status(200).send(following[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno del servidor");
+  }
+});
+
+//GET NOT-following users list
+router.get("/not-following/:user_id", async function (req, res) {
+  const loggedId = req.params.user_id;
+  
+  try {
+    const notFollowing = await sequelize.query(
+    `SELECT DISTINCT * FROM user
+    WHERE id NOT IN (
+    SELECT CASE
+    WHEN user_friend1_id = "${loggedId}" THEN user_friend2_id
+    ELSE user_friend1_id
+    END AS friend_id
+    FROM friend
+    WHERE user_friend1_id = "${loggedId}" OR user_friend2_id = "${loggedId}") 
+    AND id <> "${loggedId}"`,
+      {
+        type: sequelize.QueryTypes.SELECT,
+        replacements: [loggedId, loggedId],
+      }
+    );
+    res.status(200).send(notFollowing);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error interno del servidor");
@@ -82,58 +106,4 @@ router.delete("/unfollow/:id", async (req, res) => {
   }
 });
 
-//GET NOT-following users list
-router.get("/not-following/:user_id", async function (req, res) {
-  const loggedId = req.params.user_id;
-  try {
-    const notFollowing = await sequelize.query(
-      `
-      SELECT DISTINCT *
-FROM user
-WHERE id NOT IN (
-  SELECT CASE
-    WHEN user_friend1_id = "${loggedId}" THEN user_friend2_id
-    ELSE user_friend1_id
-  END AS friend_id
-  FROM friend
-  WHERE user_friend1_id = "${loggedId}" OR user_friend2_id = "${loggedId}"
-) AND id <> "${loggedId}"
-
-      `,
-      {
-        type: sequelize.QueryTypes.SELECT,
-        replacements: [loggedId, loggedId],
-      }
-    );
-
-    res.status(200).send(notFollowing);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error interno del servidor");
-  }
-});
-
-//POST follow user using /follow/:user_friend2_id
-router.post("/:user_friend2_id", async (req, res) => {
-  const { user_friend2_id } = req.params;
-
-  // Check that the user ID exists
-  const user = await User.findOne({ where: { id: user_friend2_id } });
-  if (!user) {
-    return res.status(400).json({ error: "Invalid user ID" });
-  }
-
-  // Insert the new row into the friend table
-  try {
-    await Friend.create({
-      status: 1,
-      user_friend1_id: req.user.id,
-      user_friend2_id,
-    });
-    return res.json({ message: "Friend request sent" });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "Failed to send friend request" });
-  }
-});
 module.exports = router;

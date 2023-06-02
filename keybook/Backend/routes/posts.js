@@ -36,9 +36,7 @@ router.get("/feed/:id", async function (req, res) {
       JOIN user ON user.id = post.post_id_user
       WHERE post.post_id_user IN (SELECT friend.user_friend2_id FROM friend WHERE friend.user_friend1_id = ${loggedId}) 
       OR post.post_id_user = ${loggedId}          
-      ORDER BY post.post_id DESC
-      LIMIT 6
-      `,
+      ORDER BY post.post_id DESC`,
       { type: sequelize.QueryTypes.SELECT }
     );
     res.send(posts);

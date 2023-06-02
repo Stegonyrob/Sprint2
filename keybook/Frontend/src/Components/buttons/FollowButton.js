@@ -16,9 +16,7 @@ export default function Follow({ id }) {
                 body: self
             });
 
-            if (response.friendship_id) {
-                alert("Siguiendo usuario")
-            } else {
+            if (!response.friendship_id) {
                 alert("Usuario ya seguido. No se puede volver a seguir")
             }
         } catch (error) {

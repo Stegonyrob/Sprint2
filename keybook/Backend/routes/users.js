@@ -6,19 +6,6 @@ const jwt = require("jsonwebtoken");
 
 const salt = 10;
 
-// // /* GET users listing. */
-// router.get("/", async function (req, res) {
-//   try {
-//     const usersList = await sequelize.query("SELECT * FROM user", {
-//       type: sequelize.QueryTypes.SELECT,
-//     });
-//     res.status(200).send(usersList);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error interno del servidor");
-//   }
-// });
-
 //GET user by id
 router.get("/user/:id", async (req, res) => {
   const userId = req.params.id;
@@ -182,7 +169,7 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-// //GET user by name or email (based on input)
+//GET user by name or email (based on input)
 router.get("/user", async function (req, res) {
   const { searchKey } = req.query;
 
@@ -206,33 +193,4 @@ router.get("/user", async function (req, res) {
   }
 });
 
-// //GET user not follow
-router.get("/", async function (req, res) {
-  const notFriendsWith = req.query.not_friends_with;
-  const page = req.query.page || 1;
-  const limit = req.query.limit || 10;
-  const offset = (page - 1) * limit;
-
-  try {
-    const usersList = await sequelize.query(
-      `
-      SELECT * FROM user
-      WHERE id != "${notFriendsWith}" AND id NOT IN (
-        SELECT user_friend2_id FROM friend
-        WHERE user_friend1_id = "${notFriendsWith}" AND status = 1
-      )
-      ORDER BY id DESC
-      LIMIT ${limit}
-      OFFSET ${offset}
-    `,
-      {
-        type: sequelize.QueryTypes.SELECT,
-      }
-    );
-    res.status(200).send(usersList);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error interno del servidor");
-  }
-});
 module.exports = router;
