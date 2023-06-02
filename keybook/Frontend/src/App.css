@@ -34,6 +34,7 @@ input {
   height: auto;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1; /*no tocarmas*/
+  height: 130px;
 }
 
 .keybook-logo {
@@ -41,7 +42,7 @@ input {
   border-radius: 30%;
   position: fixed;
   right: 91%;
-  top: 32px;
+  top: 35px;
   transform: translate(-50%, -50%);
   display: flex;
 
@@ -541,6 +542,31 @@ footer {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.slogan-container-nav {
+  text-align: center;
+  margin-top: 3%;
+  display: flex;
+}
+.slogan-container-nav h2 {
+  margin-left: 20%;
+  font-size: 34px;
+  transition: all 0.3s ease-in-out;
+  background-image: linear-gradient(to right, red, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+}
+.slogan-container-nav h2:hover {
+  transform: scale(1.1);
+}
+@media screen and (max-width: 767px) {
+  .slogan-container-nav h2 {
+    font-size: 85%;
+    display: flex;
+  }
+}
+
+
 .slogan-container h2:hover {
   transform: scale(1.1);
 }
@@ -606,6 +632,7 @@ footer {
   margin: 0 0 10px;
   background-color: rgba(0, 0, 0, 0.8);
   display: block !important;
+
 }
 .default-card-center {
   justify-content: center !important;
