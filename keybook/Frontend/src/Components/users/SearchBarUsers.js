@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import diacriticless from "diacriticless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import GetUsers from "./GetUsers"; // Importa el componente GetUsers
 
 function SearchBarUsers({ onSearchResults }) {
   const [searchKey, setSearchKey] = useState("");
@@ -18,7 +19,7 @@ function SearchBarUsers({ onSearchResults }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `http://localhost:3000/users?searchKey=${searchKey}`
+      `http://localhost:3000/users/user?searchKey=${searchKey}`
     );
     const data = await response.json();
     setUserList(data);
@@ -61,6 +62,9 @@ function SearchBarUsers({ onSearchResults }) {
           <p style={{ color: "red", marginTop: "10px" }}>
             No se encontraron usuarios.
           </p>
+        )}
+        {filteredResults.length > 0 && (
+          <GetUsers users={filteredResults} />
         )}
       </span>
     </form>

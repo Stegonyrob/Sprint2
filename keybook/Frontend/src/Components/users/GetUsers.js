@@ -1,26 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function GetUsers() {
-    const [randomUsers, setRandomUsers] = useState([]);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch('http://localhost:3000/users');
-                // console.log(response);
-                const data = await response.json();
-                const randomUsers = data.sort(() => Math.random() - 0.5).slice(0, 8);
-                setRandomUsers(randomUsers);
-            } catch (error) {
-                console.log('Error al obtener usuarios:', error);
-            }
-        }
-        fetchData();
-    }, []);
-
+function GetUsers({ users }) {
     return (
         <div className="row">
-            {randomUsers.map((user) => (
+            {users.map((user) => (
                 <div className="col-sm-3 default-card friend-box" key={user.id}>
                     <img
                         className="friend-avatar"

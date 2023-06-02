@@ -3,29 +3,35 @@ import React, { useState, useEffect } from "react";
 import UsersGridFollow from "./UsersGridFollow";
 import UsersGridUnfollow from "./UsersGridUnfollow";
 import SearchBarUsers from "./SearchBarUsers";
+
 function UserGrid() {
   const [following, setFollowing] = useState([]);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     async function fetchUsers() {
-      const response = await fetch("http://localhost:3000/users");
+      const response = await fetch("http://localhost:3000/users/user");
       const data = await response.json();
       setUsers(data);
     }
     fetchUsers();
   }, []);
 
+  const handleSearchResults = (results) => {
+    console.log("results", results);
+    setUsers(results)
+  };
+
   return (
     <>
-      <div class="container main-structure">
+      <div className="container main-structure">
         <div className="search-friends default-card">
           <h4>COMUNIDAD</h4>
-          <SearchBarUsers />
+          <SearchBarUsers onSearchResults={handleSearchResults} />
         </div>
       </div>
-      <div class="container main-structure friend-structure">
-        <div class="row">
+      <div className="container main-structure friend-structure">
+        <div className="row">
           <UsersGridFollow
             users={users}
             following={following}
@@ -37,4 +43,5 @@ function UserGrid() {
     </>
   );
 }
+
 export default UserGrid;

@@ -16,7 +16,7 @@ function UsersGridUnfollow() {
       );
       const data = await response.json();
       setRequests(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error(error);
     }

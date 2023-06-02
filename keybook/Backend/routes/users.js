@@ -183,27 +183,21 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 // //GET user by name or email (based on input)
-
 router.get("/user", async function (req, res) {
   const { searchKey } = req.query;
-  const { loggedInUserId } = req.body;
 
   try {
     const people = searchKey
       ? await sequelize.query(
-          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
-          {
-            replacements: { searchKey, loggedInUserId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        )
-      : await sequelize.query(
-          "SELECT * FROM user WHERE id != :loggedInUserId",
-          {
-            replacements: { loggedInUserId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        );
+        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey)`,
+        {
+          replacements: { searchKey },
+          type: sequelize.QueryTypes.SELECT,
+        }
+      )
+      : await sequelize.query("SELECT * FROM user", {
+        type: sequelize.QueryTypes.SELECT,
+      });
 
     res.send(people);
   } catch (error) {
@@ -212,7 +206,6 @@ router.get("/user", async function (req, res) {
   }
 });
 
-module.exports = router;
 // //GET user not follow
 router.get("/", async function (req, res) {
   const notFriendsWith = req.query.not_friends_with;
@@ -242,3 +235,4 @@ router.get("/", async function (req, res) {
     res.status(500).send("Error interno del servidor");
   }
 });
+module.exports = router;
