@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../src/App.css";
-
 import Unfollow from "../buttons/UnfollowButton";
 import { Link } from "react-router-dom";
 
-function UsersGridFollow({}) {
+function UsersGridFollow({ }) {
   const [users, setUsers] = useState([]);
   const userId = localStorage.getItem("userId");
 
@@ -37,20 +34,11 @@ function UsersGridFollow({}) {
       {users.map((user) => (
         <div className="col-sm-3" key={user.id}>
           <div className="default-card friend-box">
-            <Link
-              to={`/profile/${user.id}`}
-              onClick={() => handleProfileClick(user.id)}
-            >
+            <Link to={`/profile/${user.id}`}             >
               <img
                 className="friend-avatar"
-                style={{
-                  borderRadius: "50%",
-                  width: "150px",
-                  height: "150px",
-                }}
                 src={user.profile_picture}
-                alt={user.name}
-              />
+                alt={user.name} />
             </Link>
             <h5>
               {user.name} {user.last_name}

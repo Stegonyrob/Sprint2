@@ -24,19 +24,13 @@ function UserGrid() {
 
   return (
     <>
-      <div className="container main-structure">
-        <div className="search-friends default-card">
-          <h4>COMUNIDAD</h4>
-          <SearchBarUsers onSearchResults={handleSearchResults} />
-        </div>
-      </div>
-      <div className="container main-structure friend-structure">
+      <SearchBarUsers onSearchResults={handleSearchResults} />
+      <div className="container friend-structure">
         <div className="row">
           <UsersGridFollow
             users={users}
             following={following}
-            setFollowing={setFollowing}
-          />
+            setFollowing={setFollowing} />
           <UsersGridUnfollow />
         </div>
       </div>

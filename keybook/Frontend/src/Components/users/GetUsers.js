@@ -1,22 +1,26 @@
 import React from 'react';
+import { ButtonDefault } from '../buttons/ButtonDefault';
+import { Link } from "react-router-dom";
 
 function GetUsers({ users }) {
     return (
         <div className="row">
             {users.map((user) => (
-                <div className="col-sm-3 default-card friend-box" key={user.id}>
-                    <img
-                        className="friend-avatar"
-                        style={{ borderRadius: '50%', width: '150px', height: '150px' }}
-                        src={user.profile_picture}
-                        alt=""
-                    />
-                    <a>{user.name}</a>
-                    <p>{user.email}</p>
-                    <a href="friendsProfile.html" id="profileLink">
-                        Ver perfil
-                    </a>
-                    <button className="btn btn-outline-warning btn-sm">Enviar solicitud</button>
+                <div className="col-sm-3" key={user.id}>
+                    <div className="default-card friend-box">
+                        <Link to={`/profile/${user.id}`} >
+                            <img
+                                className="friend-avatar"                              
+                                src={user.profile_picture}
+                                alt={user.name}
+                            />
+                        </Link>
+                        <h5>{user.name} {user.last_name}</h5>
+                        <Link
+                            to={`/profile/${user.id}`}                                                >
+                            <ButtonDefault content="Ver perfil" />
+                        </Link>
+                    </div>
                 </div>
             ))}
         </div>

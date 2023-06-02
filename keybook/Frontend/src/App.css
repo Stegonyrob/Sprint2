@@ -386,12 +386,18 @@ textarea {
 /*FRIENDS PAGE*/
 .search-friends {
   position: fixed;
-  top: 15%;
+  top: 10%;
   width: 70%;
   left: 15%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px;  
+}
+
+
+
+.main-structure-grid {
+  margin-top: 10%;  
 }
 
 .search-input {
@@ -419,8 +425,9 @@ textarea {
 }
 
 .friend-avatar {
-  width: 80%;
-  margin: auto;
+  width: 50%;
+  margin: auto; 
+ 
 }
 
 .friend-box {
@@ -446,8 +453,10 @@ textarea {
   text-decoration: none;
 }
 .friend-structure{
-  margin-top: 15%;
+  margin-top: 5%;
 }
+
+
 /* CREATE ACCOUNT FORM */
 
 .error-card{
