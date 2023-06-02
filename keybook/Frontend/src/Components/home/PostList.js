@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import NewPost from "./NewPost";
 import PostFeed from "./PostFeed";
 import { url } from "../../utils/url";
+import Pagination from "react-js-pagination";
 
 function PostList() {
   const [posts, setPosts] = useState([]);
   const [postAdded, setPostAdded] = useState([]);
+  const [activePage, setActivePage] = useState(1);
+  const [totalItemsCount, setTotalItemsCount] = useState(0);
+  const itemsCountPerPage = 4;
   const loggedId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -15,6 +19,7 @@ function PostList() {
         const data = await response.json();
         console.log(data);
         setPosts(data);
+        setTotalItemsCount(data.length);
       } catch (error) {
         alert("Error de servidor");
         console.log(error);
@@ -23,10 +28,30 @@ function PostList() {
     fetchPosts();
   }, [postAdded]);
 
+  const handlePageChange = (pageNumber) => {
+    console.log(`active page is ${pageNumber}`);
+    setActivePage(pageNumber);
+  };
+
+  const indexOfLastItem = activePage * itemsCountPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
+  const currentItems = posts.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <>
       <NewPost setPostAdded={setPostAdded} />
-      <PostFeed posts={posts} postAdded={postAdded} />{" "}
+      <PostFeed posts={currentItems} postAdded={postAdded} />
+      <div className="pagination-wrapper">
+        <Pagination
+          activePage={activePage}
+          itemsCountPerPage={itemsCountPerPage}
+          totalItemsCount={totalItemsCount}
+          pageRangeDisplayed={5}
+          onChange={handlePageChange}
+          itemClass="page-item"
+          linkClass="page-link"
+        />
+      </div>
     </>
   );
 }
