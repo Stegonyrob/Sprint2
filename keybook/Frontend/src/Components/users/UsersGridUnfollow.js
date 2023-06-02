@@ -16,7 +16,7 @@ function UsersGridUnfollow() {
       );
       const data = await response.json();
       setRequests(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -67,12 +67,7 @@ function UsersGridUnfollow() {
           <div className="default-card friend-box">
             <Link to={`/profile/${user.id}`}>
               <img
-                className="friend-avatar"
-                style={{
-                  borderRadius: "50%",
-                  width: "150px",
-                  height: "150px",
-                }}
+                className="friend-avatar"               
                 src={user.profile_picture}
                 alt={user.name}
               />

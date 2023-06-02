@@ -16,9 +16,7 @@ export default function Unfollow({ id }) {
                 body: self
             });
 
-            if (response.message) {
-                alert("Dejado de seguir a este usuario")
-            } else {
+            if (!response.message) {               
                 alert("Usuario no seguido. No se puede dejar de seguir")
             }
         } catch (error) {

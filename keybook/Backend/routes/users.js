@@ -6,19 +6,6 @@ const jwt = require("jsonwebtoken");
 
 const salt = 10;
 
-// // /* GET users listing. */
-// router.get("/", async function (req, res) {
-//   try {
-//     const usersList = await sequelize.query("SELECT * FROM user", {
-//       type: sequelize.QueryTypes.SELECT,
-//     });
-//     res.status(200).send(usersList);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error interno del servidor");
-//   }
-// });
-
 //GET user by id
 router.get("/user/:id", async (req, res) => {
   const userId = req.params.id;
@@ -182,28 +169,22 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-// //GET user by name or email (based on input)
-
+//GET user by name or email (based on input)
 router.get("/user", async function (req, res) {
   const { searchKey } = req.query;
-  const { loggedInUserId } = req.body;
 
   try {
     const people = searchKey
       ? await sequelize.query(
-          `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey) AND id != :loggedInUserId`,
-          {
-            replacements: { searchKey, loggedInUserId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        )
-      : await sequelize.query(
-          "SELECT * FROM user WHERE id != :loggedInUserId",
-          {
-            replacements: { loggedInUserId },
-            type: sequelize.QueryTypes.SELECT,
-          }
-        );
+        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey)`,
+        {
+          replacements: { searchKey },
+          type: sequelize.QueryTypes.SELECT,
+        }
+      )
+      : await sequelize.query("SELECT * FROM user", {
+        type: sequelize.QueryTypes.SELECT,
+      });
 
     res.send(people);
   } catch (error) {
