@@ -38,6 +38,10 @@ Arrancamos la aplicación de React:
 ```
 npm start
 ```
+Para realizar el testeo detenemos la aplicación de react y ejecutamos lo siguiente:
+```
+npm test
+```
 
 ## Presentación del proyecto
 Para este Sprint 2 hemos adaptado el proyecto de red social que venimos trabajando durante el curso a React con Node. 
@@ -47,6 +51,7 @@ Para este Sprint 2 hemos adaptado el proyecto de red social que venimos trabajan
 - Se ha añadido un sistema de interacción entre usuarios a través de seguidores, así como opción de escribir y recibir reseñas de otros usuarios
 - Se ha añadido la opción de editar todos los campos del perfil en la base de datos, excepto por el email (por seguridad de la cuenta)
 - Se ha ampliado la base de datos a 20 usuarios con contraseñas encriptadas, así como una nueva tabla para las reseñas y las relaciones de amistad
+- Se ha realizado un pequeño testeo sobre la barra de buscar usuario (SearchUserBar) con Mocha Chai, solo para ver que se rendericen varios de sus componentes correctamente.
 
 ## Vistas y componentes de la red social
 Cada vista incluye al componente relevante, componente Footer y en algunos casos el componente NavBar. 
