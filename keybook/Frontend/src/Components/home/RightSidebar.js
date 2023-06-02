@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import FollowButton from "../buttons/FollowButton";
+import { ButtonDefault } from "../buttons/ButtonDefault";
+import { useNavigate } from "react-router-dom";
 
 function RightSidebar() {
   const [requests, setRequests] = useState([]);
@@ -59,30 +61,41 @@ function RightSidebar() {
     sendFollowRequest(userId);
   }
 
+  function MyButton() {
+    const navigate = useNavigate();
+
+    function handleClick() {
+      navigate("/Users");
+    }
+
+    return <ButtonDefault content="Mostrar más" onClick={handleClick} />;
+  }
+
   return (
-    <div className="default-card">
+    <div className="default-card-right">
       <h2>SUGERENCIAS</h2>
-      <ul>
-        {requests.map((user) => (
-          <li key={user.id}>
+      <div>
+        {requests.slice(0, 6).map((user) => (
+          <div key={user.id}>
             <a title={`Perfil ${user.name}`} href={`/profile/${user.id}`}>
               <img src={user.profile_picture} alt="Avatar" className="avatar" />
             </a>
-            <li>
+            <div>
               <h4>
                 {user.name} {user.last_name}
               </h4>
-            </li>
-            <li>
+            </div>
+            <div>
               <FollowButton
                 id={user.id}
                 onClick={handleFollow}
                 setRequests={setRequests}
               />
-            </li>
-          </li>
+            </div>
+          </div>
         ))}
-      </ul>
+        <MyButton />
+      </div>
     </div>
   );
 }

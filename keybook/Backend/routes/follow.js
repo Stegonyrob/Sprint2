@@ -12,7 +12,7 @@ router.get("/following/:user_id", async function (req, res) {
         INNER JOIN friend ON friend.user_friend2_id = user.id 
         WHERE friend.user_friend1_id = "${loggedId}" AND friend.status = 1 
         ORDER BY user.id 
-        LIMIT 4
+        
       `);
 
     res.status(200).send(following[0]);
