@@ -5,6 +5,9 @@
 En phpMyAdmin, crear una base de datos llamada "keybook" e importar el archivo keybook.sql de este repositorio.
 
 Dicho archivo se encuentra en el directorio original, junto a este archivo README.md
+### Archivo de environment o .env
+Simplemente pegarlo dentro del directorio principal de Backend, junto a app.js, por ejemplo.
+
 ### Backend
 Accedemos al directorio Backend
 
