@@ -23,7 +23,7 @@ nodemon
 ```
 
 
-##3 Frontend
+## Frontend
 Accedemos al directorio Frontend
 
  ```
@@ -59,7 +59,7 @@ Las vistas RegisterView y LoginView son de libre acceso, pero el resto están re
 - EditProfileView: formulario de edición de datos de usuario  (a excepción del email) con opción de borrar la cuenta
 - HomeView: vista que reúne varios componentes. Por un lado, muro de publicaciones dinámico de usuarios seguidos y publicaciones propias, con limitación y paginación. Por otro lado, menús laterales dinámicos de usuarios seguidos y sugerencias de amistad. Además, una pequeña tarjeta con los datos propios. Podemos acceder al perfil de los usuarios a través de sus fotos de perfil. 
 - ProfileView: vista de perfil de usuarios con datos personales, hoja de vida y funcionalidad de feedback. Esta función está limitada a una recomendación por usuario por perfil, y no es posible recomendarse a sí mismo.
--UsersView: esta vista nos trae a todos los usuarios de la base de datos, diferenciándolos entre si ya son seguidos por nosotros o no. Además, la barra de búsqueda nos permite encontrar usuarios por nombre o email.
+- UsersView: esta vista nos trae a todos los usuarios de la base de datos, diferenciándolos entre si ya son seguidos por nosotros o no. Además, la barra de búsqueda nos permite encontrar usuarios por nombre o email.
 
 
 
