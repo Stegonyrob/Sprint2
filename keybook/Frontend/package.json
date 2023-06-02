@@ -31,7 +31,7 @@
   "scripts": {
     "start": "set PORT=8080 && react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha --require @babel/register --recursive \"src/**/*.test.js\"",
+    "test": "mocha --require @babel/register --recursive \"*/*.test.js\"",
     "eject": "react-scripts eject"
   },
   "browserslist": {
