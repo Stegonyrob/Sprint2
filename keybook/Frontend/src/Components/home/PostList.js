@@ -4,6 +4,8 @@ import PostFeed from "./PostFeed";
 import { url } from "../../utils/url";
 import Pagination from "react-js-pagination";
 
+//Post lists showing own posts and posts of users we follow
+
 function PostList() {
   const [posts, setPosts] = useState([]);
   const [postAdded, setPostAdded] = useState([]);
@@ -16,20 +18,19 @@ function PostList() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(url + `posts/feed/${loggedId}`);
-        const data = await response.json();
-        console.log(data);
+        const data = await response.json();        
         setPosts(data);
         setTotalItemsCount(data.length);
       } catch (error) {
         alert("Error de servidor");
-        console.log(error);
+        console.error(error);
       }
     };
     fetchPosts();
   }, [postAdded]);
 
-  const handlePageChange = (pageNumber) => {
-    console.log(`active page is ${pageNumber}`);
+  //Pagination and limits
+  const handlePageChange = (pageNumber) => {    
     setActivePage(pageNumber);
   };
 

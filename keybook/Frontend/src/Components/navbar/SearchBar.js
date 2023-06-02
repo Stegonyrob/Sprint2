@@ -2,6 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+//Temporarily without functions, hidden from view
+
 function SearchBar() {
   return (
     <div className="col-8 search-bar d-none">

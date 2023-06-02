@@ -1,11 +1,7 @@
-import React from "react";
 import RightSidebar from "./RightSidebar";
 import LeftSidebar from "./LeftSidebar";
 import LoggedInfo from "./LoggedInfo";
 import Postlist from "./PostList";
-
-import "../../App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
   return (

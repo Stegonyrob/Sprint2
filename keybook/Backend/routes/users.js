@@ -19,6 +19,30 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
+//GET user by name or email (based on input)
+router.get("/user", async function (req, res) {
+  const { searchKey } = req.query;
+
+  try {
+    const people = searchKey
+      ? await sequelize.query(
+        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey)`,
+        {
+          replacements: { searchKey },
+          type: sequelize.QueryTypes.SELECT,
+        }
+      )
+      : await sequelize.query("SELECT * FROM user", {
+        type: sequelize.QueryTypes.SELECT,
+      });
+
+    res.send(people);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 //POST create new user
 router.post("/register", async function (req, res) {
   try {
@@ -72,11 +96,10 @@ router.post("/register", async function (req, res) {
       );
       res.status(200).send({
         id: newUser[0],
-      });
-      console.log("Usuario creado con éxito");
+      });      
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(400).send({ error: e.message });
   }
 });
@@ -106,7 +129,7 @@ router.post("/auth", async (req, res) => {
       res.status(400).send({ error: "Email no encontrado en base de datos" });
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(400).send({ error: e.message });
   }
 });
@@ -166,30 +189,6 @@ router.delete("/delete/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: "Error al borrar cuenta" });
-  }
-});
-
-//GET user by name or email (based on input)
-router.get("/user", async function (req, res) {
-  const { searchKey } = req.query;
-
-  try {
-    const people = searchKey
-      ? await sequelize.query(
-        `SELECT * FROM user WHERE (name = :searchKey OR email = :searchKey)`,
-        {
-          replacements: { searchKey },
-          type: sequelize.QueryTypes.SELECT,
-        }
-      )
-      : await sequelize.query("SELECT * FROM user", {
-        type: sequelize.QueryTypes.SELECT,
-      });
-
-    res.send(people);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
   }
 });
 

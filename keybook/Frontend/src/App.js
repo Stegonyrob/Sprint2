@@ -1,4 +1,6 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import {
   BrowserRouter,
   Routes,
@@ -6,8 +8,6 @@ import {
   Router,
   Navigate,
 } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import RegisterView from "./views/RegisterView";
 import LoginView from "./views/LoginView";
 import HomeView from "./views/HomeView";
@@ -17,8 +17,7 @@ import EditProfileView from "./views/EditProfileView";
 import ErrorView from "./views/ErrorView";
 
 function App() {
-  const isAuthenticated = !!localStorage.getItem("token");
-  console.log(isAuthenticated);
+  const isAuthenticated = !!localStorage.getItem("token"); 
 
   return (
     <>

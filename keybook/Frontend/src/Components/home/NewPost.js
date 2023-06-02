@@ -33,7 +33,7 @@ function NewPost(props) {
         setPostAdded(response);
       } else {
         const errorText = await response.text();
-        console.log(errorText);
+        console.error(errorText);
       }
     } catch (error) {
       alert("Error del servidor. Vuelva a intentarlo");
@@ -60,7 +60,7 @@ function NewPost(props) {
           onChange={handleInputChange}
           className="new-post"
         />
-        {success && <div className="success ">Publicado con éxito ✔</div>}
+        {success && <div >Publicado con éxito ✔</div>}
         <div className="insert">
           <div>
             <ButtonDefault
