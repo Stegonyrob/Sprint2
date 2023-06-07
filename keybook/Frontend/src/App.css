@@ -475,7 +475,101 @@ textarea {
 .search-friends-input {
   margin: 0 7%;
 }
-
+@media screen and (max-width: 1100px) {
+  .search-friends {
+    position: fixed;
+    top: 10%;
+    width: 70%;
+    left: 15%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;  
+  }
+  
+  
+  
+  .main-structure-grid {
+    margin-top: 13.5%;  
+  }
+}
+@media screen and (max-width: 980px) {
+  .search-friends {
+    position: fixed;
+    top: 10%;
+    width: 70%;
+    left: 15%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;  
+  }
+  
+  
+  
+  .main-structure-grid {
+    margin-top: 13.5%;  
+  }
+  @media screen and (max-width: 790px) {
+    .search-friends {
+      position: fixed;
+      top: 10%;
+      width: 70%;
+      left: 15%;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;  
+    }
+    
+    
+    
+    .main-structure-grid {
+      margin-top: 15.5%;  
+    }
+  }
+  @media screen and (max-width: 690px) {
+    .search-friends {
+      position: fixed;
+      top: 10%;
+      width: 70%;
+      left: 15%;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;  
+    }
+    
+    .main-structure-grid {
+      margin-top: 25.5%;  
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .search-friends {
+      position: fixed;
+      top: 10%;
+      width: 70%;
+      left: 15%;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;  
+    }
+     
+    
+    .main-structure-grid {
+      margin-top: 39.5%;  
+    }
+  }
+  .search-input {
+    padding: 10px 10px 10px 35px;
+    border-radius: 10px;
+    border: 2px solid #b17aa2;
+    cursor: pointer;
+    background-color: aliceblue;
+  }
+  
+  .search-friends-input {
+    margin: 0 7%;
+  }
+  
+  
+}
 .filter-icon {
   position: absolute;
   right: 2%;
