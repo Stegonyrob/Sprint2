@@ -55,7 +55,6 @@ function SearchBarUsers({ onSearchResults }) {
     <>
       <div className="container">
         <div className="search-friends default-card">
-          <h4>COMUNIDAD</h4>
           <form id="find-user-form" className="d-flex" onSubmit={handleSubmit}>
             <span className="input-group-text" id="basic-addon1">
               <input
