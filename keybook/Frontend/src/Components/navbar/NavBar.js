@@ -56,7 +56,7 @@ export default function NavBar() {
       icon: faHome,
       title: "Inicio",
       component: <HomeIcon />,
-      activeColor: "#0a3d62",
+      activeColor: "lightskyblue",
     },
     {
       link: `/profile/${getUserId()}`,
@@ -64,14 +64,14 @@ export default function NavBar() {
       title: "Mi Perfil",
       component: <Profile />,
       onClick: handleProfileClick,
-      activeColor: "#0a3d62",
+      activeColor: "lightskyblue",
     },
     {
       link: "/users",
       icon: faAddressBook,
       title: "Amigos",
       component: <UsersGrid />,
-      activeColor: "#0a3d62",
+      activeColor: "lightskyblue",
     },
 
     {
@@ -80,7 +80,7 @@ export default function NavBar() {
       title: "Configuración",
       component: <CogIcon />,
       onClick: handleProfileClick,
-      activeColor: "#0a3d62",
+      activeColor: "lightskyblue",
     },
   ];
 

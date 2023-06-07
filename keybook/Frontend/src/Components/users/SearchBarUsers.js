@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import diacriticless from "diacriticless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import GetUsers from "./GetUsers"; 
+import GetUsers from "./GetUsers";
 import { url } from "../../utils/url";
 
 function SearchBarUsers({ onSearchResults }) {
@@ -44,7 +44,6 @@ function SearchBarUsers({ onSearchResults }) {
     <>
       <div className="container ">
         <div className="search-friends default-card">
-          <h4>COMUNIDAD</h4>
           <form id="find-user-form" className="d-flex" onSubmit={handleSubmit}>
             <span className="input-group-text" id="basic-addon1">
               <input
@@ -72,13 +71,9 @@ function SearchBarUsers({ onSearchResults }) {
       </div>
       <div className="container main-structure-grid ">
         <div className="row">
-          {filteredResults.length > 0 && (
-            <GetUsers users={filteredResults} />
-          )}</div>
+          {filteredResults.length > 0 && <GetUsers users={filteredResults} />}
+        </div>
       </div>
-
-
-
     </>
   );
 }
