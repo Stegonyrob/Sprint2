@@ -99,6 +99,11 @@ input {
   color: #ffc312;
 }
 
+.icon.active {
+  color: #0a3d62;
+}
+
+
 .search-icon {
   color: #b17aa2; /*no tocarmas*/
 }
@@ -130,10 +135,38 @@ input {
   color: red;
   text-decoration: underline;
 }
-
+.slogan-container-nav {
+  text-align: center;
+  margin-top: 3%;
+  display: flex;
+}
+.slogan-container-nav h2 {
+  margin-left: 20%;
+  font-size: 34px;
+  transition: all 0.3s ease-in-out;
+  background-image: linear-gradient(to right, red, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+}
+.slogan-container-nav h2:hover {
+  transform: scale(1.1);
+}
 
 /* DISPOSITIVOS MOVILES */
 
+@media (max-width:1270px){
+  .slogan-container-nav h2 {
+    font-size: 185%;
+    display: flex;
+  }
+}
+@media (max-width:1170px){
+  .slogan-container-nav h2 {
+    font-size: 165%;
+    display: flex;
+  }
+}
 @media (max-width: 992px) {
   body {
     overflow: hidden;
@@ -238,6 +271,36 @@ input {
   }
 }
 
+@media screen and (max-width: 825px) {
+  .slogan-container-nav h2 {
+    font-size: 155%;
+    display: flex;
+  }
+}
+@media screen and (max-width: 700px) {
+  .slogan-container-nav h2 {
+    font-size: 145%;
+    display: flex;
+  }
+}
+@media screen and (max-width: 670px) {
+  .slogan-container-nav h2 {
+    font-size: 115%;
+    display: flex;
+  }
+}
+@media screen and (max-width: 600px) {
+  .slogan-container-nav h2 {
+    font-size: 95%;
+    display: flex;
+  }
+}
+@media screen and (max-width: 390px) {
+  .slogan-container-nav h2 {
+    font-size: 75%;
+    display: flex;
+  }
+}
 /* Animaciones */
 
 @keyframes muestraMenu {
@@ -541,29 +604,7 @@ footer {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.slogan-container-nav {
-  text-align: center;
-  margin-top: 3%;
-  display: flex;
-}
-.slogan-container-nav h2 {
-  margin-left: 20%;
-  font-size: 34px;
-  transition: all 0.3s ease-in-out;
-  background-image: linear-gradient(to right, red, blue);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: flex;
-}
-.slogan-container-nav h2:hover {
-  transform: scale(1.1);
-}
-@media screen and (max-width: 767px) {
-  .slogan-container-nav h2 {
-    font-size: 85%;
-    display: flex;
-  }
-}
+
 
 
 .slogan-container h2:hover {
