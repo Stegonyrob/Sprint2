@@ -1,9 +1,10 @@
 var express = require("express");
 const sequelize = require("../db/connection");
 var router = express.Router();
+const authChecker = require("../utils/authChecker");
 
 //GET following users list
-router.get("/following/:user_id", async function (req, res) {
+router.get("/following/:user_id", authChecker, async function (req, res) {
   const loggedId = req.params.user_id;
 
   try {
@@ -20,12 +21,12 @@ router.get("/following/:user_id", async function (req, res) {
 });
 
 //GET NOT-following users list
-router.get("/not-following/:user_id", async function (req, res) {
+router.get("/not-following/:user_id", authChecker, async function (req, res) {
   const loggedId = req.params.user_id;
-  
+
   try {
     const notFollowing = await sequelize.query(
-    `SELECT DISTINCT * FROM user
+      `SELECT DISTINCT * FROM user
     WHERE id NOT IN (
     SELECT CASE
     WHEN user_friend1_id = "${loggedId}" THEN user_friend2_id
@@ -47,7 +48,7 @@ router.get("/not-following/:user_id", async function (req, res) {
 });
 
 //POST follow user
-router.post("/:id", async function (req, res) {
+router.post("/:id", authChecker, async function (req, res) {
   const loggedId = req.body.logged_id;
   const followId = req.params.id;
 
@@ -81,7 +82,7 @@ router.post("/:id", async function (req, res) {
 });
 
 //DELETE unfollow user
-router.delete("/unfollow/:id", async (req, res) => {
+router.delete("/unfollow/:id", authChecker, async (req, res) => {
   const loggedId = req.body.logged_id;
   const unfollowId = req.params.id;
 
