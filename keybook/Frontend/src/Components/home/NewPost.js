@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonDefault } from "../buttons/ButtonDefault";
-import request from "../../utils/url";
+import request from "../../utils/request";
 
 function NewPost(props) {
   const [postContent, setPostContent] = useState("");
@@ -60,7 +60,7 @@ function NewPost(props) {
           onChange={handleInputChange}
           className="new-post"
         />
-        {success && <div >Publicado con éxito ✔</div>}
+        {success && <div>Publicado con éxito ✔</div>}
         <div className="insert">
           <div>
             <ButtonDefault

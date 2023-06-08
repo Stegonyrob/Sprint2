@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { NavLink, useLocation } from "react-router-dom";
 import GrayScaleButton from "./GrayScaleButton";
 import SearchBar from "./SearchBar";
@@ -8,12 +8,21 @@ import Logout from "./Logout";
 import { Logo } from "../logo/Logo";
 import NavBarIcon from "./NavBarIcon";
 
+import ModalUserTable from "react-modal";
 import {
   faAddressBook,
   faHome,
   faUser,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
+
+async function getUserDataFromDatabase(userId) {
+  const session = await getSession();
+  const userData = await session.query("SELECT * FROM users WHERE id = :id", {
+    id: userId,
+  });
+  return userData[0];
+}
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,6 +37,12 @@ export default function NavBar() {
       navIcons.classList.remove("activado");
     }
   };
+
+  function isAdmin() {
+    const userData = getUserDataFromDatabase(getUserId());
+    return userData.AisAdmin;
+  }
+
   function getUserId() {
     return localStorage.getItem("userId");
   }
@@ -49,6 +64,11 @@ export default function NavBar() {
   function isActive(pathname) {
     return location.pathname === pathname;
   }
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   const navIcons = [
     {
@@ -73,7 +93,6 @@ export default function NavBar() {
       component: <UsersGrid />,
       activeColor: "lightskyblue",
     },
-
     {
       link: "/edit",
       icon: faCog,
@@ -81,6 +100,17 @@ export default function NavBar() {
       component: <CogIcon />,
       onClick: handleProfileClick,
       activeColor: "lightskyblue",
+    },
+    {
+      link: "/admin/users",
+      icon: faTable,
+      title: "Usuarios",
+      activeColor: "lightskyblue",
+      onClick: () => {
+        if (isAdmin()) {
+          setModalOpen(true);
+        }
+      },
     },
   ];
 
